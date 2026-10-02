@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qwen3.8 Max API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Qwen3.8 Max API 国内调用与中转价格：百炼华北2 ¥12/¥36，DashScope OpenAI 兼容接入，一 Key 多模型与分组倍率。">
+<link rel="canonical" href="https://docs.tryallapi.com/qwen3.8-max-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Qwen3.8 Max API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Qwen3.8 Max API 国内调用与中转价格：百炼华北2 ¥12/¥36，DashScope OpenAI 兼容接入，一 Key 多模型与分组倍率。">
+<meta property="og:url" content="https://docs.tryallapi.com/qwen3.8-max-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/qwen3.8-max-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Qwen3.8 Max API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Qwen3.8 Max API 国内调用与中转价格：百炼华北2 ¥12/¥36，DashScope OpenAI 兼容接入，一 Key 多模型与分组倍率。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/qwen3.8-max-api.png">
+<meta property="article:published_time" content="2026-10-02">
+<meta property="article:modified_time" content="2026-10-02">
+<meta property="article:section" content="Qwen">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Qwen3.8 Max API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Qwen3.8 Max API 国内调用与中转价格：百炼华北2 ¥12/¥36，DashScope OpenAI 兼容接入，一 Key 多模型与分组倍率。",
+   "image": [
+    "https://docs.tryallapi.com/og/qwen3.8-max-api.png"
+   ],
+   "datePublished": "2026-10-02",
+   "dateModified": "2026-10-02",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/qwen3.8-max-api/",
+   "url": "https://docs.tryallapi.com/qwen3.8-max-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Qwen3.8 Max API（qwen3.8-max）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Qwen3.8 Max API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/qwen3.8-max-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "模型 ID？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "qwen3.8-max（以百炼与 tryallapi 控制台为准）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "华北2 官方价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "输入 ¥12 / 输出 ¥36（每百万 tokens），另有缓存与 Batch 价，以阿里云文档为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "为什么官方能直连还要中转？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "为了和 GPT/Claude 共用一个 Key、一套 SDK 与一张账单；不是因为百炼连不上。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方兼容 Base URL？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "https://dashscope.aliyuncs.com/compatible-mode/v1。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi Base URL？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "https://tryallapi.com/v1，环境变量 TRYALLAPI_KEY。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "聚合一定更便宜吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不一定。先比控制台实际扣费，再比运维成本。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Cursor 怎么配聚合？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Base URL https://tryallapi.com/v1，模型 qwen3.8-max。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一个 Key 能调 Claude 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "在 tryallapi 分组权限内可以。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Qwen3.8 Max API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">阿里通义（Qwen） · <code>qwen3.8-max</code></p>
+<h1>Qwen3.8 Max API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-02">2026-10-02</time> · 更新 <time datetime="2026-10-02">2026-10-02</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。通义千问 / 阿里云百炼参数来自官方文档；tryallapi.com 数据取自公开接口，取数时间 2026-10-02（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>和 Claude / GPT 不同：<strong>Qwen 的官方国内通道本身就好走</strong>（百炼 / DashScope）。本文仍写「中转」，重点不是「连不上」，而是<strong>多模型一 Key、统一账单、以及和海外模型同一套 SDK</strong>。</p>
+<hr />
+<h2>Qwen3.8 Max 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>qwen3.8-max</code></td>
+<td><a href="https://help.aliyun.com/zh/model-studio/qwen3-8-max" target="_blank" rel="noopener noreferrer">阿里云帮助中心</a></td>
+</tr>
+<tr>
+<td>定位（tryallapi 描述）</td>
+<td>约 2.4T MoE 旗舰；编码/办公；原生视觉；长文档/视频</td>
+<td>tryallapi.com 模型说明</td>
+</tr>
+<tr>
+<td>官方国内价（华北2 北京，每百万 tokens）</td>
+<td>输入 ¥12；输出 ¥36；缓存命中输入 ¥1.5；显式缓存创建 ¥15；显式缓存命中 ¥1；Batch 文件输入/输出 ¥6 / ¥18</td>
+<td>阿里云模型工作室文档</td>
+</tr>
+<tr>
+<td>国际价</td>
+<td>部分区域文档列有 USD 价——<strong>国内读者以华北2 人民币为准</strong>，其他区域以百炼控制台为准</td>
+<td>国际文档 / 控制台</td>
+</tr>
+<tr>
+<td>官方 OpenAI 兼容</td>
+<td><code>https://dashscope.aliyuncs.com/compatible-mode/v1</code></td>
+<td>阿里云文档</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点 <code>openai</code></td>
+<td><code>/api/pricing</code> 2026-10-02</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>只要「只用通义」，优先直连百炼：发票、合规、SLA 更清晰，华北2 标价 ¥12/¥36。</li>
+<li>若同一应用还要调 GPT / Claude / Gemini，用 tryallapi.com 可减少多套 Key 与多套 SDK。</li>
+<li>聚合侧估算 ≈（平台基准或官方参考价）× 分组倍率，<strong>务必以 tryallapi 控制台为准</strong>，不要假设永远低于百炼。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、什么时候该直连百炼，什么时候用聚合？</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更合适的选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只用 Qwen，要合同/专票/内网</td>
+<td>阿里云百炼直连</td>
+</tr>
+<tr>
+<td>原型阶段，已有 tryallapi 令牌</td>
+<td>聚合，改 model 名即可</td>
+</tr>
+<tr>
+<td>需要在 Qwen 与 Claude/GPT 间 A/B</td>
+<td>聚合统一入口</td>
+</tr>
+<tr>
+<td>对延迟与数据驻留极敏感</td>
+<td>直连 + 同区域部署</td>
+</tr>
+</tbody>
+</table></div>
+<p>tryallapi 模型说明里强调编码、办公与原生视觉——适合作为「国产旗舰默认档」之一，但仍要用你自己的业务集验收。</p>
+<hr />
+<h2>二、方案对比：百炼 / 国际 DashScope / 聚合</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>阿里云百炼（国内）</th>
+<th>DashScope 国际</th>
+<th>tryallapi.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内可达性</td>
+<td>好</td>
+<td>看账号区域</td>
+<td>国内入口</td>
+</tr>
+<tr>
+<td>模型 ID</td>
+<td><code>qwen3.8-max</code>（以控制台为准）</td>
+<td>以国际目录为准</td>
+<td><code>qwen3.8-max</code></td>
+</tr>
+<tr>
+<td>付款</td>
+<td>阿里云账单 / 人民币</td>
+<td>国际支付</td>
+<td>微信 / 支付宝等</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>OpenAI 兼容为主</td>
+<td>OpenAI 兼容</td>
+<td>openai</td>
+</tr>
+<tr>
+<td>多厂商</td>
+<td>仅阿里云生态</td>
+<td>仅阿里云</td>
+<td>一 Key 多模型</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>生产、合规、只跑通义</td>
+<td>海外主体</td>
+<td>多模型研发与中小团队</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>三、快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（经 tryallapi）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,
+    timeout=120.0,
+)
+r = client.chat.completions.create(
+    model=&quot;qwen3.8-max&quot;,
+    messages=[
+        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是严谨的中文技术编辑&quot;},
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;把这份需求改成用户故事&quot;},
+    ],
+)
+print(r.choices[0].message.content)
+</code></pre>
+<h3>3. 对照：直连百炼（官方兼容模式）</h3>
+<pre><code class="language-python">client = OpenAI(
+    api_key=os.environ[&quot;DASHSCOPE_API_KEY&quot;],
+    base_url=&quot;https://dashscope.aliyuncs.com/compatible-mode/v1&quot;,
+)
+</code></pre>
+<h3>4. cURL（聚合）</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;qwen3.8-max&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<h3>5. Cursor / Dify</h3>
+<ul>
+<li>Base URL：<code>https://tryallapi.com/v1</code></li>
+<li>模型：<code>qwen3.8-max</code></li>
+<li>若团队规定「通义必须走阿里云」，在 Dify 里单独配百炼凭据。</li>
+</ul>
+<hr />
+<h2>四、价格说明</h2>
+<h3>官方国内（华北2 北京，2026-10-02 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>每百万 tokens（¥）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>12</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>36</td>
+</tr>
+<tr>
+<td>缓存命中输入</td>
+<td>1.5</td>
+</tr>
+<tr>
+<td>显式缓存创建</td>
+<td>15</td>
+</tr>
+<tr>
+<td>显式缓存命中</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Batch 文件输入 / 输出</td>
+<td>6 / 18</td>
+</tr>
+</tbody>
+</table></div>
+<p>国际 USD 价因区域而异，本文不强制换算汇率；<strong>其他区域以百炼 / 国际控制台为准</strong>。</p>
+<h3>tryallapi.com（估算 ≈ 参考价 × 分组倍率）</h3>
+<p><code>qwen3.8-max</code>：<code>model_ratio=1</code>，<code>completion_ratio=3</code>，<code>cache_ratio=0.125</code>。分组（2026-10-02）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-Deployed-1</td>
+<td>0.6</td>
+<td>相对基准更低，先小流量核对</td>
+</tr>
+<tr>
+<td>Self-Deployed-2</td>
+<td>1</td>
+<td>基准档</td>
+</tr>
+<tr>
+<td>Alibaba-2 / Self-Deployed-3</td>
+<td>1.5</td>
+<td></td>
+</tr>
+<tr>
+<td>Alibaba-3</td>
+<td>2.2</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>具体人民币扣费以 tryallapi 控制台明细为准；<strong>不要默认聚合一定比百炼便宜</strong>——比的是「统一入口」与「多模型」价值。</p>
+<hr />
+<h2>五、常见报错</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>Key / 平台搞混</td>
+<td>分清 tryallapi 令牌 vs 阿里云 Key</td>
+</tr>
+<tr>
+<td>403</td>
+<td>分组无 Qwen</td>
+<td>换 Alibaba / Self-Deployed 分组</td>
+</tr>
+<tr>
+<td>404</td>
+<td>ID 写成 <code>qwen-max</code> 等旧名</td>
+<td>确认 <code>qwen3.8-max</code></td>
+</tr>
+<tr>
+<td>429</td>
+<td>限流</td>
+<td>退避或回退直连百炼</td>
+</tr>
+<tr>
+<td>超时</td>
+<td>长文档/视觉</td>
+<td>提高 timeout，拆分输入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>六、避坑</h2>
+<ol>
+<li><strong>先问清合规</strong>：国企/金融数据可能要求必须走阿里云，聚合不适用。</li>
+<li><strong>别混两套 Key</strong>：环境变量命名分开（<code>TRYALLAPI_KEY</code> vs <code>DASHSCOPE_API_KEY</code>）。</li>
+<li><strong>缓存字段以各平台文档为准</strong>：百炼显式缓存与 tryallapi cache_ratio 不是同一套 UI。</li>
+<li><strong>视觉与长视频</strong>：先用小样本看 token 与扣费，再上生产。</li>
+<li><strong>国际价勿直接乘汇率</strong>：区域价不同，用控制台数字。</li>
+</ol>
+<hr />
+<hr />
+<h2>国产模型 + 聚合：真实动机清单</h2>
+<p>很多团队搜「Qwen 中转」并不是因为百炼连不上，而是这几类动机：</p>
+<ol>
+<li><strong>研发侧已经有一套 OpenAI 兼容客户端</strong>，只想改 <code>model</code> 字段做 A/B；</li>
+<li><strong>财务希望一张卡/一个余额池</strong>覆盖通义与海外模型；</li>
+<li><strong>外包/个人开发者</strong>还没开阿里云企业认证，但临时要用 Qwen3.8 Max；</li>
+<li><strong>多区域协作</strong>：部分成员用百炼，部分成员用聚合，文档需要两套示例并排。</li>
+</ol>
+<p>如果你属于「只用通义、要专票、要内网」——请直接百炼，本文聚合方案当备选即可。</p>
+<hr />
+<h2>价格对比时别犯的错</h2>
+<ul>
+<li>用国际 USD 价 × 随意汇率去比华北2 人民币价；</li>
+<li>把 Batch / 缓存优惠当成默认在线价；</li>
+<li>假设 tryallapi 某分组倍率「永久」低于官方。</li>
+</ul>
+<p>正确做法：同一天打开百炼控制台与 tryallapi 控制台，用同一段固定 prompt 各跑 N 次，对明细。聚合的价值经常是<strong>工程整合</strong>，不一定是<strong>单价最低</strong>。</p>
+<hr />
+<h2>组织落地</h2>
+<ol>
+<li>在 wiki 写清：生产通义是否允许走聚合（合规结论一句话）。</li>
+<li>环境变量严格拆分 <code>DASHSCOPE_API_KEY</code> 与 <code>TRYALLAPI_KEY</code>。</li>
+<li>视觉与长视频任务单独设预算告警。</li>
+<li>相关阅读里同时保留「百炼文档」与「本站其他模型中转文」，方便同事按场景跳转。</li>
+</ol>
+<p>完成接入后，继续做密钥轮换与月度对账。本文数字快照于 2026-10-02；百炼与 tryallapi 任一侧调价，都以当时控制台为准。</p>
+<hr />
+<h2>和 DeepSeek / Kimi 一起做国产矩阵</h2>
+<p>不少国内团队会把 Qwen3.8 Max、DeepSeek、Kimi 放在同一条「国产备用链」里：主路径百炼通义，故障或比价时切 DeepSeek / Kimi，海外模型另算。tryallapi.com 的价值是让这条链和 GPT/Claude 链共用客户端。注意各自官方价币种不同（人民币 vs 美元），对比时用「完成同一任务的控制台实扣」而不是纸面单价。模型 ID 写错（旧版 <code>qwen-max</code>、<code>qwen-plus</code>）是 404 重灾区，接入清单里应用自动校验。</p>
+<p>写在最后：只用通义就走百炼；要多模型一 Key 再走 tryallapi.com。两套 Key 永远不要写进同一变量。用固定提示集对账，而不是听信群里的「内部汇率」。数字快照于 2026-10-02，华北2 ¥12/¥36 以阿里云页面为准。</p>
+<hr />
+<h2>从「能跑」到「能运营」</h2>
+<p>接口通了之后，还差三件事：配额告警、错误码字典、模型切换开关。建议在应用配置中心同时存放「通义直连」与「聚合」两套端点，用功能开关秒切。对账周期至少每周一次，对齐百炼账单与 tryallapi 余额。若发现某分组突然变贵或变不稳定，先降级到百炼，再找平台排查——不要在客户流量高峰临时改 SDK。</p>
+<p>办公场景（纪要、邮件、表格）可以默认 Qwen3.8 Max；强 agentic 编码可 A/B Claude Sonnet。用同一批真实工单评测，而不是公开榜单截图。相关阅读里的兄弟篇可帮助同事快速跳到其他模型的配置细节。</p>
+<p>补充一句工程建议：把模型 ID、Base URL、超时、重试次数做成同一份「模型配置表」，通义直连与 tryallapi 聚合各一行，代码只读配置不写死。这样换分组或回退百炼时，不必翻遍仓库。</p>
+<h2>七、FAQ</h2>
+<p><strong>Q1：模型 ID？</strong><br />
+<code>qwen3.8-max</code>（以百炼与 tryallapi 控制台为准）。</p>
+<p><strong>Q2：华北2 官方价？</strong><br />
+输入 ¥12 / 输出 ¥36（每百万 tokens），另有缓存与 Batch 价，以阿里云文档为准。</p>
+<p><strong>Q3：为什么官方能直连还要中转？</strong><br />
+为了和 GPT/Claude 共用一个 Key、一套 SDK 与一张账单；不是因为百炼连不上。</p>
+<p><strong>Q4：官方兼容 Base URL？</strong><br />
+<code>https://dashscope.aliyuncs.com/compatible-mode/v1</code>。</p>
+<p><strong>Q5：tryallapi Base URL？</strong><br />
+<code>https://tryallapi.com/v1</code>，环境变量 <code>TRYALLAPI_KEY</code>。</p>
+<p><strong>Q6：聚合一定更便宜吗？</strong><br />
+不一定。先比控制台实际扣费，再比运维成本。</p>
+<p><strong>Q7：Cursor 怎么配聚合？</strong><br />
+Base URL <code>https://tryallapi.com/v1</code>，模型 <code>qwen3.8-max</code>。</p>
+<p><strong>Q8：一个 Key 能调 Claude 吗？</strong><br />
+在 tryallapi 分组权限内可以。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/kimi-k3-api/">Kimi K3 API 国内中转调用指南与价格</a>：官方全球价 $3/$15、缓存 $0.30；推理常开，100 万上下文。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>官方参考：<a href="https://help.aliyun.com/zh/model-studio/qwen3-8-max" target="_blank" rel="noopener noreferrer">Qwen3.8 Max（帮助中心）</a> · <a href="https://docs.modelstudio.console.alibabacloud.com/zh/model-studio/qwen3-8-max" target="_blank" rel="noopener noreferrer">模型工作室文档</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-02｜最后更新：2026-10-02｜更新日志：2026-10-02 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-02，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Qwen3.8 Max API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">查看 Qwen3.8 Max API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=qwen3.8-max-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

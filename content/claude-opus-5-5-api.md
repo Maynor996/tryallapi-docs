@@ -1,0 +1,307 @@
+# Claude Opus 5.5 API 国内中转调用指南（2026年最新）
+
+> 作者：MaynorAI｜首发：2026-10-01｜最后更新：2026-10-01
+> 利益声明：作者运营 tryallapi.com。Anthropic / Claude 参数来自官方公告与平台文档；tryallapi.com 数据取自公开接口，取数时间 2026-10-01（北京时间），最终以控制台为准。
+
+**入口速查：**
+
+| 渠道类型 | 访问网址 | 适用场景 |
+| --- | --- | --- |
+| 全模型 API 聚合站 | https://tryallapi.com/ | 适合开发者调用、低延迟直连、多模型一站式接入 |
+
+本文面向用 **Claude API / Claude Code** 写代码的开发者，不讨论 Claude.ai 网页订阅。
+
+---
+
+## Claude Opus 5.5 信息卡
+
+| 项目 | 内容 | 来源 |
+| --- | --- | --- |
+| 发布 | 2026-09-22，Claude 5.5 家族首发 | [Anthropic 公告](https://www.anthropic.com/claude-opus-5-5) |
+| API 模型 ID | `claude-opus-5-5`（Bedrock：`anthropic.claude-opus-5-5`） | [Claude Platform 文档](https://platform.claude.com/docs/en/models/opus-5-5/overview) |
+| 上下文 / 最大输出 | 1,000,000 / 128,000 tokens | Claude Platform 文档 |
+| 知识截止 | 2026-06 | Claude Platform 文档 |
+| Thinking | Adaptive，**始终开启**，不可关闭；默认 effort=`medium` | Claude Platform 文档 |
+| 官方价（每百万 tokens） | 输入 $4；输出 $20；缓存读 $0.20；5 分钟缓存写 $5；1 小时缓存写 $8 | Claude Platform / Anthropic 公告 |
+| tryallapi.com | **已上架**；端点 `anthropic` + `openai` | `/api/pricing` 2026-10-01 |
+| Base URL | OpenAI 兼容：`https://tryallapi.com/v1`；Claude Code：`https://tryallapi.com` | tryallapi.com |
+
+**三行结论**
+
+1. Opus 5.5 相对 Opus 5：官方称典型工作负载成本约降 40%，输入/输出单价 $4/$20，缓存读降到 $0.20。
+2. Adaptive thinking 不能关，只能用 effort 调深度；迁移旧代码时注意强制 tool_choice、thinking 块绑定等破坏性变更。
+3. 国内直连 Anthropic 困难；tryallapi.com 同时提供 Anthropic Messages 与 OpenAI 兼容入口，Claude Code 改 `ANTHROPIC_BASE_URL` 即可。
+
+👉 [前往 tryallapi.com 注册并生成 API Key](https://tryallapi.com/)
+
+---
+
+## 一、Opus 5.5 对「写代码的人」意味着什么？
+
+[Anthropic 发布页](https://www.anthropic.com/claude-opus-5-5)强调：长程 Agent 编码、知识工作、更少 token 走完同类任务。对国内团队更实际的三点：
+
+- **单价下来了**：相对 Opus 5 的 $5/$25，标准价变为 $4/$20；缓存读 $0.20（官方称相对 Opus 5 降约 60%），Agent 会话大多是缓存读。
+- **Thinking 行为变了**：不能再「关思考」；默认 medium effort，适合当日常默认档。
+- **安全护栏更强**：生物学、网络安全等高风险能力有额外路由与验证计划——企业合规场景要读 System Card，不要假设「完全无限制」。
+
+官方基准数字是厂商自评，本文不转述为「实测」。你自己的仓库要用固定 PR / 评测集对比。
+
+---
+
+## 二、国内为什么还要中转？
+
+Anthropic Claude API 对账号地区、支付方式有明确约束，中国大陆团队通常无法稳定直连。另外 Claude Code 需要稳定的 `ANTHROPIC_BASE_URL`；聚合平台把 Messages API 暴露到国内可达域名，并支持微信/支付宝充值。代价仍是：流量经过第三方，敏感代码与密钥要自己做分级。
+
+---
+
+## 三、方案对比：官方 / Bedrock / 聚合
+
+| 对比项 | Claude 官方 API | AWS Bedrock 等云 | tryallapi.com |
+| --- | --- | --- | --- |
+| 国内可达性 | 受限 | 需海外云账号与网络 | 国内入口 |
+| 模型 ID | `claude-opus-5-5` | `anthropic.claude-opus-5-5` | 同官方 ID |
+| 付款 | 境外卡 | 云账单 | 微信 / 支付宝等 |
+| Claude Code | 原生 | 需额外适配 | 改 Base URL + Token |
+| 协议 | Anthropic Messages | Bedrock Invoke | Anthropic + OpenAI 兼容 |
+| 适合 | 海外主体、零数据保留合规 | 已有 AWS 体系 | 个人/中小团队、多模型 |
+
+---
+
+## 四、接入：Claude Code + Python + cURL
+
+### 1. 注册令牌
+
+在 [tryallapi.com](https://tryallapi.com/) 创建令牌，分组选 Claude 相关（见下节），环境变量：
+
+```bash
+export TRYALLAPI_KEY="sk-xxxxxxxx"
+```
+
+### 2. Claude Code（`~/.claude/settings.json`）
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://tryallapi.com",
+    "ANTHROPIC_AUTH_TOKEN": "sk-你的令牌"
+  }
+}
+```
+
+部分版本也认 `ANTHROPIC_API_KEY`。改完后新开终端，用 `/model` 或启动参数切到 `claude-opus-5-5`（以客户端实际列表为准）。
+
+### 3. Python（Anthropic SDK）
+
+```python
+# pip install -U anthropic
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ["TRYALLAPI_KEY"],
+    base_url="https://tryallapi.com",
+    timeout=180.0,
+)
+
+msg = client.messages.create(
+    model="claude-opus-5-5",
+    max_tokens=16000,
+    messages=[{"role": "user", "content": "给这段 Python 写边界测试并指出竞态"}],
+)
+print(msg.content)
+```
+
+### 4. OpenAI 兼容（便于 Cursor / Dify）
+
+```python
+from openai import OpenAI
+import os
+client = OpenAI(api_key=os.environ["TRYALLAPI_KEY"], base_url="https://tryallapi.com/v1")
+r = client.chat.completions.create(
+    model="claude-opus-5-5",
+    messages=[{"role": "user", "content": "总结这份 RFC 的争议点"}],
+)
+print(r.choices[0].message.content)
+```
+
+```bash
+curl https://tryallapi.com/v1/messages \
+  -H "x-api-key: $TRYALLAPI_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{"model":"claude-opus-5-5","max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
+```
+
+鉴权头字段以 tryallapi.com 文档为准；若 401，优先试 `Authorization: Bearer`。
+
+### 5. Cursor / Dify
+
+- Cursor：Override OpenAI Base URL → `https://tryallapi.com/v1`，模型填 `claude-opus-5-5`。
+- Dify：OpenAI-API-compatible，endpoint 同上。
+
+---
+
+## 五、价格与分组倍率
+
+### 官方价（2026-10-01 核对）
+
+| 项目 | 每百万 tokens |
+| --- | --- |
+| 输入 | $4.00 |
+| 输出 | $20.00 |
+| 缓存读 | $0.20 |
+| 5m 缓存写 | $5.00 |
+| 1h 缓存写 | $8.00 |
+| Batch | 输入/输出约 5 折（以官方为准） |
+| Fast mode | 官方另列约 $8 / $40（研究预览，以页面为准） |
+
+### tryallapi.com（公式：≈ 官方价 × 分组倍率）
+
+`claude-opus-5-5`：`model_ratio=2`，`completion_ratio=5`，`cache_ratio=0.05`。分组（2026-10-01）：
+
+| 分组 | 倍率 | 输入估算 | 输出估算 |
+| --- | --- | --- | --- |
+| Kiro-Claude-1 | 0.17648 | ≈ $0.71 | ≈ $3.53 |
+| Claude-Code-1 | 0.35294 | ≈ $1.41 | ≈ $7.06 |
+| Claude-Code-2 | 0.58824 | ≈ $2.35 | ≈ $11.76 |
+| AWS-Bedrock-2 | 1.17648 | ≈ $4.71 | ≈ $23.53 |
+| AWS-Claude-2 | 1.76472 | ≈ $7.06 | ≈ $35.29 |
+| AWS-Claude-3 | 2.2 | $8.80 | $44.00 |
+
+**以控制台为准。** Agent 场景务必确认缓存读是否按约 5% 输入价结算，否则「便宜」会落空。
+
+成本直觉：缓存命中高的 Claude Code 会话，账单大头往往是缓存读与输出；选低倍率分组前先用小任务核对扣费明细。
+
+---
+
+## 六、自测方法（不编造延迟）
+
+- 同一仓库开两个分支，官方对照（若有）与 tryallapi 分组各跑一轮；
+- 记录：任务是否完成、输出 tokens、控制台扣费、是否触发安全回退；
+- 不要用「首字延迟 XXXms」类无法复现的宣传数字做决策。
+
+---
+
+## 七、常见报错
+
+| 报错 | 原因 | 处理 |
+| --- | --- | --- |
+| 401 | Key / Base URL 错 | 检查 settings.json 与 Bearer / x-api-key |
+| 403 | 分组无 Opus 5.5 | 换 Claude-Code / Bedrock 等分组 |
+| 404 | 模型名写成 `claude-3-opus` 等旧名 | 用 `claude-opus-5-5` |
+| 400 thinking / tool_choice | 沿用 Opus 5 旧参数 | 读官方迁移指南：thinking 不可关 |
+| 429 | 限流 | 退避、降并发、换分组 |
+| 超时 | 高 effort 长任务 | 提高 timeout，或降 effort |
+
+---
+
+
+---
+
+## 写给「只想改两行配置」的读者
+
+如果你已经在用 Claude Code，最小改动是：把原来的 Anthropic 官方地址换成 `https://tryallapi.com`，把 Key 换成 tryallapi 令牌，模型选 `claude-opus-5-5`。先跑 `claude -p "用一句话介绍你自己"` 这类烟测，确认 200 响应与扣费流水，再把真实仓库接进去。Cursor、Continue、Cline 等走 OpenAI 兼容的工具，则统一 `base_url=https://tryallapi.com/v1`。两种协议不要混在同一个客户端配置里，以免签名头对不上。
+
+## 八、避坑
+
+1. **迁移先读 breaking changes**：thinking 常开、强制 tool use 报错、thinking 块与会话绑定。
+2. **分清订阅与 API**：Max 订阅额度 ≠ API Key 计费。
+3. **护栏会改路由**：部分生物/网络安全请求可能落到其他模型，别当「静默降智」误解。
+4. **小额验证缓存账单**。
+5. **敏感仓慎用第三方**：合规优先 Bedrock / 官方零保留。
+
+---
+
+
+---
+
+## 五·附、effort 与成本的直觉
+
+官方把 effort 当作「想多久、花多少」的旋钮。默认 `medium` 适合大多数 Claude Code 会话；简单格式转换可以试更低档，跨仓重构再升高。需要注意：
+
+- effort 升高通常带来更多中间 reasoning / thinking tokens，账单里的「输出侧」会变沉；
+- 缓存读便宜，但若每次都把巨型系统提示当「未命中」重推，优惠会被吃掉——尽量稳定 system prompt 与工具定义，让缓存生效；
+- Fast mode 若开启，官方另有更高单价，只在延迟敏感路径使用，并在控制台核对实际扣费。
+
+把 effort、分组倍率、缓存命中率三件事写进团队的「模型使用规范」，比争论「哪家中转最稳」更有用。
+
+---
+
+## 六·附、从 Opus 5 迁到 5.5 的检查清单
+
+1. 搜索代码里是否有 `thinking: disabled` 或等价字段，删掉或改为 effort。
+2. 检查是否使用了强制 `tool_choice` 的旧写法，按迁移指南改。
+3. 流式 UI 若依赖「工具调用之间的可见文本」，确认新的 thinking 展示设置，否则界面会「突然安静」。
+4. Bedrock / Vertex / Foundry 上的模型 ID 与区域是否已放行 Opus 5.5。
+5. 用同一套内部评测集对比 token 消耗，而不是只看单次对话手感。
+
+
+
+---
+
+## 落地时的组织建议
+
+把 Claude Opus 5.5 引进团队时，建议同步做三件事：第一，在内部 wiki 写明「默认模型、默认 effort、默认分组」；第二，给每个业务线单独令牌并设置月度额度，避免一个泄露的 Key 打穿整站余额；第三，建立简单的质量抽检——每周抽若干真实任务，对比是否值得继续付旗舰价。中转站降低的是接入摩擦，降不掉的是提示词工程与代码评审。对金融、医疗、政务类数据，优先走可签合同、可审计的云通道；tryallapi.com 更适合互联网产品原型、内部工具与中小规模生产。最后，关注 Anthropic 的验证计划与护栏说明，以免关键能力在无提示的情况下被路由到其他模型，造成「同一模型名、不同行为」的错觉。
+
+
+## 九、FAQ
+
+**Q1：模型 ID 怎么写？**  
+`claude-opus-5-5`。Bedrock 为 `anthropic.claude-opus-5-5`。
+
+**Q2：官方价？**  
+输入 $4、输出 $20、缓存读 $0.20、5m/1h 缓存写 $5/$8（每百万 tokens），以 Claude Platform 为准。
+
+**Q3：国内能直连 Anthropic 吗？**  
+多数个人与中小团队不稳定；常用聚合平台或云厂商中转。
+
+**Q4：Claude Code 如何接 tryallapi.com？**  
+`ANTHROPIC_BASE_URL=https://tryallapi.com`，Token 填站点令牌。
+
+**Q5：thinking 能关吗？**  
+不能。用 effort（默认 medium）调节。
+
+**Q6：tryallapi 怎么计价？**  
+官方价 × 分组倍率；2026-10-01 分组约 0.18～2.2，以控制台为准。
+
+**Q7：和 Fable 5.1 比？**  
+官方表：Fable 更高价（约 $10/$50）、默认 effort 更高。选哪档看任务难度与预算。
+
+**Q8：一个 Key 能否兼用 GPT？**  
+可以，权限内多模型通用；建议分项目建令牌。
+
+---
+
+
+---
+
+## 写在接入之后
+
+完成第一次成功响应只是起点。建议你继续做两件事：把 `TRYALLAPI_KEY` 放进密钥管理（不要写进仓库）；为关键路径准备第二个模型作降级。中转站解决的是网络与支付，解决不了提示词质量、评测缺失与密钥泄露。定期打开 tryallapi.com 控制台核对分组倍率是否变动，并回到厂商官方价格页复核——本文数字快照于 2026-10-01，之后一切以页面为准。若你的流量上升到需要合同、发票抬头与专线，再评估直连官方云或企业方案，而不是无限叠加低倍率分组。
+
+## 相关阅读
+
+- [Gemini 2.5 Pro API 国内中转调用指南](/gemini-2.5-pro-api/)
+- [GPT-6.1 Sol API 国内中转调用指南](/gpt-6.1-sol-api/)
+- [GPT-6 Astra API 国内中转调用指南](/gpt-6-astra-api/)
+- [Claude Opus 5.5 API 国内中转调用指南](/claude-opus-5-5-api/)
+- [Gemini 3.1 Pro API 国内中转调用指南](/gemini-3.1-pro-api/)
+- [DeepSeek V3.2 API 国内中转调用指南](/deepseek-v3.2-api/)
+- [Grok 4.7 API 国内中转调用指南](/grok-4.7-api/)
+- [tryallapi.com 模型价格总览](https://tryallapi.com/pricing)
+
+- 官方参考：[Introducing Claude Opus 5.5](https://www.anthropic.com/claude-opus-5-5) · [Opus 5.5 Overview](https://platform.claude.com/docs/en/models/opus-5-5/overview)
+
+---
+
+**其他使用方式，按需选择：**
+
+| 渠道类型 | 访问网址 | 适用场景 |
+| --- | --- | --- |
+| 全模型 API 聚合站 | https://tryallapi.com/ | 适合开发者调用、低延迟直连、多模型一站式接入 |
+
+---
+
+*作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。*
+*首发：2026-10-01｜最后更新：2026-10-01｜更新日志：2026-10-01 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-01，最终以控制台为准）。*
+*免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。*

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grok 4.7 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Grok 4.7 API 国内中转调用与价格：官方 $2/$6、缓存 $0.50（≥200K 加倍），OpenAI 兼容接入、倍率与 Cursor 配置。">
+<link rel="canonical" href="https://docs.tryallapi.com/grok-4.7-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Grok 4.7 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Grok 4.7 API 国内中转调用与价格：官方 $2/$6、缓存 $0.50（≥200K 加倍），OpenAI 兼容接入、倍率与 Cursor 配置。">
+<meta property="og:url" content="https://docs.tryallapi.com/grok-4.7-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/grok-4.7-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Grok 4.7 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Grok 4.7 API 国内中转调用与价格：官方 $2/$6、缓存 $0.50（≥200K 加倍），OpenAI 兼容接入、倍率与 Cursor 配置。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/grok-4.7-api.png">
+<meta property="article:published_time" content="2026-10-01">
+<meta property="article:modified_time" content="2026-10-01">
+<meta property="article:section" content="xAI">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Grok 4.7 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Grok 4.7 API 国内中转调用与价格：官方 $2/$6、缓存 $0.50（≥200K 加倍），OpenAI 兼容接入、倍率与 Cursor 配置。",
+   "image": [
+    "https://docs.tryallapi.com/og/grok-4.7-api.png"
+   ],
+   "datePublished": "2026-10-01",
+   "dateModified": "2026-10-01",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/grok-4.7-api/",
+   "url": "https://docs.tryallapi.com/grok-4.7-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Grok 4.7 API（grok-4.7）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Grok 4.7 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/grok-4.7-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "模型 ID？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "grok-4.7。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "<200K：$2 入 / $0.5 缓存 / $6 出；≥200K：整单 $4 / $1 / $12。以 docs.x.ai 为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内直连 xAI？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "视网络与支付而定，多数团队用聚合更省事。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么接？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，环境变量 TRYALLAPI_KEY，model=grok-4.7。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "分组倍率？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "2026-10-01：约 0.15～0.88，见上表，以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文多长？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "文档写 500K；价梯在 200K prompt 处加倍。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "和 Grok 4.6？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "公开短档价相同量级；按质量与可用性选择。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一 Key 多模型？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以；建议分项目限额。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Grok 4.7 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">xAI（Grok） · <code>grok-4.7</code></p>
+<h1>Grok 4.7 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-01">2026-10-01</time> · 更新 <time datetime="2026-10-01">2026-10-01</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。xAI 参数来自 <a href="https://docs.x.ai/" target="_blank" rel="noopener noreferrer">docs.x.ai</a>；tryallapi.com 取数 2026-10-01，最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>面向想把 <strong>Grok 4.7</strong> 接进 Agent / 编程工作流，却不便直连 <code>api.x.ai</code> 的国内开发者。</p>
+<hr />
+<h2>Grok 4.7 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>grok-4.7</code></td>
+<td><a href="https://docs.x.ai/docs/models" target="_blank" rel="noopener noreferrer">xAI Models</a></td>
+</tr>
+<tr>
+<td>定位</td>
+<td>文本与代码主推型号（文档称 Code/Chat 优先选 4.7）</td>
+<td>xAI Docs</td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>500K tokens</td>
+<td>xAI Docs</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026-05（文档 NOTE）</td>
+<td>xAI Docs</td>
+</tr>
+<tr>
+<td>官方价（提示 &lt;200K）</td>
+<td>输入 $2.00；缓存输入 $0.50；输出 $6.00</td>
+<td>xAI Docs 2026-10-01</td>
+</tr>
+<tr>
+<td>官方价（提示 ≥200K）</td>
+<td>输入 $4.00；缓存输入 $1.00；输出 $12.00（<strong>整次请求</strong>按高档）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>推理</td>
+<td>文档提及 reasoning；Responses 上可能返回加密 reasoning 内容</td>
+<td>xAI Docs</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点 <code>openai</code> + <code>anthropic</code></td>
+<td><code>/api/pricing</code></td>
+</tr>
+<tr>
+<td>Base URL</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>官方标准档在短提示下是 <strong>$2 / $6</strong>，一旦提示达到 200K，<strong>整单</strong>升到 <strong>$4 / $12</strong>，做长仓分析前先截断或摘要。</li>
+<li>xAI 原生 base 是 <code>https://api.x.ai/v1</code>；国内网络与支付往往不便，可用 tryallapi.com 兼容层。</li>
+<li>创建令牌时选 Cli-Grok / Xai-Grok 分组，扣费 ≈ 官方价 × 分组倍率，<strong>以控制台为准</strong>。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">注册 tryallapi.com</a></p>
+<hr />
+<h2>一、Grok 4.7 在工程里的位置</h2>
+<p>xAI 文档把 Grok 4.7 当作通用文本与代码默认项，并提供 Responses API 示例。和「只做聊天」不同，编程 Agent 更关心：函数调用是否稳、长仓库上下文是否触发 200K 加倍、reasoning 字段是否被客户端正确忽略或展示。</p>
+<p>与同系列 4.6 / 4.5 相比，公开价目表上 4.7 与 4.6 短上下文价一致（$2/$0.5/$6），长上下文规则同样是 ≥200K 加倍。选型时更应看代码质量与工具调用，而不是差几美分的标价。</p>
+<hr />
+<h2>二、为什么走中转？</h2>
+<ol>
+<li><strong>网络</strong>：<code>api.x.ai</code> 在部分国内网络下不稳定。</li>
+<li><strong>支付</strong>：xAI 账单与境外卡门槛。</li>
+<li><strong>多模型</strong>：同一项目可能还要调 GPT、Claude；聚合平台一个 Key 切换 <code>model</code> 字段即可。</li>
+</ol>
+<p>中转多一跳，延迟与可用性取决于分组上游；用小流量探针，不要一上来就灌生产全量。</p>
+<hr />
+<h2>三、官方 xAI / 聚合对比</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>官方 xAI API</th>
+<th>tryallapi.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base URL</td>
+<td><code>https://api.x.ai/v1</code></td>
+<td><code>https://tryallapi.com/v1</code></td>
+</tr>
+<tr>
+<td>模型名</td>
+<td><code>grok-4.7</code></td>
+<td>同左</td>
+</tr>
+<tr>
+<td>国内访问</td>
+<td>视网络而定</td>
+<td>面向国内入口</td>
+</tr>
+<tr>
+<td>支付</td>
+<td>xAI 账户</td>
+<td>微信 / 支付宝等</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>OpenAI 风格 Responses / Chat</td>
+<td>OpenAI + Anthropic 兼容端点</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>海外主体、要官方特性第一时间</td>
+<td>国内团队、多模型统一账单</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>四、接入代码</h2>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<p><strong>Python（Chat Completions）</strong></p>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,
+    timeout=180,
+)
+
+stream = client.chat.completions.create(
+    model=&quot;grok-4.7&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;修复并解释：function median(a){a.sort();return a[a.length/2]}&quot;}],
+    stream=True,
+)
+for chunk in stream:
+    if chunk.choices and chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end=&quot;&quot;, flush=True)
+</code></pre>
+<p><strong>Python（Responses，若网关已映射）</strong></p>
+<pre><code class="language-python">resp = client.responses.create(
+    model=&quot;grok-4.7&quot;,
+    input=&quot;给这个 Flask 路由补上幂等键设计&quot;,
+)
+print(getattr(resp, &quot;output_text&quot;, resp))
+</code></pre>
+<p>若 Responses 返回 404，退回 Chat Completions；以 tryallapi 文档支持的端点为准。</p>
+<p><strong>Node.js</strong></p>
+<pre><code class="language-javascript">import OpenAI from &quot;openai&quot;;
+const client = new OpenAI({ apiKey: process.env.TRYALLAPI_KEY, baseURL: &quot;https://tryallapi.com/v1&quot; });
+const r = await client.chat.completions.create({
+  model: &quot;grok-4.7&quot;,
+  messages: [{ role: &quot;user&quot;, content: &quot;把这段 TypeScript 的 any 收紧成真实类型&quot; }],
+});
+console.log(r.choices[0].message.content);
+</code></pre>
+<p><strong>cURL</strong></p>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;grok-4.7&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<p><strong>Cursor</strong>：Settings → Models → OpenAI API Key + Override Base URL <code>https://tryallapi.com/v1</code> → 自定义 <code>grok-4.7</code>。<br />
+<strong>Claude Code</strong>：若走 Anthropic 兼容端点，按站点说明配置 <code>ANTHROPIC_BASE_URL</code>；模型名仍写 <code>grok-4.7</code>（需网关支持协议转换）。<br />
+<strong>Dify</strong>：OpenAI-API-compatible，endpoint <code>https://tryallapi.com/v1</code>。</p>
+<hr />
+<h2>五、价格与分组</h2>
+<h3>官方（每百万 tokens）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th>提示 &lt;200K</th>
+<th>提示 ≥200K（整次请求）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$2.00</td>
+<td>$4.00</td>
+</tr>
+<tr>
+<td>缓存输入</td>
+<td>$0.50</td>
+<td>$1.00</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$6.00</td>
+<td>$12.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>来源：<a href="https://docs.x.ai/docs/models" target="_blank" rel="noopener noreferrer">xAI Models 文档</a>，2026-10-01 核对。</p>
+<h3>tryallapi.com（≈ 官方 × 分组倍率）</h3>
+<p><code>grok-4.7</code>：<code>model_ratio=1</code>，<code>completion_ratio=3</code>，<code>cache_ratio=0.25</code>。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>&lt;200K 输入估算</th>
+<th>&lt;200K 输出估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cli-Grok-1</td>
+<td>0.14706</td>
+<td>≈ $0.29</td>
+<td>≈ $0.88</td>
+</tr>
+<tr>
+<td>Cli-Grok-2</td>
+<td>0.2059</td>
+<td>≈ $0.41</td>
+<td>≈ $1.24</td>
+</tr>
+<tr>
+<td>Xai-Grok-1</td>
+<td>0.88236</td>
+<td>≈ $1.76</td>
+<td>≈ $5.29</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>以控制台为准。</strong> 长提示先按官方加倍规则估算，再乘倍率。</p>
+<p>示例：日 300 次 × 入 4k / 出 1.5k → 月入 3,600 万、出 1,350 万；官方短档约 36×$2 + 13.5×$6 = <strong>$153</strong>；倍率 r 时约 <strong>$153×r</strong>。若单次提示经常 ≥200K，用加倍后的官方价替换后再乘 r。</p>
+<hr />
+<h2>六、长上下文策略（比「找更低倍率」更重要）</h2>
+<ol>
+<li>仓库级任务先检索再喂文件，避免把整个 monorepo 塞进一条 prompt。</li>
+<li>稳定前缀尽量命中缓存（官方缓存输入 $0.50 档）。</li>
+<li>监控每条请求的 prompt tokens；接近 200K 时告警。</li>
+<li>对比「摘要后短提示 + 工具读文件」与「一次塞满」的总费用，而不是只看单次输出质量。</li>
+</ol>
+<hr />
+<h2>七、自测方法</h2>
+<ul>
+<li>短题 100 次：成功与截断；</li>
+<li>构造 ~210K 提示（合成重复文本即可）验证是否按加倍计费；</li>
+<li>核对 <code>usage</code> 与控制台；</li>
+<li>不在文章里填写未测量的延迟。</li>
+</ul>
+<hr />
+<h2>八、报错与避坑</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>检查 Bearer / 令牌</td>
+</tr>
+<tr>
+<td>403</td>
+<td>换 Cli-Grok / Xai-Grok 分组</td>
+</tr>
+<tr>
+<td>404</td>
+<td>确认模型名 <code>grok-4.7</code>；base_url 含 <code>/v1</code></td>
+</tr>
+<tr>
+<td>429</td>
+<td>退避、换分组</td>
+</tr>
+<tr>
+<td>超时</td>
+<td>提高 timeout，开流式</td>
+</tr>
+</tbody>
+</table></div>
+<p>避坑：① 警惕 200K 加倍；② 低倍率分组先测质量；③ 加密 reasoning 字段不要当用户可见文本乱展示；④ 小额充值；⑤ 敏感代码审第三方条款。</p>
+<hr />
+<hr />
+<h2>编程 Agent 场景的实践笔记</h2>
+<p>把 Grok 4.7 接到 Cursor、Cline 或自建 Agent 时，优先保证三件事：流式输出完整、工具调用参数可解析、长文件采用「检索 + 分段」而不是一次性塞满 200K。官方在 ≥200K 时整单加倍，意味着「多塞一点上下文」可能让费用跳档，而不是线性变贵。试运行阶段用 tryallapi.com 的低倍率 Grok 分组观察行为，确认质量可接受后再视稳定性需求调整分组。若 Responses API 在中转层尚未完全映射，先用 Chat Completions 跑通业务，把协议升级当成独立里程碑。和 GPT、Claude 混用时，用统一的评测集打分，避免仅凭主观「更敢改代码」选型。账单侧按模型维度拆开令牌，才能知道 Grok 是否真的比别的旗舰更省。</p>
+<hr />
+<h2>与 xAI 原生 SDK 的差异心态</h2>
+<p>官方示例里 <code>base_url=&quot;https://api.x.ai/v1&quot;</code>，换成 tryallapi 后，行为上应尽量贴近 OpenAI 兼容子集。遇到官方新字段（例如强制附带的加密 reasoning）时，客户端要能容忍未知字段，不要因为多一个 JSON key 就整段解析失败。地区路由、优先处理等官方加价项，中转是否透传以控制台说明为准；没有写清楚的，就当作「未承诺」，不要在对外 SLA 里写死。保持这种「兼容优先、特性渐进」的心态，中转链路会好维护得多。</p>
+<h2>九、FAQ</h2>
+<p><strong>Q1：模型 ID？</strong><br />
+<code>grok-4.7</code>。</p>
+<p><strong>Q2：官方价？</strong><br />
+&lt;200K：$2 入 / $0.5 缓存 / $6 出；≥200K：整单 $4 / $1 / $12。以 docs.x.ai 为准。</p>
+<p><strong>Q3：国内直连 xAI？</strong><br />
+视网络与支付而定，多数团队用聚合更省事。</p>
+<p><strong>Q4：tryallapi 怎么接？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，环境变量 <code>TRYALLAPI_KEY</code>，model=<code>grok-4.7</code>。</p>
+<p><strong>Q5：分组倍率？</strong><br />
+2026-10-01：约 0.15～0.88，见上表，以控制台为准。</p>
+<p><strong>Q6：上下文多长？</strong><br />
+文档写 500K；价梯在 200K prompt 处加倍。</p>
+<p><strong>Q7：和 Grok 4.6？</strong><br />
+公开短档价相同量级；按质量与可用性选择。</p>
+<p><strong>Q8：一 Key 多模型？</strong><br />
+可以；建议分项目限额。</p>
+<hr />
+<hr />
+<h2>写在接入之后</h2>
+<p>完成第一次成功响应只是起点。建议你继续做两件事：把 <code>TRYALLAPI_KEY</code> 放进密钥管理（不要写进仓库）；为关键路径准备第二个模型作降级。中转站解决的是网络与支付，解决不了提示词质量、评测缺失与密钥泄露。定期打开 tryallapi.com 控制台核对分组倍率是否变动，并回到厂商官方价格页复核——本文数字快照于 2026-10-01，之后一切以页面为准。若你的流量上升到需要合同、发票抬头与专线，再评估直连官方云或企业方案，而不是无限叠加低倍率分组。</p>
+<hr />
+<h2>费用告警怎么设才有用</h2>
+<p>针对 Grok 4.7，建议至少三条告警：单请求 prompt tokens ≥ 180K（靠近加倍阈值）；单日该模型消费超过预算的 N%；某分组错误率短时升高。告警不要只发到没人看的邮箱，最好进值班群并附带 request id。试制阶段可以用 Cli-Grok 低倍率分组，但要把「质量抽检通过」写成上线门禁，再视情况换更接近官方的 Xai-Grok 分组。混合使用 Anthropic 兼容端点时，确认客户端不会把 Grok 当 Claude 解析特有字段。把这些运维细节写进 runbook，中转方案才能从 Demo 变成可值夜班的生产依赖。</p>
+<hr />
+<h2>小结：什么时候该上 Grok 4.7</h2>
+<p>当你已经有 OpenAI 兼容工具链，希望多一个高质量代码模型做 A/B，或官方评测/内部手感显示 Grok 在某类重构上更敢改且可接受时，用 tryallapi.com 接入成本最低。若你的硬性要求是「必须官方 SLA + 数据驻留条款」，那就走 xAI 官方合同，而不是中转。两者可以并存：实验流量走聚合，合规流量走官方。</p>
+<p>对于只想「先跑通」的读者：复制本文的 Python 片段，换成自己的 Key，先完成一次非流式 <code>ping</code>，再开流式，最后才接工具调用。顺序不要反。</p>
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/kimi-k3-api/">Kimi K3 API 国内中转调用指南与价格</a>：官方全球价 $3/$15、缓存 $0.30；推理常开，100 万上下文。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>官方参考：<a href="https://docs.x.ai/" target="_blank" rel="noopener noreferrer">xAI Docs</a> · <a href="https://docs.x.ai/docs/models" target="_blank" rel="noopener noreferrer">Models &amp; Pricing</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-01｜最后更新：2026-10-01｜更新日志：2026-10-01 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-01，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Grok 4.7 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">查看 Grok 4.7 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=grok-4.7-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

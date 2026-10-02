@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini 3.1 Pro API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Gemini 3.1 Pro API 国内中转调用与价格：官方 $2/$12（&gt;200K $4/$18），OpenAI 兼容与原生接入、倍率与代码。">
+<link rel="canonical" href="https://docs.tryallapi.com/gemini-3.1-pro-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Gemini 3.1 Pro API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Gemini 3.1 Pro API 国内中转调用与价格：官方 $2/$12（&gt;200K $4/$18），OpenAI 兼容与原生接入、倍率与代码。">
+<meta property="og:url" content="https://docs.tryallapi.com/gemini-3.1-pro-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/gemini-3.1-pro-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gemini 3.1 Pro API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Gemini 3.1 Pro API 国内中转调用与价格：官方 $2/$12（&gt;200K $4/$18），OpenAI 兼容与原生接入、倍率与代码。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/gemini-3.1-pro-api.png">
+<meta property="article:published_time" content="2026-10-01">
+<meta property="article:modified_time" content="2026-10-01">
+<meta property="article:section" content="Google">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Gemini 3.1 Pro API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Gemini 3.1 Pro API 国内中转调用与价格：官方 $2/$12（>200K $4/$18），OpenAI 兼容与原生接入、倍率与代码。",
+   "image": [
+    "https://docs.tryallapi.com/og/gemini-3.1-pro-api.png"
+   ],
+   "datePublished": "2026-10-01",
+   "dateModified": "2026-10-01",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/gemini-3.1-pro-api/",
+   "url": "https://docs.tryallapi.com/gemini-3.1-pro-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Gemini 3.1 Pro API（gemini-3.1-pro-preview）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Gemini 3.1 Pro API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/gemini-3.1-pro-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "模型 ID？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "gemini-3.1-pro-preview；自定义工具场景可看 gemini-3.1-pro-preview-customtools。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "≤200K：$2 入 / $12 出；>200K：$4 / $18。缓存 $0.20 / $0.40。以 Google 价格页为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内直连？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "通常不行或不稳定；用 Vertex 或聚合。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "和 Gemini 2.5 Pro？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "2.5 Pro 标准档更低（≤200K 约 $1.25/$10）；3.1 Pro 为新一代 Preview，能力与价格不同，按需求选。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方价 × 分组倍率；2026-10-01 倍率约 0.15～1.91。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "能否用 OpenAI SDK？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，base_url=https://tryallapi.com/v1。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支付与发票？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "微信/支付宝/信用卡等以站点为准；发票见公告。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一个 Key 多模型？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，建议分项目限额。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Gemini 3.1 Pro API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">Google（Gemini） · <code>gemini-3.1-pro-preview</code></p>
+<h1>Gemini 3.1 Pro API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-01">2026-10-01</time> · 更新 <time datetime="2026-10-01">2026-10-01</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。Google Gemini 参数来自 <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer">ai.google.dev</a> 模型页与价格页；tryallapi.com 取数 2026-10-01，最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>面向需要 <strong>多模态长上下文 + Agent 工具调用</strong> 的国内开发者。</p>
+<hr />
+<h2>信息卡：gemini-3.1-pro-preview</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型代码</td>
+<td><code>gemini-3.1-pro-preview</code>（另有 <code>…-customtools</code>）</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview" target="_blank" rel="noopener noreferrer">模型页</a></td>
+</tr>
+<tr>
+<td>状态</td>
+<td>Preview（文档标注 Latest update：February 2026）</td>
+<td>Google 模型页</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1,048,576 / 65,536 tokens</td>
+<td>Google 模型页</td>
+</tr>
+<tr>
+<td>模态</td>
+<td>输入：文本/图像/视频/音频/PDF；输出：文本</td>
+<td>Google 模型页</td>
+</tr>
+<tr>
+<td>能力摘要</td>
+<td>Thinking、Function calling、Search/Maps grounding、Caching、Batch/Flex/Priority</td>
+<td>Google 模型页</td>
+</tr>
+<tr>
+<td>官方标准价（≤200K）</td>
+<td>输入 $2.00；输出 $12.00（含 thinking tokens）；缓存 $0.20</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Pricing</a> 2026-10-01</td>
+</tr>
+<tr>
+<td>官方标准价（&gt;200K）</td>
+<td>输入 $4.00；输出 $18.00；缓存 $0.40；存储约 $4.50/百万 tokens/小时</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点 <code>gemini</code> + <code>openai</code></td>
+<td><code>/api/pricing</code></td>
+</tr>
+<tr>
+<td>Base URL</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>Google Gemini API 在中国大陆通常无法稳定直连；支付与地区策略也让个人账号成本高。</li>
+<li>3.1 Pro Preview 标准档 ≤200K 为 <strong>$2 / $12</strong>，超过 200K 升到 <strong>$4 / $18</strong>——长视频/PDF 分析前先算阶梯。</li>
+<li>tryallapi.com 可用 OpenAI 兼容 SDK 调 <code>gemini-3.1-pro-preview</code>，创建令牌时选 Gemini 分组，扣费 ≈ 官方价 × 分组倍率。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">前往 tryallapi.com</a></p>
+<hr />
+<h2>一、3.1 Pro Preview 适合什么任务？</h2>
+<p>Google 文档把它放在「第三代 Pro」：多模态理解、Agent 精确用工具、偏工程与 vibe-coding。和 Flash 系列比：更贵、上下文同样到约 1M，但输出上限 65K，适合深推理而不是海量廉价吞吐。</p>
+<p>另有 <code>gemini-3.1-pro-preview-customtools</code>：官方说明更偏向 bash + 自定义工具的 Agent；不含这类工具的场景可能波动，按文档选型。</p>
+<p>Preview 意味着行为与额度可能变，生产环境要有模型切换预案（例如回退到已稳定的 2.5 Pro，见相关阅读）。</p>
+<hr />
+<h2>二、三种国内可达方案</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>说明</th>
+<th>优点</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google AI Studio / Gemini API</td>
+<td>官方 Developer API</td>
+<td>一手模型、文档全</td>
+<td>地区与支付门槛</td>
+</tr>
+<tr>
+<td>Vertex AI</td>
+<td>GCP 企业通道</td>
+<td>合规、配额可控</td>
+<td>开通与账单复杂</td>
+</tr>
+<tr>
+<td>聚合（tryallapi.com）</td>
+<td>OpenAI / Gemini 兼容入口</td>
+<td>国内网、统一 Key、支付宝微信</td>
+<td>经第三方</td>
+</tr>
+</tbody>
+</table></div>
+<p>多数个人项目从聚合起步；有 GCP 合同的公司再评估 Vertex。</p>
+<hr />
+<h2>三、快速接入</h2>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<p><strong>Python（OpenAI 兼容，改两行）</strong></p>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;, timeout=180)
+r = client.chat.completions.create(
+    model=&quot;gemini-3.1-pro-preview&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;根据附件 PDF 大纲写风险清单（此处先测纯文本）&quot;}],
+)
+print(r.choices[0].message.content)
+</code></pre>
+<p><strong>Node.js</strong></p>
+<pre><code class="language-javascript">import OpenAI from &quot;openai&quot;;
+const client = new OpenAI({ apiKey: process.env.TRYALLAPI_KEY, baseURL: &quot;https://tryallapi.com/v1&quot; });
+const r = await client.chat.completions.create({
+  model: &quot;gemini-3.1-pro-preview&quot;,
+  messages: [{ role: &quot;user&quot;, content: &quot;把这段日志归类成 incident 时间线&quot; }],
+});
+console.log(r.choices[0].message.content);
+</code></pre>
+<p><strong>cURL</strong></p>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;gemini-3.1-pro-preview&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<p>原生 Gemini 路径（若走 <code>generativelanguage</code> 风格）以 tryallapi 文档为准；多数业务用 OpenAI 兼容即可。</p>
+<p><strong>Cursor / Dify</strong>：Base URL <code>https://tryallapi.com/v1</code>，模型名填完整 <code>gemini-3.1-pro-preview</code>（不要省略 <code>-preview</code>，除非广场另有别名）。</p>
+<hr />
+<h2>四、价格对比</h2>
+<h3>官方（Standard Paid，2026-10-01 自 <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">价格页</a> 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th>≤200K</th>
+<th>&gt;200K</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$2.00</td>
+<td>$4.00</td>
+</tr>
+<tr>
+<td>输出（含 thinking）</td>
+<td>$12.00</td>
+<td>$18.00</td>
+</tr>
+<tr>
+<td>上下文缓存</td>
+<td>$0.20</td>
+<td>$0.40</td>
+</tr>
+</tbody>
+</table></div>
+<p>Batch / Flex 约为标准一半；Priority 更高——以官方页为准。Grounding with Google Search 另有免费额与按次计费。</p>
+<h3>tryallapi.com 分组（≈ 官方 × 倍率；model_ratio=1, completion_ratio=6）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>≤200K 输入估算</th>
+<th>≤200K 输出估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anti-Gemini-1</td>
+<td>0.14706</td>
+<td>≈ $0.29</td>
+<td>≈ $1.76</td>
+</tr>
+<tr>
+<td>Cli-Gemini-1</td>
+<td>0.14706</td>
+<td>≈ $0.29</td>
+<td>≈ $1.76</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-1</td>
+<td>0.35294</td>
+<td>≈ $0.71</td>
+<td>≈ $4.24</td>
+</tr>
+<tr>
+<td>Vertex-Gemini-1</td>
+<td>0.4</td>
+<td>$0.80</td>
+<td>$4.80</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-2</td>
+<td>0.52942</td>
+<td>≈ $1.06</td>
+<td>≈ $6.35</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-3</td>
+<td>0.88236</td>
+<td>≈ $1.76</td>
+<td>≈ $10.59</td>
+</tr>
+<tr>
+<td>Vertex-Gemini-2</td>
+<td>0.9</td>
+<td>$1.80</td>
+<td>$10.80</td>
+</tr>
+<tr>
+<td>Vertex-Gemini-3</td>
+<td>1.8</td>
+<td>$3.60</td>
+<td>$21.60</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-4</td>
+<td>1.91178</td>
+<td>≈ $3.82</td>
+<td>≈ $22.94</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>以控制台为准。</strong> 超过 200K 时按官方阶梯先算官方价，再乘倍率。</p>
+<p>示例（公式）：日 500 次 × 输入 3k / 输出 1k → 月输入 4,500 万、输出 1,500 万；官方 ≤200K 约 45×$2 + 15×$12 = <strong>$270</strong>；倍率 r 时约 <strong>$270×r</strong>。</p>
+<hr />
+<hr />
+<h2>四·附、多模态与长上下文的计费提醒</h2>
+<p>Gemini 3.1 Pro Preview 吃图像、视频、音频和 PDF。对中转站来说，常见坑是：</p>
+<ol>
+<li><strong>本地以为「一张图」，上游按许多 image tokens 计。</strong> 先看响应里的 <code>usage</code>，再和官方 tokenizer / 文档对照。</li>
+<li><strong>视频按帧或按时长折算 tokens</strong>（以 Google 当期文档为准），很容易不知不觉跨过 200K 阶梯。</li>
+<li><strong>PDF 常按文档/图像模态计价</strong>，不要按「纯文字页数」估算。</li>
+<li><strong>Grounding（Search / Maps）</strong> 可能在 token 费之外另计请求费；关掉 grounding 做基线对比，再决定是否打开。</li>
+</ol>
+<p>建议在试生产前写一份「模态 × 预估 tokens × 是否 &gt;200K × 分组倍率」的表格，发给团队，避免月底才发现账单翻倍。</p>
+<hr />
+<h2>五·附、AI Studio、Vertex 与聚合的分工</h2>
+<ul>
+<li><strong>AI Studio</strong>：适合探索与小流量；免费档有限额，且内容可能用于改进产品（以官方条款为准）。</li>
+<li><strong>Vertex</strong>：企业配额、VPC、数据区域；工程成本高，但合规路径清晰。</li>
+<li><strong>tryallapi.com</strong>：把多模型收成一个 Key，适合国内个人与中小团队的原型与中等流量。若日后要过等保或客户审计，再把核心流量迁回 Vertex / 官方。</li>
+</ul>
+<p>不要在同一条业务链路上无文档地混用三条通道，否则出错时很难判断是模型问题还是线路问题。</p>
+<h2>五、自测与真伪核对（方法）</h2>
+<ul>
+<li>上传或粘贴接近 20 万+ tokens 的材料，观察是否触发 &gt;200K 计价；</li>
+<li>对照 <code>usage</code> 与控制台流水；</li>
+<li>多模态请求（图/PDF）单独测失败率；</li>
+<li>本文不提供编造的延迟表。</li>
+</ul>
+<hr />
+<hr />
+<h2>工程侧最小验证脚本思路</h2>
+<p>用同一条提示词，连续请求 20 次：记录 HTTP 状态、是否流式完整、<code>model</code> 回显、输入输出 tokens、控制台扣费。若中途换分组，只改令牌分组、不改代码。发现 404 时优先检查模型字符串是否少了 <code>-preview</code>；发现偏贵时优先检查是否误开 grounding 或是否跨过 200K。把结果存进表格，而不是截一张「很快」的聊天窗口当证据。</p>
+<h2>六、报错速查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>检查 Bearer 与令牌状态</td>
+</tr>
+<tr>
+<td>403</td>
+<td>换包含该模型的 Gemini 分组</td>
+</tr>
+<tr>
+<td>404</td>
+<td>模型名必须含 <code>-preview</code>；base_url 带 <code>/v1</code></td>
+</tr>
+<tr>
+<td>429</td>
+<td>退避、降并发、换分组</td>
+</tr>
+<tr>
+<td>超时</td>
+<td>长视频/深 thinking 提高 timeout，开流式</td>
+</tr>
+<tr>
+<td>余额不足</td>
+<td>充值或令牌额度上限</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、避坑</h2>
+<ol>
+<li>Preview 可能改价改行为，关键路径留备用模型。</li>
+<li>算清 200K 阶梯，否则「以为 $2/$12」实际按 $4/$18。</li>
+<li>Grounding / 搜索工具可能单独计费。</li>
+<li>低倍率分组上游不同，先小额看稳定性。</li>
+<li>敏感影像与合同扫描谨慎过第三方。</li>
+</ol>
+<hr />
+<hr />
+<h2>和「只写聊天机器人」不一样的预算观</h2>
+<p>Gemini 3.1 Pro Preview 的账单结构，和纯文本闲聊很不一样。多模态输入、thinking tokens、200K 阶梯、可选的 Search grounding，任意一项被忽略，月度预算都可能偏一截。建议在立项时按「最坏情况」估：所有请求都按 &gt;200K 标准档、开启 grounding、输出接近上限，再乘你打算使用的最高分组倍率，得到天花板；日常监控则看 P50 实际 tokens。tryallapi.com 的价值在于用国内可达的 OpenAI 兼容接口快速试错，并用同一套账单看 GPT / Claude / Gemini 的占比。等某一模型的调用量稳定后，再决定是否把该部分迁到 Vertex 做长期合约。Preview 模型尤其不要写死在不可热更新的客户端里——把 model 字符串放到配置中心，才能在 Google 调整预览策略时迅速切换。</p>
+<h2>八、FAQ</h2>
+<p><strong>Q1：模型 ID？</strong><br />
+<code>gemini-3.1-pro-preview</code>；自定义工具场景可看 <code>gemini-3.1-pro-preview-customtools</code>。</p>
+<p><strong>Q2：官方价？</strong><br />
+≤200K：$2 入 / $12 出；&gt;200K：$4 / $18。缓存 $0.20 / $0.40。以 Google 价格页为准。</p>
+<p><strong>Q3：国内直连？</strong><br />
+通常不行或不稳定；用 Vertex 或聚合。</p>
+<p><strong>Q4：和 Gemini 2.5 Pro？</strong><br />
+2.5 Pro 标准档更低（≤200K 约 $1.25/$10）；3.1 Pro 为新一代 Preview，能力与价格不同，按需求选。</p>
+<p><strong>Q5：tryallapi 计费？</strong><br />
+官方价 × 分组倍率；2026-10-01 倍率约 0.15～1.91。</p>
+<p><strong>Q6：能否用 OpenAI SDK？</strong><br />
+可以，<code>base_url=https://tryallapi.com/v1</code>。</p>
+<p><strong>Q7：支付与发票？</strong><br />
+微信/支付宝/信用卡等以站点为准；发票见公告。</p>
+<p><strong>Q8：一个 Key 多模型？</strong><br />
+可以，建议分项目限额。</p>
+<hr />
+<hr />
+<h2>写在接入之后</h2>
+<p>完成第一次成功响应只是起点。建议你继续做两件事：把 <code>TRYALLAPI_KEY</code> 放进密钥管理（不要写进仓库）；为关键路径准备第二个模型作降级。中转站解决的是网络与支付，解决不了提示词质量、评测缺失与密钥泄露。定期打开 tryallapi.com 控制台核对分组倍率是否变动，并回到厂商官方价格页复核——本文数字快照于 2026-10-01，之后一切以页面为准。若你的流量上升到需要合同、发票抬头与专线，再评估直连官方云或企业方案，而不是无限叠加低倍率分组。</p>
+<hr />
+<h2>常见架构：网关里的模型路由</h2>
+<p>很多团队会在自己的 API 网关里写一条规则：默认 <code>gemini-3.1-pro-preview</code>，失败则回退 <code>gemini-2.5-pro</code>，再失败则回退某款 Flash。配合 tryallapi.com 时，回退只改 <code>model</code> 字段，不必换 Key。记得给每次回退打日志，否则线上「偶尔变笨」很难追查。配额方面，聚合平台的限流与 Google 官方限流是两层概念——你可能在平台侧 429，也可能透传上游 429，错误体要分别解析。对于 Dify、FastGPT 一类编排工具，把温度、最大输出、超时做成可配置项，避免把 Preview 模型的默认思考预算拉满导致长时间无首包。最后，定期导出消费 CSV，按模型与分组做透视，比只看余额数字更有利于砍掉浪费。</p>
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/gemini-2.5-pro-api/">Gemini 2.5 Pro API 国内中转调用指南与价格</a>：官方 $1.25/$10（≤200K），100 万上下文；OpenAI 兼容 + Gemini 原生双协议。</li>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>官方参考：<a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview" target="_blank" rel="noopener noreferrer">Gemini 3.1 Pro Preview</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Pricing</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-01｜最后更新：2026-10-01｜更新日志：2026-10-01 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-01，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Gemini 3.1 Pro API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">查看 Gemini 3.1 Pro API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.1-pro-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

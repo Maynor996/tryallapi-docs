@@ -1,0 +1,112 @@
+{
+ "articles": [
+  {
+   "slug": "gemini-2.5-pro-api",
+   "name": "Gemini 2.5 Pro",
+   "model_id": "gemini-2.5-pro",
+   "vendor": "Google",
+   "date_published": "2026-09-30",
+   "description": "Gemini 2.5 Pro API 国内中转调用与价格：官方 $1.25/$10，tryallapi.com 分组倍率、base_url 接入、代码与排查。",
+   "summary": "官方 $1.25/$10（≤200K），100 万上下文；OpenAI 兼容 + Gemini 原生双协议。"
+  },
+  {
+   "slug": "gpt-6.1-sol-api",
+   "name": "GPT-6.1 Sol",
+   "model_id": "gpt-6.1-sol",
+   "vendor": "OpenAI",
+   "date_published": "2026-09-30",
+   "description": "GPT-6.1 Sol API 国内中转调用与价格：官方 $2/$10、缓存 $0.10，tryallapi.com 已上架，分组倍率、接入代码与排查。",
+   "summary": "官方 $2/$10、缓存输入 $0.10，105 万上下文；工具调用走 Responses API。"
+  },
+  {
+   "slug": "gpt-6-astra-api",
+   "name": "GPT-6 Astra",
+   "model_id": "gpt-6-astra",
+   "vendor": "OpenAI",
+   "date_published": "2026-10-01",
+   "description": "GPT-6 Astra API 国内中转调用与价格：官方 $10/$50、缓存 $1，105 万上下文，tryallapi.com 接入步骤、代码与报错排查。",
+   "summary": "OpenAI 旗舰：官方 $10/$50、缓存输入 $1；官方 / Azure / 聚合三种方案对比。"
+  },
+  {
+   "slug": "claude-opus-5-5-api",
+   "name": "Claude Opus 5.5",
+   "model_id": "claude-opus-5-5",
+   "vendor": "Anthropic",
+   "date_published": "2026-10-01",
+   "description": "Claude Opus 5.5 API 国内中转调用与价格：官方 $4/$20、缓存读 $0.20，Claude Code 配置、双协议接入与分组倍率。",
+   "summary": "官方 $4/$20、缓存读 $0.20；Claude Code settings.json 与双协议接入。"
+  },
+  {
+   "slug": "gemini-3.1-pro-api",
+   "name": "Gemini 3.1 Pro",
+   "model_id": "gemini-3.1-pro-preview",
+   "vendor": "Google",
+   "date_published": "2026-10-01",
+   "description": "Gemini 3.1 Pro API 国内中转调用与价格：官方 $2/$12（>200K $4/$18），OpenAI 兼容与原生接入、倍率与代码。",
+   "summary": "gemini-3.1-pro-preview：官方 ≤200K $2/$12，>200K $4/$18。"
+  },
+  {
+   "slug": "deepseek-v3.2-api",
+   "name": "DeepSeek V3.2",
+   "model_id": "deepseek-v3.2",
+   "vendor": "DeepSeek",
+   "date_published": "2026-10-01",
+   "description": "DeepSeek V3.2 API 国内调用与中转价格：官方已转向 V4，tryallapi.com 仍可调 deepseek-v3.2，附接入代码与倍率。",
+   "summary": "官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。"
+  },
+  {
+   "slug": "grok-4.7-api",
+   "name": "Grok 4.7",
+   "model_id": "grok-4.7",
+   "vendor": "xAI",
+   "date_published": "2026-10-01",
+   "description": "Grok 4.7 API 国内中转调用与价格：官方 $2/$6、缓存 $0.50（≥200K 加倍），OpenAI 兼容接入、倍率与 Cursor 配置。",
+   "summary": "官方 <200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。"
+  },
+  {
+   "slug": "claude-sonnet-4-6-api",
+   "name": "Claude Sonnet 4.6",
+   "model_id": "claude-sonnet-4-6",
+   "vendor": "Anthropic",
+   "date_published": "2026-10-02",
+   "description": "Claude Sonnet 4.6 API 国内中转调用与价格：官方 $3/$15、缓存读 $0.30，Claude Code 配置、双协议接入与倍率。",
+   "summary": "官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。"
+  },
+  {
+   "slug": "gpt-5.4-api",
+   "name": "GPT-5.4",
+   "model_id": "gpt-5.4",
+   "vendor": "OpenAI",
+   "date_published": "2026-10-02",
+   "description": "GPT-5.4 API 国内中转调用与价格：官方 $2.5/$15、缓存 $0.25，超 272K 加价，Responses 接入、分组倍率与排查。",
+   "summary": "官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。"
+  },
+  {
+   "slug": "gemini-3-flash-api",
+   "name": "Gemini 3 Flash",
+   "model_id": "gemini-3-flash-preview",
+   "vendor": "Google",
+   "date_published": "2026-10-02",
+   "description": "Gemini 3 Flash API 国内中转调用与价格：官方 $0.5/$3、思考计入输出，Gemini/OpenAI 双端点接入、倍率与排查。",
+   "summary": "gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。"
+  },
+  {
+   "slug": "qwen3.8-max-api",
+   "name": "Qwen3.8 Max",
+   "model_id": "qwen3.8-max",
+   "vendor": "Qwen",
+   "date_published": "2026-10-02",
+   "description": "Qwen3.8 Max API 国内调用与中转价格：百炼华北2 ¥12/¥36，DashScope OpenAI 兼容接入，一 Key 多模型与分组倍率。",
+   "summary": "阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。"
+  },
+  {
+   "slug": "kimi-k3-api",
+   "name": "Kimi K3",
+   "model_id": "kimi-k3",
+   "vendor": "Moonshot",
+   "date_published": "2026-10-02",
+   "description": "Kimi K3 API 国内中转调用与价格：官方 $3/$15、缓存 $0.30，推理常开，Moonshot OpenAI 兼容接入、倍率与排查。",
+   "summary": "官方全球价 $3/$15、缓存 $0.30；推理常开，100 万上下文。"
+  }
+ ]
+}

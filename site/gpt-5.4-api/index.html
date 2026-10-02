@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT-5.4 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="GPT-5.4 API 国内中转调用与价格：官方 $2.5/$15、缓存 $0.25，超 272K 加价，Responses 接入、分组倍率与排查。">
+<link rel="canonical" href="https://docs.tryallapi.com/gpt-5.4-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="GPT-5.4 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="GPT-5.4 API 国内中转调用与价格：官方 $2.5/$15、缓存 $0.25，超 272K 加价，Responses 接入、分组倍率与排查。">
+<meta property="og:url" content="https://docs.tryallapi.com/gpt-5.4-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/gpt-5.4-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPT-5.4 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="GPT-5.4 API 国内中转调用与价格：官方 $2.5/$15、缓存 $0.25，超 272K 加价，Responses 接入、分组倍率与排查。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/gpt-5.4-api.png">
+<meta property="article:published_time" content="2026-10-02">
+<meta property="article:modified_time" content="2026-10-02">
+<meta property="article:section" content="OpenAI">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "GPT-5.4 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "GPT-5.4 API 国内中转调用与价格：官方 $2.5/$15、缓存 $0.25，超 272K 加价，Responses 接入、分组倍率与排查。",
+   "image": [
+    "https://docs.tryallapi.com/og/gpt-5.4-api.png"
+   ],
+   "datePublished": "2026-10-02",
+   "dateModified": "2026-10-02",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/gpt-5.4-api/",
+   "url": "https://docs.tryallapi.com/gpt-5.4-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "GPT-5.4 API（gpt-5.4）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "GPT-5.4 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/gpt-5.4-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "模型 ID？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "gpt-5.4。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "输入 $2.50、缓存输入 $0.25、输出 $15（每百万 tokens）；超 272K 输入另有加价，以 OpenAI 文档为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内能直连 OpenAI 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "多数个人与中小团队受地区与支付限制，常用聚合或云通道。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "为什么强调 Responses API？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "tryallapi.com 将该模型标为 openai-response，优先 Responses 更稳妥。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "长上下文怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "输入超过 272K 时，整次会话输入/缓存 2×、输出 1.5×（标准/Batch/Flex），以官方为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "估算 ≈ 官方价 × 分组倍率；2026-10-02 分组约 0.2～1.8，以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Cursor 怎么配？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Base URL https://tryallapi.com/v1，Key 用 tryallapi 令牌，模型 gpt-5.4。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一个 Key 能调 Claude 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，在分组权限内多模型通用；建议分项目建令牌。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">GPT-5.4 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">OpenAI · <code>gpt-5.4</code></p>
+<h1>GPT-5.4 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-02">2026-10-02</time> · 更新 <time datetime="2026-10-02">2026-10-02</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。OpenAI 相关参数来自官方开发者文档；tryallapi.com 数据取自公开接口，取数时间 2026-10-02（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>本文面向<strong>写代码调用 API 的开发者</strong>。ChatGPT 网页订阅不在讨论范围。GPT-5.4 走 OpenAI Responses 风格接口，接入时注意 tryallapi 上的端点类型是 <code>openai-response</code>。</p>
+<hr />
+<h2>GPT-5.4 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API 模型 ID</td>
+<td><code>gpt-5.4</code></td>
+<td><a href="https://developers.openai.com/api/docs/models/gpt-5.4" target="_blank" rel="noopener noreferrer">OpenAI 模型文档</a></td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1,050,000 / 128,000 tokens</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>推理强度</td>
+<td><code>none</code>（默认）、<code>low</code>、<code>medium</code>、<code>high</code>、<code>xhigh</code>；亦可在模型名后缀带 high/low/medium/xhigh（以 tryallapi 说明为准）</td>
+<td>OpenAI / tryallapi 说明</td>
+</tr>
+<tr>
+<td>官方价（每百万 tokens）</td>
+<td>输入 $2.50；缓存输入 $0.25；输出 $15.00</td>
+<td><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI Pricing</a></td>
+</tr>
+<tr>
+<td>长上下文加价</td>
+<td>单次输入 <strong>&gt;272K</strong> tokens 时，整次会话输入/缓存 2×、输出 1.5×（标准/Batch/Flex）</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点类型 <strong><code>openai-response</code></strong>（优先 Responses API）</td>
+<td><code>/api/pricing</code> 2026-10-02</td>
+</tr>
+<tr>
+<td>Base URL</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>GPT-5.4 官方标准价 $2.5/$15，缓存输入 $0.25；超 272K 输入会触发整次加价，长文档任务要先算窗口。</li>
+<li>国内直连 OpenAI 有地区与支付限制；tryallapi.com 用 OpenAI 兼容入口，改 <code>base_url</code> 与 Key 即可。</li>
+<li>tryallapi 将该模型标为 <code>openai-response</code>，优先用 Responses API；账单估算 ≈ 官方价 × 分组倍率，以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、GPT-5.4 适合什么场景？</h2>
+<p>相对「只聊几句」的短会话，GPT-5.4 更适合：</p>
+<ul>
+<li><strong>长上下文 Agent</strong>：官方给出约 105 万上下文，适合带大仓库摘要、多文件规格书；</li>
+<li><strong>可调推理强度</strong>：默认 <code>none</code> 偏快省，复杂任务再升 <code>medium</code> / <code>high</code> / <code>xhigh</code>；</li>
+<li><strong>与 OpenAI 生态工具对齐</strong>：Responses API、函数调用、结构化输出等（以官方文档为准）。</li>
+</ul>
+<p>本文不编造延迟或第三方榜单分数。是否值得上 5.4，用你自己的评测集对比同系列其他档位。</p>
+<hr />
+<h2>二、国内为什么要走中转？</h2>
+<p>OpenAI 支持国家和地区名单对中国大陆/香港有限制，官方充值多依赖境外卡，账号、支付地、调用 IP 不一致时容易触发风控。此外，一个项目里同时用 GPT、Claude、Gemini 越来越常见，每家单独开户结算成本高。聚合平台的路径是：<strong>你的程序 → tryallapi.com → 上游</strong>，用统一 Key 与国内支付换可达性；代价是多一个需要信任的服务商。</p>
+<hr />
+<h2>三、方案对比：官方 / Azure / 聚合</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>官方 OpenAI API</th>
+<th>Azure / 云托管</th>
+<th>tryallapi.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内可用性</td>
+<td>支持地区不含中国大陆/香港（以官方名单为准）</td>
+<td>需海外云订阅</td>
+<td>国内入口</td>
+</tr>
+<tr>
+<td>模型 ID</td>
+<td><code>gpt-5.4</code></td>
+<td>以云厂商目录为准</td>
+<td>同官方 ID</td>
+</tr>
+<tr>
+<td>付款</td>
+<td>境外卡</td>
+<td>云账单</td>
+<td>微信 / 支付宝等</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>Responses / Chat Completions</td>
+<td>云适配</td>
+<td><strong>openai-response</strong> 优先</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>海外主体、企业合规</td>
+<td>已有 Azure 体系</td>
+<td>个人/中小团队、多模型一 Key</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>四、快速接入：Python / Node / cURL</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（OpenAI SDK · Responses）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,
+    timeout=180.0,
+)
+
+# 优先 Responses API（与 tryallapi openai-response 端点对齐）
+resp = client.responses.create(
+    model=&quot;gpt-5.4&quot;,
+    input=&quot;用三条要点说明如何给遗留服务加可观测性&quot;,
+)
+print(resp.output_text)
+</code></pre>
+<p>若你的 SDK/工具仍走 Chat Completions，也可试：</p>
+<pre><code class="language-python">r = client.chat.completions.create(
+    model=&quot;gpt-5.4&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;ping：回复 ok&quot;}],
+)
+print(r.choices[0].message.content)
+</code></pre>
+<p>具体路径以 tryallapi.com 文档与控制台「端点类型」为准；若 404，优先改用 Responses。</p>
+<h3>3. Node.js</h3>
+<pre><code class="language-javascript">import OpenAI from &quot;openai&quot;;
+const client = new OpenAI({
+  apiKey: process.env.TRYALLAPI_KEY,
+  baseURL: &quot;https://tryallapi.com/v1&quot;,
+});
+const resp = await client.responses.create({
+  model: &quot;gpt-5.4&quot;,
+  input: &quot;把这段需求拆成验收标准&quot;,
+});
+console.log(resp.output_text);
+</code></pre>
+<h3>4. cURL</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/responses \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;gpt-5.4&quot;,&quot;input&quot;:&quot;ping&quot;}'
+</code></pre>
+<h3>5. Cursor / Codex / Dify</h3>
+<ul>
+<li>Cursor：自定义 OpenAI Base URL → <code>https://tryallapi.com/v1</code>，模型填 <code>gpt-5.4</code>（或带 effort 后缀的变体，以列表为准）。</li>
+<li>Dify：OpenAI-API-compatible，Base URL 同上。</li>
+<li>需要高推理时，按官方文档设置 <code>reasoning.effort</code>，或确认 tryallapi 是否接受 <code>gpt-5.4-high</code> 这类后缀。</li>
+</ul>
+<hr />
+<h2>五、价格与分组倍率</h2>
+<h3>官方价（2026-10-02 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>每百万 tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$2.50</td>
+</tr>
+<tr>
+<td>缓存输入</td>
+<td>$0.25</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$15.00</td>
+</tr>
+<tr>
+<td>长上下文</td>
+<td>输入 &gt;272K 时，整次：输入/缓存 2×、输出 1.5×</td>
+</tr>
+</tbody>
+</table></div>
+<h3>tryallapi.com（估算 ≈ 官方价 × 分组倍率）</h3>
+<p><code>gpt-5.4</code>：<code>model_ratio=1.25</code>，<code>completion_ratio=6</code>，<code>cache_ratio=0.1</code>。分组（2026-10-02）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure-Gpt-2</td>
+<td>0.2</td>
+<td>≈ $0.50</td>
+<td>≈ $3.00</td>
+</tr>
+<tr>
+<td>Azure-Gpt-3</td>
+<td>0.44</td>
+<td>≈ $1.10</td>
+<td>≈ $6.60</td>
+</tr>
+<tr>
+<td>Azure-Gpt-4</td>
+<td>0.88</td>
+<td>≈ $2.20</td>
+<td>≈ $13.20</td>
+</tr>
+<tr>
+<td>Openai-Gpt-1</td>
+<td>1.17648</td>
+<td>≈ $2.94</td>
+<td>≈ $17.65</td>
+</tr>
+<tr>
+<td>Azure-Gpt-5</td>
+<td>1.2</td>
+<td>$3.00</td>
+<td>$18.00</td>
+</tr>
+<tr>
+<td>Openai-Gpt-2</td>
+<td>1.4706</td>
+<td>≈ $3.68</td>
+<td>≈ $22.06</td>
+</tr>
+<tr>
+<td>Azure-Gpt-6</td>
+<td>1.8</td>
+<td>$4.50</td>
+<td>$27.00</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>以控制台为准。</strong> 长文档任务务必监控是否越过 272K 阈值——加价作用于整次会话，不是「只对超出部分」。</p>
+<hr />
+<h2>六、常见报错</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>Key 错或未带 Bearer</td>
+<td>检查 <code>TRYALLAPI_KEY</code></td>
+</tr>
+<tr>
+<td>403</td>
+<td>分组无 gpt-5.4</td>
+<td>换 Azure-Gpt / Openai-Gpt 等分组</td>
+</tr>
+<tr>
+<td>404</td>
+<td>走了错误路径或旧模型名</td>
+<td>优先 <code>/v1/responses</code>；模型写 <code>gpt-5.4</code></td>
+</tr>
+<tr>
+<td>429</td>
+<td>限流</td>
+<td>退避、降并发、换分组</td>
+</tr>
+<tr>
+<td>账单异常高</td>
+<td>触发 &gt;272K 加价或高 effort</td>
+<td>缩短上下文、降 effort、看 usage 明细</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、避坑</h2>
+<ol>
+<li><strong>端点类型</strong>：tryallapi 标 <code>openai-response</code>，不要假设所有分组都有完整 Chat Completions 行为。</li>
+<li><strong>272K 阈值</strong>：一次塞进超长仓库摘要前，先估算 prompt tokens。</li>
+<li><strong>effort 与费用</strong>：更高推理通常带来更多输出侧 tokens，账单会变沉。</li>
+<li><strong>Key 分项目</strong>：生产与实验令牌分开，设月度额度。</li>
+<li><strong>敏感数据</strong>：合规要求高时优先官方企业通道或 Azure，而不是第三方聚合。</li>
+</ol>
+<hr />
+<hr />
+<h2>长上下文加价：上线前先算窗口</h2>
+<p>GPT-5.4 在「单次输入超过 272K」时会对<strong>整次会话</strong>施加输入/缓存 2×、输出 1.5× 的加价（标准/Batch/Flex，以官方为准）。这意味着：你不能指望「只对超出的那几万 tokens 加价」。做仓库级摘要、多 PDF 合并、超长对话回放前，先在本地或预检接口估算 prompt tokens；必要时改成分块检索 + 短上下文合成，而不是一次性塞满。</p>
+<p>同样要注意 tryallapi 标注的 <code>openai-response</code> 端点：优先 Responses API，能少踩一层「路径存在但行为不一致」的坑。Chat Completions 是否在你的分组可用，以控制台与实际 404/400 为准，不要写死假设。</p>
+<hr />
+<h2>推理强度与账单的直觉</h2>
+<p>默认 <code>reasoning.effort=none</code> 偏省；升到 medium/high/xhigh 通常换来更稳的复杂推理，但输出侧（含中间推理痕迹，视上游返回而定）会变沉。建议：</p>
+<ul>
+<li>内部工具默认 none 或 low；</li>
+<li>代码评审、架构取舍再升档；</li>
+<li>在模型名后缀与 API 字段两种写法里选一种团队标准，避免有人用后缀、有人用字段导致行为不一致。</li>
+</ul>
+<p>成本管控上，给每个业务线单独令牌并设月度额度，比共用一个「上帝 Key」安全得多。泄露一个实验 Key 不该打穿整站余额。</p>
+<hr />
+<h2>落地建议</h2>
+<p>把 GPT-5.4 引进团队时，同步做三件事：第一，wiki 写明默认模型、默认 effort、是否允许超过 272K；第二，监控里同时看错误率与「触发长上下文加价」的请求占比；第三，每周抽检若干真实任务，确认旗舰价是否仍值得。中转解决网络与支付，解决不了评测缺失与密钥泄露。定期复核 OpenAI 官方价表与 tryallapi 分组倍率——本文快照于 2026-10-02。</p>
+<hr />
+<h2>与同系列其他 GPT 怎么排班</h2>
+<p>若你同时能调用 GPT-5.4 与更新的 Sol / Astra 等档位，建议按任务类型排班：短指令与格式转换用更便宜或更低 effort 的档；需要百万级上下文的仓库理解再上 5.4；最难科研/巨型 Agent 再考虑更高旗舰。排班表写进内部文档，并注明「超过 272K 必须人工确认」。在 tryallapi.com 上切换模型通常只改 <code>model</code> 字符串，但端点类型可能不同——5.4 记得优先 Responses。</p>
+<p>联调完成后，用固定的「黄金提示集」每周回归一次，防止上游或分组变更导致静默行为漂移。价格与倍率仍以 2026-10-02 之后的控制台实时数据为准。</p>
+<p>写在最后：把 <code>TRYALLAPI_KEY</code> 放进密钥管理，生产与实验令牌分离，并定期回到 OpenAI 官方价格页与 tryallapi 控制台核对。长上下文任务建立「272K 预算告警」，避免整次会话静默进入加价档。本文所有数字快照于 2026-10-02（北京时间）。</p>
+<h2>八、FAQ</h2>
+<p><strong>Q1：模型 ID？</strong><br />
+<code>gpt-5.4</code>。</p>
+<p><strong>Q2：官方价？</strong><br />
+输入 $2.50、缓存输入 $0.25、输出 $15（每百万 tokens）；超 272K 输入另有加价，以 OpenAI 文档为准。</p>
+<p><strong>Q3：国内能直连 OpenAI 吗？</strong><br />
+多数个人与中小团队受地区与支付限制，常用聚合或云通道。</p>
+<p><strong>Q4：为什么强调 Responses API？</strong><br />
+tryallapi.com 将该模型标为 <code>openai-response</code>，优先 Responses 更稳妥。</p>
+<p><strong>Q5：长上下文怎么计费？</strong><br />
+输入超过 272K 时，整次会话输入/缓存 2×、输出 1.5×（标准/Batch/Flex），以官方为准。</p>
+<p><strong>Q6：tryallapi 怎么计价？</strong><br />
+估算 ≈ 官方价 × 分组倍率；2026-10-02 分组约 0.2～1.8，以控制台为准。</p>
+<p><strong>Q7：Cursor 怎么配？</strong><br />
+Base URL <code>https://tryallapi.com/v1</code>，Key 用 tryallapi 令牌，模型 <code>gpt-5.4</code>。</p>
+<p><strong>Q8：一个 Key 能调 Claude 吗？</strong><br />
+可以，在分组权限内多模型通用；建议分项目建令牌。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-6-astra-api/">GPT-6 Astra API 国内中转调用指南与价格</a>：OpenAI 旗舰：官方 $10/$50、缓存输入 $1；官方 / Azure / 聚合三种方案对比。</li>
+<li><a href="/gpt-6.1-sol-api/">GPT-6.1 Sol API 国内中转调用指南与价格</a>：官方 $2/$10、缓存输入 $0.10，105 万上下文；工具调用走 Responses API。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>官方参考：<a href="https://developers.openai.com/api/docs/models/gpt-5.4" target="_blank" rel="noopener noreferrer">GPT-5.4 模型页</a> · <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI Pricing</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-02｜最后更新：2026-10-02｜更新日志：2026-10-02 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-02，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>GPT-5.4 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">查看 GPT-5.4 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-5.4-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

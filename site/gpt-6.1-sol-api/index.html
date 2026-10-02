@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT-6.1 Sol API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="GPT-6.1 Sol API 国内中转调用与价格：官方 $2/$10、缓存 $0.10，tryallapi.com 已上架，分组倍率、接入代码与排查。">
+<link rel="canonical" href="https://docs.tryallapi.com/gpt-6.1-sol-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="GPT-6.1 Sol API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="GPT-6.1 Sol API 国内中转调用与价格：官方 $2/$10、缓存 $0.10，tryallapi.com 已上架，分组倍率、接入代码与排查。">
+<meta property="og:url" content="https://docs.tryallapi.com/gpt-6.1-sol-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/gpt-6.1-sol-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPT-6.1 Sol API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="GPT-6.1 Sol API 国内中转调用与价格：官方 $2/$10、缓存 $0.10，tryallapi.com 已上架，分组倍率、接入代码与排查。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/gpt-6.1-sol-api.png">
+<meta property="article:published_time" content="2026-09-30">
+<meta property="article:modified_time" content="2026-10-02">
+<meta property="article:section" content="OpenAI">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "GPT-6.1 Sol API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "GPT-6.1 Sol API 国内中转调用与价格：官方 $2/$10、缓存 $0.10，tryallapi.com 已上架，分组倍率、接入代码与排查。",
+   "image": [
+    "https://docs.tryallapi.com/og/gpt-6.1-sol-api.png"
+   ],
+   "datePublished": "2026-09-30",
+   "dateModified": "2026-10-02",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/gpt-6.1-sol-api/",
+   "url": "https://docs.tryallapi.com/gpt-6.1-sol-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "GPT-6.1 Sol API（gpt-6.1-sol）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "GPT-6.1 Sol API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/gpt-6.1-sol-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "GPT-6.1 Sol 在 API 里的模型名是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方模型 ID 是 gpt-6.1-sol。它是 2026-09-29 发布的 GPT-6 Sol 升级版，上下文 105 万 tokens，最大输出 12.8 万 tokens。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6.1 Sol 的官方价格是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "每百万 tokens：输入 $2.00、缓存输入 $0.10、缓存写入 $2.50、输出 $10.00；单次输入超过 272K tokens 时，输入按 2 倍、输出按 1.5 倍计费。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内可以直接调用 OpenAI 官方的 GPT-6.1 Sol 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不建议。OpenAI 的 API 支持地区不包括中国大陆和香港，在名单外使用可能导致账号被封。国内开发者通常通过兼容 OpenAI 协议的聚合平台调用。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi.com 现在能调用 gpt-6.1-sol 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以。2026-10-02 取数时 gpt-6.1-sol 已上架，支持 Chat Completions 与 Responses 端点，可选 Codex / Azure / Openai 等分组，倍率 0.07354–1.4706，以控制台模型广场为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6.1 Sol 和 GPT-6 Sol 有什么区别？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "标准输入、输出价格相同（$2 / $10），但缓存输入从 $0.20 降到 $0.10；官方评测显示编程、电脑操作、专业文档任务都有提升，DeepSWE v1.1 上与 GPT-6 Astra 持平。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6.1 Sol 支持 Ultrafast 模式吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "暂不支持。官方表示未来几天推出 GPT-6.1 Sol Ultrafast，在 Codex 中生成速度最高为标准的 8 倍；目前 API 的 Ultrafast 面向 GPT-6 Astra 开放。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "为什么工具调用要用 Responses API？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "OpenAI 文档说明，GPT-6.1 Sol 的工具调用需通过 Responses API，Chat Completions 只支持不带工具的调用。在 tryallapi.com 上对应 /v1/responses 端点。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一个 tryallapi.com 的 Key 能同时调 GPT、Claude、Gemini 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，在令牌分组权限范围内一个 Key 能调用多家模型。建议按项目分别建令牌并设置额度上限，方便对账。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">GPT-6.1 Sol API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">OpenAI · <code>gpt-6.1-sol</code></p>
+<h1>GPT-6.1 Sol API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-09-30">2026-09-30</time> · 更新 <time datetime="2026-10-02">2026-10-02</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。OpenAI 相关参数均来自官方公告与开发者文档（文中附链接）；tryallapi.com 的数据取自站点公开接口，首次取数 2026-09-30，分组与倍率 2026-10-02 复核（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>这篇文章面向<strong>写代码调用 API 的开发者</strong>，也就是表中「全模型 API 聚合站」这一类用法；ChatGPT / Codex 订阅用户的使用方式不在本文讨论范围。</p>
+<hr />
+<h2>GPT-6.1 Sol 参数速览</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发布</td>
+<td>2026-09-29（OpenAI DevDay 当天），是 GPT-6 Sol 的升级版</td>
+<td>OpenAI 发布公告</td>
+</tr>
+<tr>
+<td>API 模型 ID</td>
+<td><code>gpt-6.1-sol</code></td>
+<td>OpenAI 发布公告 / 模型文档</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1,050,000 / 128,000 tokens</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026-04-30</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>输入 / 输出模态</td>
+<td>文本 + 图片输入，文本输出（不支持音频、视频）</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>推理强度</td>
+<td><code>reasoning.effort</code> 可选 low / medium（默认）/ high / xhigh / max；不支持 none、minimal</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>官方标准价（每百万 tokens）</td>
+<td>输入 $2.00；缓存输入 $0.10；缓存写入 $2.50；输出 $10.00</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>长上下文加价</td>
+<td>单次输入超过 272K tokens，整次请求按输入 / 缓存 2 倍、输出 1.5 倍计费</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>tryallapi.com 是否已上架</td>
+<td><strong>已上架</strong>（2026-10-02 取数），端点 <code>openai</code>、<code>openai-response</code></td>
+<td>tryallapi.com <code>/api/pricing</code></td>
+</tr>
+<tr>
+<td>tryallapi.com Base URL</td>
+<td><code>https://tryallapi.com/v1</code>（OpenAI 兼容，支持 <code>/v1/chat/completions</code> 与 <code>/v1/responses</code>）</td>
+<td>tryallapi.com 站点配置</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>OpenAI 公布的 API 支持国家和地区名单里没有中国大陆和香港，国内团队直连官方接口有封号风险，也不现实。</li>
+<li>GPT-6.1 Sol 的卖点是「接近 Astra 的能力，Astra 五分之一的标准价」，缓存输入降到 $0.10，特别适合反复带长上下文的 Agent。</li>
+<li>tryallapi.com 走 OpenAI 兼容协议，只需换 <code>base_url</code> 和 Key，模型名直接写 <code>gpt-6.1-sol</code>。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、GPT-6.1 Sol 到底升级了什么？</h2>
+<p>根据 <a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">OpenAI 官方公告</a>，这次升级主要集中在四个方向：</p>
+<ul>
+<li><strong>编程</strong>：在 DeepSWE v1.1（真实代码库里的复杂软件工程任务）上，GPT-6.1 Sol 与 GPT-6 Astra 持平，成本约为后者的五分之一；比 GPT-6 Sol 的最好成绩高 6.4 个百分点。</li>
+<li><strong>电脑操作</strong>：OSWorld 2.0 离线集上，最高推理强度下比 GPT-6 Sol 高 7 个百分点，与 Astra 相差 2.1 个百分点。</li>
+<li><strong>专业文档与业务流</strong>：GDP.pdf、AutomationBench 等评测上相比 GPT-6 Sol 有明显提升。</li>
+<li><strong>缓存更便宜</strong>：缓存输入 $0.10 / 百万 tokens，比标准输入低 95%，比 GPT-6 Sol 的缓存价低 50%。</li>
+</ul>
+<p>需要说明两点：第一，这些都是 OpenAI 自己公布的评测，放到你的代码库和提示词上效果如何，要自己测；第二，最难的科研类任务，官方仍建议用 GPT-6 Astra。</p>
+<p><strong>关于 Ultrafast 模式</strong>：官方公告只说「未来几天」会推出 GPT-6.1 Sol Ultrafast，在 Codex 里的生成速度最高可达标准速度的 8 倍。按 OpenAI <a href="https://developers.openai.com/api/docs/guides/ultrafast-mode" target="_blank" rel="noopener noreferrer">Ultrafast 文档</a>，目前 API 里的 Ultrafast 面向 GPT-6 Astra 开放（另有 GPT-5.6 Sol 预览），<strong>GPT-6.1 Sol 暂时还不能用</strong>。官方也没有给出 GPT-6.1 Sol Ultrafast 的具体 tokens/秒数据，网上流传的速度数字请以官方后续文档为准。</p>
+<hr />
+<h2>二、国内开发者为什么要走中转？</h2>
+<p><strong>1. 地区限制是硬门槛。</strong> OpenAI 的<a href="https://platform.openai.com/docs/supported-countries" target="_blank" rel="noopener noreferrer">支持国家和地区列表</a>明确写了：在名单以外的地区访问或提供服务，账号可能被封禁或停用。中国大陆、香港都不在名单内。</p>
+<p><strong>2. 付款和风控。</strong> 官方充值需要境外信用卡，而且账号、支付地、调用 IP 不一致时容易触发风控，对小团队来说维护成本不低。</p>
+<p><strong>3. 多模型切换的需求越来越强。</strong> 现在一个项目里同时用 GPT、Claude、Gemini 很常见，每家单独开户、单独结算，账单和 Key 管理都很麻烦。</p>
+<p>聚合平台的工作方式可以概括为：<strong>你的程序 → 聚合平台 → 上游模型</strong>。平台对外暴露和 OpenAI 一样的接口，解决网络、支付和统一计费；代价是多了一个你需要信任的服务商，这一点在后面「避坑」里展开。</p>
+<hr />
+<h2>三、官方 OpenAI API / Azure / 聚合平台怎么选</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>官方 OpenAI API</th>
+<th>Azure（Microsoft Foundry）</th>
+<th>聚合平台（tryallapi.com）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内可用性</td>
+<td>支持地区不含中国大陆 / 香港</td>
+<td>需 Azure 海外订阅，企业资质要求较高</td>
+<td>提供国内可直接访问的入口</td>
+</tr>
+<tr>
+<td>GPT-6.1 Sol 状态</td>
+<td>已开放，模型名 <code>gpt-6.1-sol</code></td>
+<td>以 Microsoft Foundry 模型目录为准（GPT-6 Sol 已于 2026-09-22 GA）</td>
+<td>已上架 <code>gpt-6.1-sol</code>（2026-10-02）</td>
+</tr>
+<tr>
+<td>付款方式</td>
+<td>境外信用卡</td>
+<td>Azure 账单</td>
+<td>微信支付、支付宝、信用卡、加密货币（站点配置）</td>
+</tr>
+<tr>
+<td>接入成本</td>
+<td>低，官方 SDK</td>
+<td>中，需要资源、部署、区域配置</td>
+<td>低，换 <code>base_url</code> 即可</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>Chat Completions / Responses 等</td>
+<td>Azure OpenAI / Foundry 接口</td>
+<td>OpenAI 兼容（Chat Completions、Responses），另有 Anthropic、Gemini 原生端点</td>
+</tr>
+<tr>
+<td>数据合规</td>
+<td>支持美国 / 欧盟数据驻留</td>
+<td>企业级合规、数据区域可选</td>
+<td>经过第三方，敏感数据需谨慎</td>
+</tr>
+<tr>
+<td>更适合</td>
+<td>海外主体、需要官方 SLA</td>
+<td>大型企业、已有 Azure 体系</td>
+<td>国内个人开发者、中小团队、多模型项目</td>
+</tr>
+</tbody>
+</table></div>
+<p>坦白讲：有海外实体、对合规要求严格的公司，优先选官方或 Azure。聚合平台的优势在于<strong>上手快、一个 Key 用多家模型、国内网络友好</strong>，适合原型验证和中小规模生产。</p>
+<hr />
+<h2>四、三步接入 tryallapi.com</h2>
+<h3>步骤 1：注册、充值、建令牌</h3>
+<ol>
+<li>打开 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">tryallapi.com</a> 注册并登录；</li>
+<li>在充值页充值，最低 $1（站点配置），新用户可领取试用额度（据站点公告）；</li>
+<li>到「令牌」页生成 API Key，<strong>并选择分组</strong>——分组决定上游渠道和倍率，见第五节；</li>
+<li>把 Key 写进环境变量，不要硬编码在代码里：</li>
+</ol>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<blockquote>
+<p>模型名说明：下面的示例统一写 <code>gpt-6.1-sol</code>。2026-10-02 取数时它已在 tryallapi.com 上架；令牌所选分组需要包含该模型（见第五节）。</p>
+</blockquote>
+<h3>步骤 2：Python —— 推荐用 Responses API</h3>
+<p>OpenAI 文档特别指出：<strong>GPT-6.1 Sol 需要工具调用（function calling）时要走 Responses API，Chat Completions 只支持不带工具的调用</strong>。tryallapi.com 的 GPT-6 系列同时开放了 <code>/v1/responses</code> 和 <code>/v1/chat/completions</code>。</p>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,  # 只改这里
+    timeout=180,
+)
+
+resp = client.responses.create(
+    model=&quot;gpt-6.1-sol&quot;,
+    reasoning={&quot;effort&quot;: &quot;medium&quot;},       # low / medium / high / xhigh / max
+    input=&quot;审查下面这段 SQL 的索引使用情况，并给出优化建议：SELECT ...&quot;,
+)
+print(resp.output_text)
+</code></pre>
+<p>只需要普通对话、不带工具时，Chat Completions 也能用：</p>
+<pre><code class="language-python">stream = client.chat.completions.create(
+    model=&quot;gpt-6.1-sol&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;用三句话解释什么是幂等接口&quot;}],
+    stream=True,
+)
+for chunk in stream:
+    if chunk.choices and chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end=&quot;&quot;, flush=True)
+</code></pre>
+<h3>步骤 3：Node.js</h3>
+<pre><code class="language-javascript">// npm i openai
+import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.TRYALLAPI_KEY,
+  baseURL: &quot;https://tryallapi.com/v1&quot;,
+});
+
+const res = await client.responses.create({
+  model: &quot;gpt-6.1-sol&quot;,
+  reasoning: { effort: &quot;high&quot; },
+  input: &quot;把这段 Express 路由改写成 Fastify，并保留中间件逻辑：...&quot;,
+});
+console.log(res.output_text);
+</code></pre>
+<h3>步骤 4：cURL 快速验证</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/responses \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{
+    &quot;model&quot;: &quot;gpt-6.1-sol&quot;,
+    &quot;input&quot;: &quot;你好，请用一句话介绍你自己&quot;
+  }'
+</code></pre>
+<p>返回 JSON 里能看到 <code>usage</code> 字段，后面对账要用。</p>
+<h3>在开发工具里配置</h3>
+<ul>
+<li>
+<p><strong>Codex CLI</strong>：在 <code>~/.codex/config.toml</code> 里新增一个自定义 provider（字段名以你所用的 Codex 版本文档为准）：</p>
+<pre><code class="language-toml">model = &quot;gpt-6.1-sol&quot;
+model_provider = &quot;tryallapi&quot;
+
+[model_providers.tryallapi]
+name = &quot;tryallapi.com&quot;
+base_url = &quot;https://tryallapi.com/v1&quot;
+env_key = &quot;TRYALLAPI_KEY&quot;
+wire_api = &quot;responses&quot;
+</code></pre>
+<p>Codex 的 Agent 流程大量依赖工具调用，所以这里用 <code>responses</code>。</p>
+</li>
+<li>
+<p><strong>Cursor</strong>：Settings → Models，填入 tryallapi.com 的 Key，开启「Override OpenAI Base URL」并填 <code>https://tryallapi.com/v1</code>，再手动添加模型 <code>gpt-6.1-sol</code>。Cursor 菜单名称随版本变动，以实际界面为准。</p>
+</li>
+<li>
+<p><strong>Claude Code</strong>：它使用 Anthropic 协议。tryallapi.com 提供 <code>/v1/messages</code> 端点，在 <code>~/.claude/settings.json</code> 的 <code>env</code> 中设置 <code>ANTHROPIC_BASE_URL</code> 为 <code>https://tryallapi.com</code>、<code>ANTHROPIC_AUTH_TOKEN</code> 为你的 Key，即可调用 Claude 系列模型。<code>gpt-6.1-sol</code> 在 tryallapi.com 公开接口里列出的端点是 <code>openai</code> 与 <code>openai-response</code>，本文不建议在 Claude Code 里调用它，用 Codex CLI、Cursor 等 OpenAI 兼容工具更合适。</p>
+</li>
+<li>
+<p><strong>Dify</strong>：设置 → 模型供应商 → 「OpenAI-API-compatible」，API endpoint 填 <code>https://tryallapi.com/v1</code>，模型名 <code>gpt-6.1-sol</code>，上下文长度可按官方 1,050,000 填，或者按业务调小以控制成本。</p>
+</li>
+</ul>
+<p>接口文档：<a href="https://5oq7d57fbk.apifox.cn" target="_blank" rel="noopener noreferrer">tryallapi.com API 文档</a></p>
+<hr />
+<h2>五、价格：官方账单 vs tryallapi.com 倍率</h2>
+<h3>1. 官方价格（每百万 tokens，美元）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项</th>
+<th>≤272K 输入</th>
+<th>&gt;272K 输入（整次请求）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$2.00</td>
+<td>$4.00</td>
+</tr>
+<tr>
+<td>缓存输入</td>
+<td>$0.10</td>
+<td>$0.20</td>
+</tr>
+<tr>
+<td>缓存写入</td>
+<td>$2.50</td>
+<td>$5.00</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$10.00</td>
+<td>$15.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>来源：<a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer">GPT-6.1 Sol 模型文档</a>。另外：Fast 模式价格为标准价的 2 倍；Batch 与 Flex 比标准价低 50%；启用区域处理加收 10%。</p>
+<h3>2. tryallapi.com 的计费方式</h3>
+<p>公式：<strong>实际扣费（美元额度）= 官方基础价 × 分组倍率</strong>。站点公告写明余额与消费统一以美元展示，充值按 1:1 对应美元。</p>
+<p><code>gpt-6.1-sol</code> 在站点的基础价换算后是输入 $2 / 缓存输入 $0.10 / 输出 $10，与官方标准价一致；超过 272K 时同样按输入 2 倍、输出 1.5 倍阶梯计费。可用分组与倍率如下（美元额度按公式推算）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组（<code>gpt-6.1-sol</code>）</th>
+<th>分组倍率</th>
+<th>输入 美元额度 / 百万 tokens</th>
+<th>输出 美元额度 / 百万 tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex-Gpt-1</td>
+<td>0.07354</td>
+<td>≈ $0.15</td>
+<td>≈ $0.74</td>
+</tr>
+<tr>
+<td>Codex-Gpt-2</td>
+<td>0.11766</td>
+<td>≈ $0.24</td>
+<td>≈ $1.18</td>
+</tr>
+<tr>
+<td>Codex-Gpt-3</td>
+<td>0.14706</td>
+<td>≈ $0.29</td>
+<td>≈ $1.47</td>
+</tr>
+<tr>
+<td>Azure-Gpt-2</td>
+<td>0.2</td>
+<td>$0.40</td>
+<td>$2.00</td>
+</tr>
+<tr>
+<td>Azure-Gpt-3</td>
+<td>0.44</td>
+<td>$0.88</td>
+<td>$4.40</td>
+</tr>
+<tr>
+<td>Azure-Gpt-4</td>
+<td>0.88</td>
+<td>$1.76</td>
+<td>$8.80</td>
+</tr>
+<tr>
+<td>Openai-Gpt-1</td>
+<td>1.17648</td>
+<td>≈ $2.35</td>
+<td>≈ $11.76</td>
+</tr>
+<tr>
+<td>Azure-Gpt-5</td>
+<td>1.2</td>
+<td>$2.40</td>
+<td>$12.00</td>
+</tr>
+<tr>
+<td>Openai-Gpt-2</td>
+<td>1.4706</td>
+<td>≈ $2.94</td>
+<td>≈ $14.71</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>数据取自 <code>tryallapi.com/api/pricing</code>（2026-10-02），美元额度按公式推算；倍率随时可能调整，<strong>以控制台模型广场为准</strong>。</li>
+<li>分组名大致对应上游渠道类型（Codex / Azure / Openai），价格低不代表更适合生产，建议小额对比后再定。</li>
+<li>充值满额折扣（站点配置）：满 $10 系数 0.99，满 $100 为 0.98，满 $1000 为 0.96，更高档位见充值页；余额与消费以美元展示，人民币支付金额以充值页为准。</li>
+</ul>
+<h3>3. 用官方价估一笔账（公式推算，不是实测）</h3>
+<p>以一个代码审查 Agent 为例：每天 500 次请求，每次输入 20,000 tokens（其中 15,000 命中缓存），输出 1,000 tokens，按 30 天计：</p>
+<ul>
+<li>未命中缓存输入 7,500 万 tokens × $2 = $150</li>
+<li>缓存输入 2.25 亿 tokens × $0.10 = $22.5</li>
+<li>输出 1,500 万 tokens × $10 = $150</li>
+<li><strong>合计约 $322.5 / 月</strong>；同样的负载用 GPT-6 Sol（缓存价 $0.20）约 $345。</li>
+</ul>
+<p>在 tryallapi.com 上，大致是「$322.5 × 分组倍率」的美元额度。可以看出，<strong>缓存命中率越高，GPT-6.1 Sol 的优势越明显</strong>——固定的系统提示词、工具定义和代码库上下文尽量放在请求前部。</p>
+<hr />
+<h2>六、GPT-6.1 Sol 上线前自测清单</h2>
+<blockquote>
+<p>本节只提供测试方法，本文不公布延迟或成功率数字。</p>
+</blockquote>
+<ul>
+<li>样本：每个分组不少于 200 次，混合短问答、长上下文（&gt;272K）、带工具调用的 Responses 请求</li>
+<li>指标：首 token 延迟 P50 / P95、成功率、流式中断率、<code>usage</code> 与控制台扣费是否一致、缓存命中是否按 $0.10 档计费</li>
+</ul>
+<p><strong>如何判断拿到的是不是 GPT-6.1 Sol？</strong> 核对响应中的 <code>model</code> 字段；设置 <code>reasoning.effort</code> 为 <code>max</code> 观察推理 tokens 是否增加；传入 <code>minimal</code> 应当报错（官方不支持）；用有标准答案的编程题和官方对照组比较通过率。</p>
+<hr />
+<h2>七、常见报错速查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>可能原因</th>
+<th>解决办法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>401 Unauthorized</strong></td>
+<td>没带 Key、环境变量没生效、<code>Bearer</code> 拼写错误</td>
+<td>执行 <code>echo $TRYALLAPI_KEY</code> 确认已设置；请求头为 <code>Authorization: Bearer sk-...</code></td>
+</tr>
+<tr>
+<td><strong>403</strong></td>
+<td>令牌分组不包含该模型，或设置了 IP / 模型白名单</td>
+<td>编辑令牌，换成包含目标模型的分组</td>
+</tr>
+<tr>
+<td><strong>404 / model not found</strong></td>
+<td>令牌分组不含该模型、模型名写错（如 <code>gpt-6.1sol</code>）、<code>base_url</code> 少了或多了 <code>/v1</code></td>
+<td>先在模型广场确认 <code>gpt-6.1-sol</code> 是否可用；base_url 写 <code>https://tryallapi.com/v1</code></td>
+</tr>
+<tr>
+<td><strong>400 参数错误</strong></td>
+<td>在 Chat Completions 中传工具、<code>reasoning.effort</code> 用了 none / minimal</td>
+<td>工具调用改用 <code>/v1/responses</code>；推理强度只用 low 到 max</td>
+</tr>
+<tr>
+<td><strong>429 Too Many Requests</strong></td>
+<td>上游限流或分组并发已满</td>
+<td>指数退避重试（1s、2s、4s）、降低并发、换分组</td>
+</tr>
+<tr>
+<td><strong>超时 / 流式断开</strong></td>
+<td>高推理强度 + 长上下文导致首字慢，客户端超时太短</td>
+<td>SDK <code>timeout</code> 设 180 秒以上，开启流式，必要时调低 effort</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>八、选 GPT-6.1 Sol 中转服务的避坑建议</h2>
+<ol>
+<li><strong>先确认模型真的上架。</strong> 新模型发布当天，很多平台只是「预告」。以模型广场和公告为准，不要看宣传图。</li>
+<li><strong>别只比倍率。</strong> 最终单价 = 官方价 × 倍率 × 充值汇率，三个数都要问清楚。</li>
+<li><strong>确认缓存和 272K 阶梯怎么计费。</strong> GPT-6.1 Sol 最大的省钱点就是 $0.10 的缓存输入，平台如果不按缓存价结算，优势就没了。</li>
+<li><strong>工具调用要走 Responses。</strong> 如果平台只支持 Chat Completions，Agent 类场景会直接受限。</li>
+<li><strong>小额试用、分散风险。</strong> 先充小额，跑完第六节的自测再加量；涉及个人信息或商业机密的数据，先读平台隐私条款，必要时改用官方或 Azure 渠道。</li>
+</ol>
+<hr />
+<h2>九、常见问题（FAQ）</h2>
+<p><strong>Q1：GPT-6.1 Sol 在 API 里的模型名是什么？</strong>
+官方模型 ID 是 <code>gpt-6.1-sol</code>。它是 2026-09-29 发布的 GPT-6 Sol 升级版，上下文 105 万 tokens，最大输出 12.8 万 tokens。</p>
+<p><strong>Q2：GPT-6.1 Sol 的官方价格是多少？</strong>
+每百万 tokens：输入 $2.00、缓存输入 $0.10、缓存写入 $2.50、输出 $10.00；单次输入超过 272K tokens 时，输入按 2 倍、输出按 1.5 倍计费。</p>
+<p><strong>Q3：国内可以直接调用 OpenAI 官方的 GPT-6.1 Sol 吗？</strong>
+不建议。OpenAI 的 API 支持地区不包括中国大陆和香港，在名单外使用可能导致账号被封。国内开发者通常通过兼容 OpenAI 协议的聚合平台调用。</p>
+<p><strong>Q4：tryallapi.com 现在能调用 gpt-6.1-sol 吗？</strong>
+可以。2026-10-02 取数时 gpt-6.1-sol 已上架，支持 Chat Completions 与 Responses 端点，可选 Codex / Azure / Openai 等分组，倍率 0.07354–1.4706，以控制台模型广场为准。</p>
+<p><strong>Q5：GPT-6.1 Sol 和 GPT-6 Sol 有什么区别？</strong>
+标准输入、输出价格相同（$2 / $10），但缓存输入从 $0.20 降到 $0.10；官方评测显示编程、电脑操作、专业文档任务都有提升，DeepSWE v1.1 上与 GPT-6 Astra 持平。</p>
+<p><strong>Q6：GPT-6.1 Sol 支持 Ultrafast 模式吗？</strong>
+暂不支持。官方表示未来几天推出 GPT-6.1 Sol Ultrafast，在 Codex 中生成速度最高为标准的 8 倍；目前 API 的 Ultrafast 面向 GPT-6 Astra 开放。</p>
+<p><strong>Q7：为什么工具调用要用 Responses API？</strong>
+OpenAI 文档说明，GPT-6.1 Sol 的工具调用需通过 Responses API，Chat Completions 只支持不带工具的调用。在 tryallapi.com 上对应 /v1/responses 端点。</p>
+<p><strong>Q8：一个 tryallapi.com 的 Key 能同时调 GPT、Claude、Gemini 吗？</strong>
+可以，在令牌分组权限范围内一个 Key 能调用多家模型。建议按项目分别建令牌并设置额度上限，方便对账。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/gpt-6-astra-api/">GPT-6 Astra API 国内中转调用指南与价格</a>：OpenAI 旗舰：官方 $10/$50、缓存输入 $1；官方 / Azure / 聚合三种方案对比。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">Introducing GPT-6.1 Sol</a> · <a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer">GPT-6.1 Sol 模型文档</a> · <a href="https://developers.openai.com/api/docs/guides/ultrafast-mode" target="_blank" rel="noopener noreferrer">Ultrafast 模式</a> · <a href="https://platform.openai.com/docs/supported-countries" target="_blank" rel="noopener noreferrer">支持的国家和地区</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-09-30｜最后更新：2026-10-02｜更新日志：2026-09-30 首版；2026-10-02 gpt-6.1-sol 已在 tryallapi.com 上架，补充分组与倍率，删除未完成的测速表与占位内容。</em>
+<em>免责声明：文中价格、倍率与政策可能随 OpenAI 及平台调整而变化，请以 OpenAI 官方页面和 tryallapi.com 控制台为准。第三方中转服务不是 OpenAI 官方服务。</em></p>
+
+<aside class="cta"><p><strong>GPT-6.1 Sol API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">查看 GPT-6.1 Sol API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6.1-sol-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

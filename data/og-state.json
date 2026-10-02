@@ -1,0 +1,15 @@
+{
+ "index": "381c79185a7b",
+ "gemini-2.5-pro-api": "4fb676038d11",
+ "gpt-6.1-sol-api": "abd2916ce97c",
+ "gpt-6-astra-api": "53dd997a6ead",
+ "claude-opus-5-5-api": "7a7940a65cdd",
+ "gemini-3.1-pro-api": "e57aa87c54f0",
+ "deepseek-v3.2-api": "0a163531f829",
+ "grok-4.7-api": "61c273940a80",
+ "claude-sonnet-4-6-api": "eea17fa24d95",
+ "gpt-5.4-api": "5740ed581a4f",
+ "gemini-3-flash-api": "021cb97e28f4",
+ "qwen3.8-max-api": "d9660cc7475e",
+ "kimi-k3-api": "647d34d9f75d"
+}

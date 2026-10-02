@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT-6 Astra API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="GPT-6 Astra API 国内中转调用与价格：官方 $10/$50、缓存 $1，105 万上下文，tryallapi.com 接入步骤、代码与报错排查。">
+<link rel="canonical" href="https://docs.tryallapi.com/gpt-6-astra-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="GPT-6 Astra API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="GPT-6 Astra API 国内中转调用与价格：官方 $10/$50、缓存 $1，105 万上下文，tryallapi.com 接入步骤、代码与报错排查。">
+<meta property="og:url" content="https://docs.tryallapi.com/gpt-6-astra-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/gpt-6-astra-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPT-6 Astra API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="GPT-6 Astra API 国内中转调用与价格：官方 $10/$50、缓存 $1，105 万上下文，tryallapi.com 接入步骤、代码与报错排查。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/gpt-6-astra-api.png">
+<meta property="article:published_time" content="2026-10-01">
+<meta property="article:modified_time" content="2026-10-01">
+<meta property="article:section" content="OpenAI">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "GPT-6 Astra API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "GPT-6 Astra API 国内中转调用与价格：官方 $10/$50、缓存 $1，105 万上下文，tryallapi.com 接入步骤、代码与报错排查。",
+   "image": [
+    "https://docs.tryallapi.com/og/gpt-6-astra-api.png"
+   ],
+   "datePublished": "2026-10-01",
+   "dateModified": "2026-10-01",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/gpt-6-astra-api/",
+   "url": "https://docs.tryallapi.com/gpt-6-astra-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "GPT-6 Astra API（gpt-6-astra）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "GPT-6 Astra API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/gpt-6-astra-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "GPT-6 Astra 的模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方与 tryallapi.com 均使用 gpt-6-astra。上下文 105 万 tokens，最大输出 12.8 万 tokens。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价格是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "标准档每百万 tokens：输入 $10、缓存输入 $1、缓存写入 $12.50、输出 $50；输入超过 272K 时整次请求输入/缓存 2 倍、输出 1.5 倍。以 OpenAI Pricing 为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内能直连官方吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不建议。支持地区不含中国大陆与香港，名单外使用有封号风险。一般通过兼容 OpenAI 协议的聚合平台调用。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi.com 怎么收费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "按「官方价 × 分组倍率」扣美元额度；Astra 分组倍率约 0.07～1.8（2026-10-01），以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Astra 和 GPT-6.1 Sol 怎么选？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sol 标准价约为 Astra 的 1/5，日常 Agent 优先 Sol；最难推理、大规模改造再上 Astra。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "reasoning.effort 支持哪些值？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "low / medium / high / xhigh / max；不支持 none、minimal。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一个 Key 能调多家模型吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，在令牌分组权限内可调 GPT / Claude / Gemini 等。建议按项目分令牌并设额度上限。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持哪些支付方式？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "站点支持微信、支付宝、信用卡等，以充值页为准；发票政策见站点公告。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">GPT-6 Astra API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">OpenAI · <code>gpt-6-astra</code></p>
+<h1>GPT-6 Astra API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-01">2026-10-01</time> · 更新 <time datetime="2026-10-01">2026-10-01</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。OpenAI 相关参数均来自官方模型文档与价格页（文中附链接）；tryallapi.com 的数据取自站点公开接口，取数时间为 2026-10-01（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>这篇文章面向<strong>写代码调用 API 的开发者</strong>；ChatGPT / Codex 订阅用户的使用方式不在本文讨论范围。</p>
+<hr />
+<h2>GPT-6 Astra 参数速览</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API 模型 ID</td>
+<td><code>gpt-6-astra</code></td>
+<td><a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">OpenAI 模型文档</a></td>
+</tr>
+<tr>
+<td>定位</td>
+<td>旗舰推理与编程模型，适合复杂推理、代码、电脑操作、科研与长文档</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1,050,000 / 128,000 tokens</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026-04-30</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>输入 / 输出模态</td>
+<td>文本 + 图片输入，文本输出（不支持音频、视频）</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>推理强度</td>
+<td><code>reasoning.effort</code>：low / medium / high / xhigh / max；不支持 none、minimal</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>官方标准价（每百万 tokens）</td>
+<td>输入 $10.00；缓存输入 $1.00；缓存写入 $12.50；输出 $50.00</td>
+<td><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI Pricing</a></td>
+</tr>
+<tr>
+<td>长上下文加价</td>
+<td>单次输入超过 272K tokens，整次请求按输入/缓存 2 倍、输出 1.5 倍计费</td>
+<td>OpenAI 模型文档</td>
+</tr>
+<tr>
+<td>tryallapi.com 是否已上架</td>
+<td><strong>是</strong>（2026-10-01 取数）</td>
+<td>tryallapi.com <code>/api/pricing</code></td>
+</tr>
+<tr>
+<td>tryallapi.com Base URL</td>
+<td><code>https://tryallapi.com/v1</code>（OpenAI 兼容；支持 Chat Completions 与 Responses）</td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>OpenAI 公布的 API 支持国家和地区名单里没有中国大陆和香港，国内团队直连官方接口有封号风险。</li>
+<li>Astra 是 GPT-6 系列里最贵也最强的一档：标准输入 $10、输出 $50；缓存输入 $1，长上下文（&gt;272K）还会再涨价。</li>
+<li>tryallapi.com 已上架 <code>gpt-6-astra</code>，走 OpenAI 兼容协议，只需换 <code>base_url</code> 和 Key；创建令牌时选好分组，实际扣费 ≈ 官方价 × 分组倍率。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、什么时候该上 Astra，而不是 Sol？</h2>
+<p>根据 <a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">OpenAI 官方模型页</a>，Astra 定位是「最难的任务」：复杂推理、大型代码库改造、电脑操作、科研与长文档创作。同系列的 GPT-6.1 Sol 标准价约是 Astra 的五分之一（$2 / $10），日常 Agent 与多数编程任务往往更划算。</p>
+<p>可以粗略按场景选：</p>
+<ul>
+<li><strong>先用 Sol / Luna</strong>：日常对话、常规 CRUD、短上下文批处理。</li>
+<li><strong>切到 Astra</strong>：多仓库重构、强推理评测、需要 <code>xhigh</code> / <code>max</code> 推理强度、或官方评测里明确推荐旗舰档的任务。</li>
+<li><strong>工具调用优先 Responses API</strong>：OpenAI 文档强调带工具的场景更适合 <code>/v1/responses</code>；tryallapi.com 对 GPT-6 系列同时开放了 Responses 与 Chat Completions。</li>
+</ul>
+<p>这些都是官方产品定位与价格结构的归纳，落到你的代码库上效果如何，需要自己用固定题集对比。</p>
+<hr />
+<h2>二、国内开发者为什么走中转？</h2>
+<ol>
+<li><strong>地区限制。</strong> OpenAI 的<a href="https://platform.openai.com/docs/supported-countries" target="_blank" rel="noopener noreferrer">支持国家和地区列表</a>明确：名单以外地区访问或提供服务，账号可能被封禁。中国大陆、香港不在名单内。</li>
+<li><strong>付款与风控。</strong> 官方充值依赖境外卡；账号主体、支付地、调用 IP 不一致时容易触发风控。</li>
+<li><strong>多模型账单。</strong> 一个项目里同时用 GPT、Claude、Gemini、Grok 很常见；每家单独开户结算，Key 与账单管理成本高。</li>
+</ol>
+<p>聚合平台的路径是：<strong>你的程序 → 聚合平台 → 上游模型</strong>。平台对外暴露 OpenAI 兼容接口，解决网络、支付和统一计费；代价是多了一个需要信任的服务商。</p>
+<hr />
+<h2>三、官方 OpenAI / Azure / 聚合平台怎么选</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>官方 OpenAI API</th>
+<th>Azure / Microsoft Foundry</th>
+<th>聚合平台（tryallapi.com）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内可用性</td>
+<td>支持地区不含中国大陆 / 香港</td>
+<td>需海外订阅，企业资质要求较高</td>
+<td>提供国内可直接访问的入口</td>
+</tr>
+<tr>
+<td>GPT-6 Astra</td>
+<td>已开放，<code>gpt-6-astra</code></td>
+<td>以 Azure 控制台为准</td>
+<td>已上架（2026-10-01）</td>
+</tr>
+<tr>
+<td>付款</td>
+<td>境外信用卡</td>
+<td>Azure 账单</td>
+<td>微信支付、支付宝、信用卡等（以站点为准）</td>
+</tr>
+<tr>
+<td>接入成本</td>
+<td>低，官方 SDK</td>
+<td>中，资源与区域配置</td>
+<td>低，改 <code>base_url</code></td>
+</tr>
+<tr>
+<td>协议</td>
+<td>Chat Completions / Responses 等</td>
+<td>Azure OpenAI / Foundry</td>
+<td>OpenAI 兼容（含 Responses）</td>
+</tr>
+<tr>
+<td>更适合</td>
+<td>海外主体、官方 SLA</td>
+<td>已有 Azure 体系的企业</td>
+<td>国内个人/中小团队、多模型项目</td>
+</tr>
+</tbody>
+</table></div>
+<p>有海外实体且合规要求严的，优先官方或 Azure；原型验证和中小规模生产，聚合平台上手更快。</p>
+<hr />
+<h2>四、三步接入 tryallapi.com</h2>
+<h3>步骤 1：注册、充值、建令牌</h3>
+<ol>
+<li>打开 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">tryallapi.com</a> 注册并登录；</li>
+<li>充值（站点配置最低约 $1，具体以充值页为准）；</li>
+<li>「令牌」页生成 API Key，<strong>并选择分组</strong>（分组决定上游与倍率）；</li>
+<li>写入环境变量：</li>
+</ol>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>步骤 2：Python —— Responses API（推荐）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,
+    timeout=180,
+)
+
+resp = client.responses.create(
+    model=&quot;gpt-6-astra&quot;,
+    reasoning={&quot;effort&quot;: &quot;high&quot;},  # low / medium / high / xhigh / max
+    input=&quot;审查下面仓库的鉴权中间件，指出越权风险并给出补丁思路：...&quot;,
+)
+print(resp.output_text)
+</code></pre>
+<p>普通对话、不带工具时，Chat Completions 也可：</p>
+<pre><code class="language-python">stream = client.chat.completions.create(
+    model=&quot;gpt-6-astra&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;用三句话解释什么是 CAP 定理&quot;}],
+    stream=True,
+)
+for chunk in stream:
+    if chunk.choices and chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end=&quot;&quot;, flush=True)
+</code></pre>
+<h3>步骤 3：Node.js 与 cURL</h3>
+<pre><code class="language-javascript">// npm i openai
+import OpenAI from &quot;openai&quot;;
+const client = new OpenAI({
+  apiKey: process.env.TRYALLAPI_KEY,
+  baseURL: &quot;https://tryallapi.com/v1&quot;,
+  timeout: 180000,
+});
+const resp = await client.responses.create({
+  model: &quot;gpt-6-astra&quot;,
+  reasoning: { effort: &quot;medium&quot; },
+  input: &quot;把这段伪代码改成幂等的 HTTP 接口&quot;,
+});
+console.log(resp.output_text);
+</code></pre>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;gpt-6-astra&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<h3>在 Cursor / Codex / Dify 里用</h3>
+<ul>
+<li><strong>Cursor</strong>：Settings → Models，填 OpenAI API Key 为 tryallapi 令牌；Override Base URL 为 <code>https://tryallapi.com/v1</code>；自定义模型 <code>gpt-6-astra</code>。</li>
+<li><strong>Codex CLI / OpenAI 兼容工具</strong>：把 <code>OPENAI_BASE_URL</code> 指到 <code>https://tryallapi.com/v1</code>，<code>OPENAI_API_KEY</code> 用 <code>TRYALLAPI_KEY</code>。</li>
+<li><strong>Dify</strong>：模型供应商选 OpenAI-API-compatible，endpoint <code>https://tryallapi.com/v1</code>，模型名 <code>gpt-6-astra</code>。</li>
+</ul>
+<p>完整文档见 <a href="https://5oq7d57fbk.apifox.cn" target="_blank" rel="noopener noreferrer">tryallapi.com 接口文档</a>。</p>
+<hr />
+<h2>五、价格：官方 vs tryallapi.com</h2>
+<h3>1. 官方标准价（每百万 tokens，美元）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项</th>
+<th>短上下文（≤272K 输入）</th>
+<th>长上下文（输入 &gt;272K，整次请求）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$10.00</td>
+<td>$20.00</td>
+</tr>
+<tr>
+<td>缓存输入</td>
+<td>$1.00</td>
+<td>$2.00</td>
+</tr>
+<tr>
+<td>缓存写入</td>
+<td>$12.50</td>
+<td>$25.00</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$50.00</td>
+<td>$75.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>来源：<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI Pricing</a>（2026-10-01 核对）。Batch / Flex 约为标准价一半；Fast 约为 2 倍——以官方页面为准。</p>
+<h3>2. tryallapi.com 怎么计费</h3>
+<p><strong>实际消耗（美元额度）≈ 官方价 × 分组倍率</strong></p>
+<p>站点价格接口里，<code>gpt-6-astra</code> 的 <code>model_ratio=5</code>、<code>completion_ratio=5</code>、<code>cache_ratio=0.1</code>，换算后对应官方 $10 / $50 / $1 的量级。创建令牌时可选分组（2026-10-01 取数）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>分组倍率</th>
+<th>输入估算 / 百万 tokens</th>
+<th>输出估算 / 百万 tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex-Gpt-1</td>
+<td>0.07354</td>
+<td>≈ $0.74</td>
+<td>≈ $3.68</td>
+</tr>
+<tr>
+<td>Codex-Gpt-2</td>
+<td>0.11766</td>
+<td>≈ $1.18</td>
+<td>≈ $5.88</td>
+</tr>
+<tr>
+<td>Codex-Gpt-3</td>
+<td>0.14706</td>
+<td>≈ $1.47</td>
+<td>≈ $7.35</td>
+</tr>
+<tr>
+<td>Azure-Gpt-2</td>
+<td>0.2</td>
+<td>$2.00</td>
+<td>$10.00</td>
+</tr>
+<tr>
+<td>Azure-Gpt-3</td>
+<td>0.44</td>
+<td>$4.40</td>
+<td>$22.00</td>
+</tr>
+<tr>
+<td>Azure-Gpt-4</td>
+<td>0.88</td>
+<td>$8.80</td>
+<td>$44.00</td>
+</tr>
+<tr>
+<td>Openai-Gpt-1</td>
+<td>1.17648</td>
+<td>≈ $11.76</td>
+<td>≈ $58.82</td>
+</tr>
+<tr>
+<td>Azure-Gpt-5</td>
+<td>1.2</td>
+<td>$12.00</td>
+<td>$60.00</td>
+</tr>
+<tr>
+<td>Openai-Gpt-2</td>
+<td>1.4706</td>
+<td>≈ $14.71</td>
+<td>≈ $73.53</td>
+</tr>
+<tr>
+<td>Azure-Gpt-6</td>
+<td>1.8</td>
+<td>$18.00</td>
+<td>$90.00</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>数据来自 <code>tryallapi.com/api/pricing</code>，取于 2026-10-01。倍率会变，<strong>以控制台模型广场为准</strong>。</li>
+<li>分组名反映上游渠道（Codex / Azure / OpenAI），价格与稳定性不同，选前先小额试。</li>
+<li>充值按站点公告以美元额度展示；批量充值可能有折扣，见充值页。</li>
+</ul>
+<h3>3. 成本估算（公式推算，非实测）</h3>
+<p>假设每天 200 次请求，每次输入 8,000、输出 2,000 tokens，月按 30 天：月输入 4,800 万、输出 1,200 万 tokens。官方标准档约 48×$10 + 12×$50 = <strong>$1,080</strong>；在倍率 r 的分组约为 <strong>$1,080 × r</strong>（美元额度）。缓存命中高时，实际会明显低于这个数。</p>
+<hr />
+<h2>六、如何自测（方法说明，无编造延迟数字）</h2>
+<p>没有公开实测数据前，本文不给出任何首字延迟或成功率数字。建议你自己记录：</p>
+<ul>
+<li>固定题集（短问答 / &gt;272K 长文 / 带工具的 Responses）；</li>
+<li>每个分组 ≥ 100～200 次，跨高峰与低峰；</li>
+<li>指标：HTTP 成功率、流式是否中断、<code>usage</code> 与控制台扣费是否一致、缓存命中是否按约 $1 档结算。</li>
+</ul>
+<p>核对是否真是 Astra：看响应 <code>model</code> 字段；把 <code>reasoning.effort</code> 调到 <code>max</code> 观察推理 tokens；传入 <code>none</code> / <code>minimal</code> 应报错。</p>
+<hr />
+<h2>七、常见报错</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>常见原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>401</strong></td>
+<td>Key 未带、空格、环境变量未生效</td>
+<td><code>Authorization: Bearer sk-...</code>；检查 <code>echo $TRYALLAPI_KEY</code></td>
+</tr>
+<tr>
+<td><strong>403</strong></td>
+<td>分组无此模型 / IP 白名单</td>
+<td>换包含 <code>gpt-6-astra</code> 的分组</td>
+</tr>
+<tr>
+<td><strong>404 model not found</strong></td>
+<td>模型名写错、<code>base_url</code> 少/多 <code>/v1</code></td>
+<td>base_url 用 <code>https://tryallapi.com/v1</code>；模型名以广场为准</td>
+</tr>
+<tr>
+<td><strong>400</strong></td>
+<td>Chat Completions 里硬塞工具、effort 非法</td>
+<td>工具走 <code>/v1/responses</code>；effort 只用 low～max</td>
+</tr>
+<tr>
+<td><strong>429</strong></td>
+<td>上游限流 / 并发顶满</td>
+<td>指数退避、降并发、换分组</td>
+</tr>
+<tr>
+<td><strong>超时</strong></td>
+<td>高 effort + 长上下文</td>
+<td><code>timeout</code> ≥ 180s，开流式，必要时降 effort</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>八、避坑</h2>
+<ol>
+<li><strong>别只看倍率。</strong> 最终成本 = 官方价 × 倍率 × 充值成本，三个都要算。</li>
+<li><strong>确认 &gt;272K 与缓存怎么结。</strong> Astra 最贵的两个放大器就是长上下文阶梯和缓存是否按 $1 档结算。</li>
+<li><strong>工具调用走 Responses。</strong> 只支持 Chat Completions 的平台会卡 Agent。</li>
+<li><strong>小额起步。</strong> 先充小额跑通自测，再加量；敏感数据先读隐私条款。</li>
+<li><strong>旗舰别滥用。</strong> 能用 Sol 的场景硬上 Astra，账单会涨得很快。</li>
+</ol>
+<hr />
+<h2>九、常见问题（FAQ）</h2>
+<p><strong>Q1：GPT-6 Astra 的模型 ID 是什么？</strong>
+官方与 tryallapi.com 均使用 <code>gpt-6-astra</code>。上下文 105 万 tokens，最大输出 12.8 万 tokens。</p>
+<p><strong>Q2：官方价格是多少？</strong>
+标准档每百万 tokens：输入 $10、缓存输入 $1、缓存写入 $12.50、输出 $50；输入超过 272K 时整次请求输入/缓存 2 倍、输出 1.5 倍。以 <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI Pricing</a> 为准。</p>
+<p><strong>Q3：国内能直连官方吗？</strong>
+不建议。支持地区不含中国大陆与香港，名单外使用有封号风险。一般通过兼容 OpenAI 协议的聚合平台调用。</p>
+<p><strong>Q4：tryallapi.com 怎么收费？</strong>
+按「官方价 × 分组倍率」扣美元额度；Astra 分组倍率约 0.07～1.8（2026-10-01），以控制台为准。</p>
+<p><strong>Q5：Astra 和 GPT-6.1 Sol 怎么选？</strong>
+Sol 标准价约为 Astra 的 1/5，日常 Agent 优先 Sol；最难推理、大规模改造再上 Astra。</p>
+<p><strong>Q6：reasoning.effort 支持哪些值？</strong>
+low / medium / high / xhigh / max；不支持 none、minimal。</p>
+<p><strong>Q7：一个 Key 能调多家模型吗？</strong>
+可以，在令牌分组权限内可调 GPT / Claude / Gemini 等。建议按项目分令牌并设额度上限。</p>
+<p><strong>Q8：支持哪些支付方式？</strong>
+站点支持微信、支付宝、信用卡等，以充值页为准；发票政策见站点公告。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/gpt-6.1-sol-api/">GPT-6.1 Sol API 国内中转调用指南与价格</a>：官方 $2/$10、缓存输入 $0.10，105 万上下文；工具调用走 Responses API。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>官方参考：<a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">GPT-6 Astra 模型文档</a> · <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">Pricing</a> · <a href="https://platform.openai.com/docs/supported-countries" target="_blank" rel="noopener noreferrer">支持国家和地区</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-01｜最后更新：2026-10-01｜更新日志：2026-10-01 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-01，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>GPT-6 Astra API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">查看 GPT-6 Astra API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-astra-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

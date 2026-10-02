@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Sonnet 4.6 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Claude Sonnet 4.6 API 国内中转调用与价格：官方 $3/$15、缓存读 $0.30，Claude Code 配置、双协议接入与倍率。">
+<link rel="canonical" href="https://docs.tryallapi.com/claude-sonnet-4-6-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Claude Sonnet 4.6 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Claude Sonnet 4.6 API 国内中转调用与价格：官方 $3/$15、缓存读 $0.30，Claude Code 配置、双协议接入与倍率。">
+<meta property="og:url" content="https://docs.tryallapi.com/claude-sonnet-4-6-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/claude-sonnet-4-6-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude Sonnet 4.6 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Claude Sonnet 4.6 API 国内中转调用与价格：官方 $3/$15、缓存读 $0.30，Claude Code 配置、双协议接入与倍率。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/claude-sonnet-4-6-api.png">
+<meta property="article:published_time" content="2026-10-02">
+<meta property="article:modified_time" content="2026-10-02">
+<meta property="article:section" content="Anthropic">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Claude Sonnet 4.6 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Claude Sonnet 4.6 API 国内中转调用与价格：官方 $3/$15、缓存读 $0.30，Claude Code 配置、双协议接入与倍率。",
+   "image": [
+    "https://docs.tryallapi.com/og/claude-sonnet-4-6-api.png"
+   ],
+   "datePublished": "2026-10-02",
+   "dateModified": "2026-10-02",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/claude-sonnet-4-6-api/",
+   "url": "https://docs.tryallapi.com/claude-sonnet-4-6-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Claude Sonnet 4.6 API（claude-sonnet-4-6）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Claude Sonnet 4.6 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/claude-sonnet-4-6-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "模型 ID 怎么写？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "claude-sonnet-4-6。Bedrock 为 anthropic.claude-sonnet-4-6。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "输入 $3、输出 $15、缓存读 $0.30、5m/1h 缓存写 $3.75/$6（每百万 tokens），以 Claude Platform / Anthropic Pricing 为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内能直连 Anthropic 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "多数个人与中小团队不稳定；常用聚合平台或云厂商中转。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Code 如何接 tryallapi.com？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "ANTHROPIC_BASE_URL=https://tryallapi.com，Token 填站点令牌，模型选 claude-sonnet-4-6。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "和 Opus 5.5 怎么选？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sonnet 更适合高频日常编码；Opus 适合更难的长程 Agent。按预算与任务难度切换。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计价？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "估算 ≈ 官方价 × 分组倍率；2026-10-02 分组约 0.18～2.2，以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持 Anthropic 原生和 OpenAI 兼容吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "支持。Claude Code / Anthropic SDK 走 Anthropic；Cursor / Dify 可走 OpenAI 兼容。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "一个 Key 能否兼用 GPT / Gemini？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，权限内多模型通用；建议分项目建令牌并设额度。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Claude Sonnet 4.6 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">Anthropic（Claude） · <code>claude-sonnet-4-6</code></p>
+<h1>Claude Sonnet 4.6 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-02">2026-10-02</time> · 更新 <time datetime="2026-10-02">2026-10-02</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。Anthropic / Claude 参数来自官方文档；tryallapi.com 数据取自公开接口，取数时间 2026-10-02（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>本文面向用 <strong>Claude API / Claude Code</strong> 写代码的开发者，不讨论 Claude.ai 网页订阅。Sonnet 4.6 是日常编码与 Agent 的「主力档」，和旗舰 Opus 系列互补。</p>
+<hr />
+<h2>Claude Sonnet 4.6 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发布</td>
+<td>2026-02-17；状态 Active（legacy），退役不早于 2027-02-17</td>
+<td><a href="https://platform.claude.com/docs/en/models/sonnet-4-6/overview" target="_blank" rel="noopener noreferrer">Claude Platform 文档</a></td>
+</tr>
+<tr>
+<td>API 模型 ID</td>
+<td><code>claude-sonnet-4-6</code>（Bedrock：<code>anthropic.claude-sonnet-4-6</code>）</td>
+<td>Claude Platform / Bedrock</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1,000,000 / 128,000 tokens</td>
+<td>Claude Platform 文档</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2025-08</td>
+<td>Claude Platform 文档</td>
+</tr>
+<tr>
+<td>Thinking</td>
+<td>Adaptive（extended 已弃用）；默认 effort=<code>high</code></td>
+<td>Claude Platform 文档</td>
+</tr>
+<tr>
+<td>官方价（每百万 tokens）</td>
+<td>输入 $3；输出 $15；缓存读 $0.30；5 分钟缓存写 $3.75；1 小时缓存写 $6</td>
+<td><a href="https://docs.anthropic.com/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic Pricing</a></td>
+</tr>
+<tr>
+<td>其他</td>
+<td>Batch API 输入/输出约 5 折；<code>inference_geo=us</code> 全类 token 约 1.1×</td>
+<td>官方定价页</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点 <code>anthropic</code> + <code>openai</code></td>
+<td><code>/api/pricing</code> 2026-10-02</td>
+</tr>
+<tr>
+<td>Base URL</td>
+<td>OpenAI 兼容：<code>https://tryallapi.com/v1</code>；Claude Code：<code>https://tryallapi.com</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>Sonnet 4.6 官方标准价 $3/$15，百万级上下文与 128K 输出，适合作为 Claude Code 默认模型。</li>
+<li>国内直连 Anthropic 困难；tryallapi.com 同时提供 Anthropic Messages 与 OpenAI 兼容入口，Claude Code 只需改 <code>ANTHROPIC_BASE_URL</code>。</li>
+<li>账单 ≈ 官方价 × 分组倍率；低倍率分组先用小任务核对扣费，再上真实仓库。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、为什么选 Sonnet 4.6 而不是 Opus？</h2>
+<p>团队里常见分工是：日常改 bug、写测例、中等规模重构用 Sonnet；跨仓重构、高风险设计评审再升 Opus。Sonnet 4.6 的优势在于：</p>
+<ul>
+<li><strong>单价更友好</strong>：相对 Opus 旗舰档，$3/$15 更适合高频率 Claude Code 会话。</li>
+<li><strong>上下文够用</strong>：官方文档给出 1M 上下文与 128K 最大输出，长仓库摘要与多文件编辑不必马上换旗舰。</li>
+<li><strong>Adaptive thinking</strong>：默认 effort 偏高，适合「想清楚再动手」的编码助手；具体 effort 档位以控制台与客户端为准。</li>
+</ul>
+<p>厂商自评基准本文不转述为实测。你自己的仓库要用固定任务集对比 Sonnet / Opus / 竞品。</p>
+<hr />
+<h2>二、国内为什么还要中转？</h2>
+<p>Anthropic Claude API 对账号地区、支付方式有约束，中国大陆团队通常无法稳定直连。Claude Code 还依赖稳定的 <code>ANTHROPIC_BASE_URL</code>。聚合平台把 Messages API 暴露到国内可达域名，并支持微信/支付宝充值。代价是：流量经过第三方，敏感代码与密钥要自己做分级。</p>
+<hr />
+<h2>三、方案对比：官方 / Bedrock / 聚合</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>Claude 官方 API</th>
+<th>AWS Bedrock 等云</th>
+<th>tryallapi.com</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内可达性</td>
+<td>受限</td>
+<td>需海外云账号与网络</td>
+<td>国内入口</td>
+</tr>
+<tr>
+<td>模型 ID</td>
+<td><code>claude-sonnet-4-6</code></td>
+<td><code>anthropic.claude-sonnet-4-6</code></td>
+<td>同官方 ID</td>
+</tr>
+<tr>
+<td>付款</td>
+<td>境外卡</td>
+<td>云账单</td>
+<td>微信 / 支付宝等</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>原生</td>
+<td>需额外适配</td>
+<td>改 Base URL + Token</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>Anthropic Messages</td>
+<td>Bedrock Invoke</td>
+<td>Anthropic + OpenAI 兼容</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>海外主体、零数据保留合规</td>
+<td>已有 AWS 体系</td>
+<td>个人/中小团队、多模型</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>四、接入：Claude Code + Python + cURL</h2>
+<h3>1. 注册令牌</h3>
+<p>在 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">tryallapi.com</a> 创建令牌，分组选 Claude 相关（见下节），环境变量：</p>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Claude Code（<code>~/.claude/settings.json</code>）</h3>
+<pre><code class="language-json">{
+  &quot;env&quot;: {
+    &quot;ANTHROPIC_BASE_URL&quot;: &quot;https://tryallapi.com&quot;,
+    &quot;ANTHROPIC_AUTH_TOKEN&quot;: &quot;sk-你的令牌&quot;
+  }
+}
+</code></pre>
+<p>部分版本也认 <code>ANTHROPIC_API_KEY</code>。改完后新开终端，用 <code>/model</code> 或启动参数切到 <code>claude-sonnet-4-6</code>（以客户端实际列表为准）。</p>
+<h3>3. Python（Anthropic SDK）</h3>
+<pre><code class="language-python"># pip install -U anthropic
+import os
+from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com&quot;,
+    timeout=180.0,
+)
+
+msg = client.messages.create(
+    model=&quot;claude-sonnet-4-6&quot;,
+    max_tokens=16000,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;给这段 TypeScript 写单元测试并标出竞态&quot;}],
+)
+print(msg.content)
+</code></pre>
+<h3>4. OpenAI 兼容（Cursor / Dify）</h3>
+<pre><code class="language-python">from openai import OpenAI
+import os
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;claude-sonnet-4-6&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;总结这份 PR 的风险点&quot;}],
+)
+print(r.choices[0].message.content)
+</code></pre>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/messages \
+  -H &quot;x-api-key: $TRYALLAPI_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -H &quot;content-type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;claude-sonnet-4-6&quot;,&quot;max_tokens&quot;:1024,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<p>鉴权头字段以 tryallapi.com 文档为准；若 401，优先试 <code>Authorization: Bearer</code>。</p>
+<h3>5. Cursor / Dify</h3>
+<ul>
+<li>Cursor：Override OpenAI Base URL → <code>https://tryallapi.com/v1</code>，模型填 <code>claude-sonnet-4-6</code>。</li>
+<li>Dify：OpenAI-API-compatible，endpoint 同上。</li>
+</ul>
+<hr />
+<h2>五、价格与分组倍率</h2>
+<h3>官方价（2026-10-02 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>每百万 tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$3.00</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$15.00</td>
+</tr>
+<tr>
+<td>缓存读</td>
+<td>$0.30</td>
+</tr>
+<tr>
+<td>5m 缓存写</td>
+<td>$3.75</td>
+</tr>
+<tr>
+<td>1h 缓存写</td>
+<td>$6.00</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>输入/输出约 5 折（以官方为准）</td>
+</tr>
+<tr>
+<td>US geo 附加</td>
+<td><code>inference_geo=us</code> 时全类约 1.1×（以官方为准）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>tryallapi.com（估算 ≈ 官方价 × 分组倍率）</h3>
+<p><code>claude-sonnet-4-6</code>：<code>model_ratio=1.5</code>，<code>completion_ratio=5</code>，<code>cache_ratio=0.1</code>，缓存写 5m/1h 倍率 1.25 / 2。分组（2026-10-02）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kiro-Claude-1</td>
+<td>0.17648</td>
+<td>≈ $0.53</td>
+<td>≈ $2.65</td>
+</tr>
+<tr>
+<td>Claude-Code-1</td>
+<td>0.35294</td>
+<td>≈ $1.06</td>
+<td>≈ $5.29</td>
+</tr>
+<tr>
+<td>Claude-Code-2</td>
+<td>0.58824</td>
+<td>≈ $1.76</td>
+<td>≈ $8.82</td>
+</tr>
+<tr>
+<td>AWS-Bedrock-1 / Vertex-Claude-1 / AWS-Claude-1</td>
+<td>0.88236</td>
+<td>≈ $2.65</td>
+<td>≈ $13.24</td>
+</tr>
+<tr>
+<td>AWS-Bedrock-2</td>
+<td>1.17648</td>
+<td>≈ $3.53</td>
+<td>≈ $17.65</td>
+</tr>
+<tr>
+<td>AWS-Claude-2</td>
+<td>1.76472</td>
+<td>≈ $5.29</td>
+<td>≈ $26.47</td>
+</tr>
+<tr>
+<td>AWS-Claude-3 / Anthropic-Claude-1</td>
+<td>2.2</td>
+<td>$6.60</td>
+<td>$33.00</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>以控制台为准。</strong> Agent 场景务必确认缓存读是否按约 10% 输入价结算。选低倍率分组前先用小任务核对扣费明细。</p>
+<hr />
+<h2>六、自测方法（不编造延迟）</h2>
+<ul>
+<li>同一仓库开两个分支，官方对照（若有）与 tryallapi 分组各跑一轮；</li>
+<li>记录：任务是否完成、输出 tokens、控制台扣费、是否触发安全回退；</li>
+<li>不要用无法复现的「首字延迟」宣传数字做决策。</li>
+</ul>
+<hr />
+<h2>七、常见报错</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>Key / Base URL 错</td>
+<td>检查 settings.json 与 Bearer / x-api-key</td>
+</tr>
+<tr>
+<td>403</td>
+<td>分组无 Sonnet 4.6</td>
+<td>换 Claude-Code / Bedrock / Vertex 等分组</td>
+</tr>
+<tr>
+<td>404</td>
+<td>模型名写成 <code>claude-3-5-sonnet</code> 等旧名</td>
+<td>用 <code>claude-sonnet-4-6</code></td>
+</tr>
+<tr>
+<td>400 thinking / tool</td>
+<td>旧参数</td>
+<td>按官方文档使用 Adaptive / effort</td>
+</tr>
+<tr>
+<td>429</td>
+<td>限流</td>
+<td>退避、降并发、换分组</td>
+</tr>
+<tr>
+<td>超时</td>
+<td>高 effort 长任务</td>
+<td>提高 timeout，或降 effort</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>八、避坑</h2>
+<ol>
+<li><strong>分清订阅与 API</strong>：Claude.ai / Max 订阅额度 ≠ API Key 计费。</li>
+<li><strong>Claude Code Base URL 不要带 <code>/v1</code></strong>：用 <code>https://tryallapi.com</code>；OpenAI SDK 才用 <code>/v1</code>。</li>
+<li><strong>双协议别混配</strong>：Anthropic 头与 OpenAI Bearer 不要塞进同一客户端配置。</li>
+<li><strong>小额验证缓存账单</strong>：否则「低倍率」会被未命中缓存吃掉。</li>
+<li><strong>敏感仓慎用第三方</strong>：合规优先 Bedrock / 官方零保留。</li>
+<li><strong>legacy 状态</strong>：官方标注 Active（legacy），退役窗口不早于 2027-02-17——长期产品请关注迁移公告。</li>
+</ol>
+<hr />
+<hr />
+<h2>写给「只想改两行配置」的读者</h2>
+<p>如果你已经在用 Claude Code，最小改动是：把原来的 Anthropic 官方地址换成 <code>https://tryallapi.com</code>，把 Key 换成 tryallapi 令牌，模型选 <code>claude-sonnet-4-6</code>。先跑一句烟测确认 200 响应与扣费流水，再把真实仓库接进去。Cursor、Continue、Cline 等走 OpenAI 兼容的工具，则统一 <code>base_url=https://tryallapi.com/v1</code>。两种协议不要混在同一个客户端配置里，以免签名头对不上。</p>
+<hr />
+<h2>effort、缓存与分组怎么一起看</h2>
+<p>Sonnet 4.6 默认 effort 偏高，适合日常编码助手，但也会推高输出侧 tokens。建议团队写清三件事：默认模型、默认 effort、默认分组。缓存读相对便宜，前提是 system prompt 与工具定义保持稳定，让缓存真正命中；每次都把巨型提示当「未命中」重推，低倍率分组的优势会被吃掉。选 Kiro / Claude-Code 等低倍率分组前，用同一小任务连跑三次，对照控制台明细里的输入、输出、缓存读三列，再决定是否放量。</p>
+<p>把「敏感仓库走 Bedrock / 官方、日常原型走聚合」写进内部 wiki，比争论哪家中转「绝对最稳」更有用。中转站降低的是接入摩擦，降不掉的是提示词工程与代码评审。对金融、医疗、政务类数据，优先可签合同、可审计的云通道；tryallapi.com 更适合互联网产品原型、内部工具与中小规模生产。</p>
+<hr />
+<h2>从旧 Sonnet 迁过来的检查清单</h2>
+<ol>
+<li>全局搜索旧模型名（如 <code>claude-3-5-sonnet</code>、<code>claude-sonnet-4</code> 等），统一改为 <code>claude-sonnet-4-6</code>。</li>
+<li>检查 Claude Code 的 <code>ANTHROPIC_BASE_URL</code> 是否误写成带 <code>/v1</code> 的地址。</li>
+<li>确认令牌所在分组确实开放了 Sonnet 4.6，避免 403。</li>
+<li>用同一套内部评测集对比 token 消耗与任务完成率，而不是只看单次对话手感。</li>
+<li>关注官方 legacy 退役窗口，长期产品预留迁移缓冲。</li>
+</ol>
+<p>完成第一次成功响应只是起点：把 <code>TRYALLAPI_KEY</code> 放进密钥管理，为关键路径准备第二个模型作降级，并定期打开控制台核对分组倍率是否变动。本文数字快照于 2026-10-02，之后一切以页面为准。</p>
+<hr />
+<h2>和 Opus 5.5 搭配使用的推荐姿势</h2>
+<p>许多团队会同时开通 Sonnet 与 Opus：默认会话、CI 里的自动重构用 Sonnet 4.6；跨服务设计评审、疑难竞态、安全审计再用 Opus。这样能在体感质量与账单之间找到平衡。切换时注意：两边的 thinking / effort 语义可能不同，不要假设「同一套参数可以直接复制」。在 tryallapi.com 上只要令牌分组同时覆盖两个模型，改 <code>model</code> 字段即可；仍建议为 Sonnet 与 Opus 使用不同令牌，便于分账。</p>
+<p>若你从第三方榜单或微信群「低价 Claude」进来，先确认模型 ID 是否真是 <code>claude-sonnet-4-6</code>，再用一小段带缓存的会话核对扣费。本文不提供无法复现的延迟承诺，稳定性以你自己的探针为准。</p>
+<h2>九、FAQ</h2>
+<p><strong>Q1：模型 ID 怎么写？</strong><br />
+<code>claude-sonnet-4-6</code>。Bedrock 为 <code>anthropic.claude-sonnet-4-6</code>。</p>
+<p><strong>Q2：官方价？</strong><br />
+输入 $3、输出 $15、缓存读 $0.30、5m/1h 缓存写 $3.75/$6（每百万 tokens），以 Claude Platform / Anthropic Pricing 为准。</p>
+<p><strong>Q3：国内能直连 Anthropic 吗？</strong><br />
+多数个人与中小团队不稳定；常用聚合平台或云厂商中转。</p>
+<p><strong>Q4：Claude Code 如何接 tryallapi.com？</strong><br />
+<code>ANTHROPIC_BASE_URL=https://tryallapi.com</code>，Token 填站点令牌，模型选 <code>claude-sonnet-4-6</code>。</p>
+<p><strong>Q5：和 Opus 5.5 怎么选？</strong><br />
+Sonnet 更适合高频日常编码；Opus 适合更难的长程 Agent。按预算与任务难度切换。</p>
+<p><strong>Q6：tryallapi 怎么计价？</strong><br />
+估算 ≈ 官方价 × 分组倍率；2026-10-02 分组约 0.18～2.2，以控制台为准。</p>
+<p><strong>Q7：支持 Anthropic 原生和 OpenAI 兼容吗？</strong><br />
+支持。Claude Code / Anthropic SDK 走 Anthropic；Cursor / Dify 可走 OpenAI 兼容。</p>
+<p><strong>Q8：一个 Key 能否兼用 GPT / Gemini？</strong><br />
+可以，权限内多模型通用；建议分项目建令牌并设额度。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/claude-opus-5-5-api/">Claude Opus 5.5 API 国内中转调用指南与价格</a>：官方 $4/$20、缓存读 $0.20；Claude Code settings.json 与双协议接入。</li>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>官方参考：<a href="https://platform.claude.com/docs/en/models/sonnet-4-6/overview" target="_blank" rel="noopener noreferrer">Sonnet 4.6 Overview</a> · <a href="https://docs.anthropic.com/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic Pricing</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-02｜最后更新：2026-10-02｜更新日志：2026-10-02 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-02，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Claude Sonnet 4.6 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">查看 Claude Sonnet 4.6 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-4-6-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

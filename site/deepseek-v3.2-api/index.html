@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek V3.2 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="DeepSeek V3.2 API 国内调用与中转价格：官方已转向 V4，tryallapi.com 仍可调 deepseek-v3.2，附接入代码与倍率。">
+<link rel="canonical" href="https://docs.tryallapi.com/deepseek-v3.2-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="DeepSeek V3.2 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="DeepSeek V3.2 API 国内调用与中转价格：官方已转向 V4，tryallapi.com 仍可调 deepseek-v3.2，附接入代码与倍率。">
+<meta property="og:url" content="https://docs.tryallapi.com/deepseek-v3.2-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/deepseek-v3.2-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DeepSeek V3.2 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="DeepSeek V3.2 API 国内调用与中转价格：官方已转向 V4，tryallapi.com 仍可调 deepseek-v3.2，附接入代码与倍率。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/deepseek-v3.2-api.png">
+<meta property="article:published_time" content="2026-10-01">
+<meta property="article:modified_time" content="2026-10-01">
+<meta property="article:section" content="DeepSeek">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "DeepSeek V3.2 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "DeepSeek V3.2 API 国内调用与中转价格：官方已转向 V4，tryallapi.com 仍可调 deepseek-v3.2，附接入代码与倍率。",
+   "image": [
+    "https://docs.tryallapi.com/og/deepseek-v3.2-api.png"
+   ],
+   "datePublished": "2026-10-01",
+   "dateModified": "2026-10-01",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/deepseek-v3.2-api/",
+   "url": "https://docs.tryallapi.com/deepseek-v3.2-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "DeepSeek V3.2 API（deepseek-v3.2）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "DeepSeek V3.2 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/deepseek-v3.2-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "官方现在还能直接买 V3.2 API 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方主路径已是 V4 系列；旧别名按 2026-07-24 时间表停用。是否还有任何官方入口暴露 V3.2，以 api-docs.deepseek.com 实时文档为准。本文不把它描述为现行主推产品。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "为什么 tryallapi.com 还有 deepseek-v3.2？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "聚合平台常保留历史型号供兼容。上架 ≠ 官方仍在售；可用性以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "历史 $0.28 / $0.42 还能用吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "那是历史参考量级，不能当作 2026-10 的官方价或中转价。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么接入 tryallapi？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，model=deepseek-v3.2，Key 用 TRYALLAPI_KEY。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "分组怎么选？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Alibaba-1/2/3 倍率 1 / 1.5 / 2.2；先低倍率小额试稳定与扣费。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "新项目还要选 V3.2 吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "一般不建议；优先官方现行模型。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "能否和 GPT/Claude 共用 Key？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "可以，权限内多模型；建议分项目令牌。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支付方式？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "微信、支付宝、信用卡等以 tryallapi 充值页为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">DeepSeek V3.2 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">DeepSeek · <code>deepseek-v3.2</code></p>
+<h1>DeepSeek V3.2 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-01">2026-10-01</time> · 更新 <time datetime="2026-10-01">2026-10-01</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。关于官方生命周期的陈述依据 <a href="https://api-docs.deepseek.com/updates" target="_blank" rel="noopener noreferrer">DeepSeek API Change Log</a>；平台倍率取自 tryallapi.com 公开接口（2026-10-01），<strong>以控制台为准</strong>。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>这篇文章解决一个很具体的问题：<strong>官方已经主推 V4 / V4.1 之后，存量项目若仍依赖 V3.2 行为，还能怎么调？</strong></p>
+<hr />
+<h2>先说清楚：官方与中转上的「V3.2」不是一回事</h2>
+<p>根据 DeepSeek 官方更新日志：</p>
+<ul>
+<li><strong>2025-12-01</strong>：<code>deepseek-chat</code> / <code>deepseek-reasoner</code> 升级到 DeepSeek-V3.2（非思考 / 思考模式）。</li>
+<li><strong>2026-04-24</strong>：API 支持 V4-Pro / V4-Flash；并公告旧别名 <code>deepseek-chat</code>、<code>deepseek-reasoner</code> 将在 <strong>三个月后（2026-07-24）停用</strong>，过渡期内它们指向 V4-Flash 的不同模式，而不再是「当前的 V3.2 独立产品」。</li>
+<li><strong>此后到 2026-09</strong>：官方文档焦点在 V4、V4.1-Flash 等新模型；主站不再把 V3.2 作为现行主推型号。</li>
+</ul>
+<p>因此本文<strong>不会</strong>把网上流传的「当年 V3.2 官方 $0.xx / 百万 tokens」写成「现在的官方价」。那些数字若出现，只属于历史参考，不能用于报价或对账。</p>
+<p>另一方面，<strong>tryallapi.com 在 2026-10-01 取数时仍列出模型 ID <code>deepseek-v3.2</code></strong>，分组为 Alibaba-1/2/3。对需要「锁版本」的旧流水线，聚合平台可能是继续调用该 ID 的现实路径；同时也要接受：上游供应、行为与价格都可能变化，且与官方最新模型不是同一条产品线。</p>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>官方 DeepSeek API 生命周期已进入 V4 家族；不要再按 V3.2 历史官价做预算。</li>
+<li>新项目优先评估官方现行模型（如 V4 / V4.1-Flash，价格以 <a href="https://api-docs.deepseek.com/" target="_blank" rel="noopener noreferrer">api-docs.deepseek.com</a> 为准）。</li>
+<li>若必须固定 <code>deepseek-v3.2</code>，可用 tryallapi.com OpenAI 兼容接口；计费看分组倍率与控制台，而不是旧博客截图。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<hr />
+<h2>信息卡（中转侧）</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中转模型 ID</td>
+<td><code>deepseek-v3.2</code></td>
+<td>tryallapi.com <code>/api/pricing</code></td>
+</tr>
+<tr>
+<td>官方现状</td>
+<td>主推 V4 系列；旧 chat/reasoner 别名已按公告停用时间表处理</td>
+<td>DeepSeek Change Log</td>
+</tr>
+<tr>
+<td>历史上下文（参考）</td>
+<td>约 128K（历史资料，现行以实际响应为准）</td>
+<td>历史文档归纳</td>
+</tr>
+<tr>
+<td>tryallapi 端点</td>
+<td><code>openai</code>（OpenAI 兼容）</td>
+<td><code>/api/pricing</code></td>
+</tr>
+<tr>
+<td>tryallapi 倍率字段</td>
+<td><code>model_ratio≈0.14495</code>，<code>completion_ratio=1.5</code></td>
+<td>2026-10-01</td>
+</tr>
+<tr>
+<td>可用分组</td>
+<td>Alibaba-1（倍率 1）、Alibaba-2（1.5）、Alibaba-3（2.2）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>Base URL</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>一、什么人还需要 V3.2？</h2>
+<p>常见三类：</p>
+<ol>
+<li><strong>评测对照</strong>：论文或内部榜单锁死 V3.2 权重，需要可复现调用。</li>
+<li><strong>旧 Agent 提示词</strong>：在 V4 上行为漂移，短期来不及重调。</li>
+<li><strong>成本实验</strong>：在聚合平台上对比「旧档 vs 新档」单位任务花费（注意：这是平台价，不是官方现行价）。</li>
+</ol>
+<p>如果是新业务，直接上官方当前模型通常更省心：文档新、路由清晰、别名不会突然改指向。</p>
+<hr />
+<h2>二、方案怎么选</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>适用</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方 DeepSeek API</td>
+<td>新项目、要最新能力</td>
+<td>用现行模型名（如 <code>deepseek-flash</code> / <code>deepseek-v4-pro</code> 等，以文档为准）；勿写已停用别名当 V3.2</td>
+</tr>
+<tr>
+<td>云厂商托管</td>
+<td>企业合同内已采购</td>
+<td>各云下线时间表不同，需单独确认是否仍提供 V3.2</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td>国内直连、锁 <code>deepseek-v3.2</code> ID</td>
+<td>以模型广场「是否可调用」为准；可能随时调整</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>三、用 tryallapi.com 调用（OpenAI 兼容）</h2>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<p><strong>Python</strong></p>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,
+    timeout=120,
+)
+
+r = client.chat.completions.create(
+    model=&quot;deepseek-v3.2&quot;,
+    messages=[
+        {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;你是严谨的代码审查助手&quot;},
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;指出下面函数的 off-by-one 风险：...&quot;},
+    ],
+)
+print(r.choices[0].message.content)
+print(r.model)  # 核对回显
+</code></pre>
+<p><strong>Node.js</strong></p>
+<pre><code class="language-javascript">import OpenAI from &quot;openai&quot;;
+const client = new OpenAI({
+  apiKey: process.env.TRYALLAPI_KEY,
+  baseURL: &quot;https://tryallapi.com/v1&quot;,
+});
+const r = await client.chat.completions.create({
+  model: &quot;deepseek-v3.2&quot;,
+  messages: [{ role: &quot;user&quot;, content: &quot;把这段 SQL 改成可参数化查询&quot; }],
+});
+console.log(r.choices[0].message.content);
+</code></pre>
+<p><strong>cURL</strong></p>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;deepseek-v3.2&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<p><strong>Cursor / Dify</strong>：Override Base URL 为 <code>https://tryallapi.com/v1</code>，模型填 <code>deepseek-v3.2</code>。若客户端校验模型列表失败，可按站点说明尝试 <code>new-</code> 前缀等兼容写法。</p>
+<hr />
+<h2>四、价格：只谈中转公式，不谈过期官价</h2>
+<p>tryallapi.com 采用 NewAPI 风格倍率。对 <code>deepseek-v3.2</code>：</p>
+<ul>
+<li>基础换算与 <code>model_ratio</code>、<code>completion_ratio</code> 相关；</li>
+<li><strong>实际扣费 ≈ 平台标定基价 × 分组倍率</strong>；</li>
+<li>2026-10-01 可见分组：</li>
+</ul>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>分组倍率</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alibaba-1</td>
+<td>1.0</td>
+<td>基准档</td>
+</tr>
+<tr>
+<td>Alibaba-2</td>
+<td>1.5</td>
+<td>更高倍率</td>
+</tr>
+<tr>
+<td>Alibaba-3</td>
+<td>2.2</td>
+<td>更高倍率</td>
+</tr>
+</tbody>
+</table></div>
+<p>具体「每百万 tokens 美元额度」请打开 <a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">定价页 / 模型广场</a> 查看当日数字，<strong>本文不臆造未在控制台展示的单价</strong>。充值、折扣以充值页为准。</p>
+<p>若你的目标是「官方最新价」，请直接打开 DeepSeek 现行 Models &amp; Pricing 页面，选择 V4 / V4.1 系列——那是另一篇文章的范围。</p>
+<hr />
+<h2>五、迁移建议：从 V3.2 到 V4 家族</h2>
+<ol>
+<li>在试环境把 <code>model</code> 改成官方文档中的现行 ID，跑同一套回归。</li>
+<li>检查 tool calling / thinking 模式字段是否仍兼容（V4 引入了 effort 等新控制）。</li>
+<li>对比 token 消耗与质量，而不是只看单价表。</li>
+<li>需要 Responses / Codex 适配时，优先读官方 2026-08 前后的 Responses 说明。</li>
+<li>确认成功后再改生产；保留 tryallapi 上的 <code>deepseek-v3.2</code> 仅作回滚开关。</li>
+</ol>
+<hr />
+<h2>六、自测清单（无延迟数字）</h2>
+<ul>
+<li>连续 50 次简单补全：成功率、是否截断；</li>
+<li>回显 <code>model</code> 是否仍为 <code>deepseek-v3.2</code>（防止静默路由到别的模型）；</li>
+<li>控制台扣费与 <code>usage</code> 是否线性；</li>
+<li>与官方现行模型各跑同一组编程题，记录通过率（自用，不必公开）。</li>
+</ul>
+<hr />
+<h2>七、常见报错</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>可能原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404 model not found</td>
+<td>广场已下架或名称写错</td>
+<td>查模型广场；或改用官方现行模型</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Key 无效</td>
+<td>检查 Bearer 与令牌状态</td>
+</tr>
+<tr>
+<td>403</td>
+<td>分组无权限</td>
+<td>换 Alibaba-* 分组</td>
+</tr>
+<tr>
+<td>429</td>
+<td>限流</td>
+<td>退避、降并发</td>
+</tr>
+<tr>
+<td>行为突变</td>
+<td>上游切换</td>
+<td>固化评测集；考虑迁到可pinned 的官方快照</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>八、避坑</h2>
+<ol>
+<li><strong>别用历史官价做对外报价。</strong></li>
+<li><strong>别假设 <code>deepseek-chat</code> 还是 V3.2</strong>——官方早已改指向并计划停用。</li>
+<li><strong>锁版本就要接受供应风险</strong>——中转列表可随时移除旧模型。</li>
+<li><strong>小额验证扣费曲线。</strong></li>
+<li><strong>新功能开发不要绑死 V3.2。</strong></li>
+</ol>
+<hr />
+<hr />
+<h2>给技术负责人的决策树</h2>
+<p>如果你在「要不要继续用 V3.2」之间犹豫，可以按下面顺序想：有没有合同或论文约束必须复现旧权重？有 → 用 tryallapi.com 的 <code>deepseek-v3.2</code> 或自建权重，并接受供应风险。没有 → 直接迁官方现行 V4 / V4.1，重跑回归。迁的过程中是否出现工具调用或格式失败？有 → 对照官方 Change Log 改字段，而不是抬高中转倍率幻想「同一个旧模型更稳」。预算模型是否还在用 2025 年底的截图价？有 → 立刻作废，改为控制台实时价。最后，把「旧模型兼容」当成有明确退役日期的过渡措施，写进日历，而不是无限期技术债。国内聚合站能续命，但不能替你做版本治理。</p>
+<h2>九、FAQ</h2>
+<p><strong>Q1：官方现在还能直接买 V3.2 API 吗？</strong><br />
+官方主路径已是 V4 系列；旧别名按 2026-07-24 时间表停用。是否还有任何官方入口暴露 V3.2，以 api-docs.deepseek.com 实时文档为准。本文不把它描述为现行主推产品。</p>
+<p><strong>Q2：为什么 tryallapi.com 还有 deepseek-v3.2？</strong><br />
+聚合平台常保留历史型号供兼容。上架 ≠ 官方仍在售；可用性以控制台为准。</p>
+<p><strong>Q3：历史 $0.28 / $0.42 还能用吗？</strong><br />
+那是历史参考量级，<strong>不能</strong>当作 2026-10 的官方价或中转价。</p>
+<p><strong>Q4：怎么接入 tryallapi？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，<code>model=deepseek-v3.2</code>，Key 用 <code>TRYALLAPI_KEY</code>。</p>
+<p><strong>Q5：分组怎么选？</strong><br />
+Alibaba-1/2/3 倍率 1 / 1.5 / 2.2；先低倍率小额试稳定与扣费。</p>
+<p><strong>Q6：新项目还要选 V3.2 吗？</strong><br />
+一般不建议；优先官方现行模型。</p>
+<p><strong>Q7：能否和 GPT/Claude 共用 Key？</strong><br />
+可以，权限内多模型；建议分项目令牌。</p>
+<p><strong>Q8：支付方式？</strong><br />
+微信、支付宝、信用卡等以 tryallapi 充值页为准。</p>
+<hr />
+<hr />
+<h2>写在接入之后</h2>
+<p>完成第一次成功响应只是起点。建议你继续做两件事：把 <code>TRYALLAPI_KEY</code> 放进密钥管理（不要写进仓库）；为关键路径准备第二个模型作降级。中转站解决的是网络与支付，解决不了提示词质量、评测缺失与密钥泄露。定期打开 tryallapi.com 控制台核对分组倍率是否变动，并回到厂商官方价格页复核——本文数字快照于 2026-10-01，之后一切以页面为准。若你的流量上升到需要合同、发票抬头与专线，再评估直连官方云或企业方案，而不是无限叠加低倍率分组。</p>
+<hr />
+<h2>兼容层上的「模型名诚信」</h2>
+<p>使用已退役或即将退役的模型 ID 时，最怕静默改道：你请求 <code>deepseek-v3.2</code>，上游却返回别的权重，评测指标会悄悄漂移。防御方式很土但有效：坚持检查响应里的 <code>model</code> 字段；对关键回归集计算哈希或固定得分；一旦发现漂移，立刻冻结发版并切换到你可解释的官方现行模型。tryallapi.com 若在公告中说明某旧模型下线，应给业务留迁移窗口。对外出售「V3.2 能力」的产品尤其要在用户协议里写清：依赖第三方上游，版本可能变更。把这些说在前面，比事后解释「模型变了但名字差不多」更负责任。</p>
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/kimi-k3-api/">Kimi K3 API 国内中转调用指南与价格</a>：官方全球价 $3/$15、缓存 $0.30；推理常开，100 万上下文。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">tryallapi.com 模型价格总览</a></li>
+<li>参考：<a href="https://api-docs.deepseek.com/updates" target="_blank" rel="noopener noreferrer">DeepSeek API Updates</a> · <a href="https://platform.deepseek.com/" target="_blank" rel="noopener noreferrer">DeepSeek Platform</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-01｜最后更新：2026-10-01｜更新日志：2026-10-01 首版（价格与倍率取自官方文档与 tryallapi.com 公开接口，取数时间 2026-10-01，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>DeepSeek V3.2 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">查看 DeepSeek V3.2 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v3.2-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>
