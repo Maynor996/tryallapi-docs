@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MiniMax M3 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="MiniMax-M3 API 国内调用与价格：512K 分档 ¥2.1/¥8.4、1M 上下文、think 标签处理，tryallapi.com 倍率与代码。">
+<link rel="canonical" href="https://docs.tryallapi.com/minimax-m3-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="MiniMax M3 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="MiniMax-M3 API 国内调用与价格：512K 分档 ¥2.1/¥8.4、1M 上下文、think 标签处理，tryallapi.com 倍率与代码。">
+<meta property="og:url" content="https://docs.tryallapi.com/minimax-m3-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/minimax-m3-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MiniMax M3 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="MiniMax-M3 API 国内调用与价格：512K 分档 ¥2.1/¥8.4、1M 上下文、think 标签处理，tryallapi.com 倍率与代码。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/minimax-m3-api.png">
+<meta property="article:published_time" content="2026-10-05">
+<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:section" content="MiniMax">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "MiniMax M3 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "MiniMax-M3 API 国内调用与价格：512K 分档 ¥2.1/¥8.4、1M 上下文、think 标签处理，tryallapi.com 倍率与代码。",
+   "image": [
+    "https://docs.tryallapi.com/og/minimax-m3-api.png"
+   ],
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/minimax-m3-api/",
+   "url": "https://docs.tryallapi.com/minimax-m3-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "MiniMax M3 API（MiniMax-M3）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "MiniMax M3 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/minimax-m3-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "MiniMax M3 的模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "MiniMax-M3（注意大小写），官方与 tryallapi.com 同名。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "国内每百万 tokens，单次输入 ≤512K：输入 ¥2.10、输出 ¥8.40、缓存读取 ¥0.42；>512K：¥4.20 / ¥16.80 / ¥0.84。国际价 $0.30 / $1.20 / $0.06（≤512K）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文多长？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "最高 1M tokens，依托 MSA 稀疏注意力。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "thinking 和 non-thinking 价格一样吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "一样。官方说明两种模式共享同一套定价，可在请求时切换。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么关闭思考？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "OpenAI 格式传 {\"thinking\": {\"type\": \"disabled\"}}，M3 会跳过思考直接回答。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "priority 通道多少钱？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "service_tier=\"priority\" 按标准价 1.5 倍计费，例如 ≤512K 档输入 ¥3.15、输出 ¥12.60。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，Key 用 TRYALLAPI_KEY，模型 MiniMax-M3，OpenAI 兼容格式。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "基价 $0.30 / $1.20 × 分组倍率（1、1.5、2.2），输入超过 512K 后再 ×2，以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">MiniMax M3 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">MiniMax · <code>MiniMax-M3</code></p>
+<h1>MiniMax M3 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-05">2026-10-05</time> · 更新 <time datetime="2026-10-05">2026-10-05</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。MiniMax-M3 的架构、价格与参数来自 MiniMax 官方发布博客与开放平台文档；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-05（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>MiniMax 在 2026-06-01 发布 <strong>MiniMax M3</strong>：新注意力架构 MSA（MiniMax Sparse Attention）、1M 上下文、原生多模态（图片 + 视频输入），重点面向 Coding 与 Agent。它的 API 有两个和别家不一样的地方：<strong>按单次请求的输入长度分 512K 两档计价</strong>，以及 <strong>OpenAI 格式下思考内容默认以 <code>&lt;think&gt;</code> 标签混在 <code>content</code> 里</strong>。本文逐一说明。</p>
+<hr />
+<h2>MiniMax-M3 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>MiniMax-M3</code></td>
+<td><a href="https://platform.minimaxi.com/docs/api-reference/text-openai-api.md" target="_blank" rel="noopener noreferrer">OpenAI 兼容接口文档</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-06-01</td>
+<td><a href="https://www.minimaxi.com/blog/minimax-m3" target="_blank" rel="noopener noreferrer">官方发布博客</a></td>
+</tr>
+<tr>
+<td>架构</td>
+<td>MSA 稀疏注意力；1M 上下文下每 token 计算量为上代的 1/20，prefill 加速超 9 倍、decode 加速超 15 倍</td>
+<td>官方发布博客</td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>1,000,000 tokens；输出速度约 100+ TPS</td>
+<td><a href="https://platform.minimaxi.com/docs/guides/text-generation.md" target="_blank" rel="noopener noreferrer">文本生成指南</a></td>
+</tr>
+<tr>
+<td>输入模态</td>
+<td>文本、图片、视频（OpenAI 兼容接口）</td>
+<td>OpenAI 兼容接口文档</td>
+</tr>
+<tr>
+<td>国内价（≤512K 输入，每百万 tokens）</td>
+<td>输入 ¥2.10；输出 ¥8.40；缓存读取 ¥0.42（永久五折后）</td>
+<td><a href="https://platform.minimaxi.com/docs/guides/pricing-paygo.md" target="_blank" rel="noopener noreferrer">官方按量计费</a></td>
+</tr>
+<tr>
+<td>国内价（&gt;512K 输入）</td>
+<td>输入 ¥4.20；输出 ¥16.80；缓存读取 ¥0.84</td>
+<td>官方按量计费</td>
+</tr>
+<tr>
+<td>国际价（≤512K / &gt;512K）</td>
+<td>$0.30 / $1.20 / $0.06；$0.60 / $2.40 / $0.12</td>
+<td><a href="https://platform.minimax.io/docs/guides/pricing-paygo.md" target="_blank" rel="noopener noreferrer">国际站按量计费</a></td>
+</tr>
+<tr>
+<td>官方 Base URL（国内）</td>
+<td>OpenAI：<code>https://api.minimax.cn/v1</code>；Anthropic：<code>https://api.minimax.cn/anthropic</code></td>
+<td>文本生成指南</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>MiniMax-M3</code>；端点 <code>openai</code>；含 512K 阶梯倍率</td>
+<td><code>/api/pricing</code> 2026-10-05</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>单次请求输入 ≤512K tokens 时，M3 官方价 ¥2.1 / ¥8.4；超过 512K 整单翻倍。把输入控制在 512K 以内是最直接的省钱方法。</li>
+<li>OpenAI 格式默认把思考写进 <code>content</code> 的 <code>&lt;think&gt;</code> 标签里，多轮对话必须<strong>完整保留</strong>整条 assistant 消息；想拆开显示用 <code>reasoning_split=true</code>。</li>
+<li>tryallapi.com 标定基价等于官方国际价（$0.30 / $1.20），超过 512K 同样 ×2；实际 ≈ 基价 × 分组倍率（1～2.2），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、MSA 与 512K 分档：长上下文到底贵在哪</h2>
+<p>MiniMax 把 M3 的 1M 上下文归功于 MSA：相比全注意力的平方级复杂度，MSA 先对 KV 分块初筛，再在算子层做「KV outer gather Q」，官方称比开源的同类稀疏注意力算子快 4 倍以上，并且在多数对照实验中能力与全注意力打平。</p>
+<p>但计价上，MiniMax 仍然按<strong>单次请求的输入 tokens</strong> 分两档：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>档位</th>
+<th>输入</th>
+<th>输出</th>
+<th>缓存读取</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≤512K 输入（标准）</td>
+<td>¥2.10</td>
+<td>¥8.40</td>
+<td>¥0.42</td>
+</tr>
+<tr>
+<td>&gt;512K 输入（标准）</td>
+<td>¥4.20</td>
+<td>¥16.80</td>
+<td>¥0.84</td>
+</tr>
+<tr>
+<td>≤512K 输入（priority）</td>
+<td>¥3.15</td>
+<td>¥12.60</td>
+<td>¥0.63</td>
+</tr>
+<tr>
+<td>&gt;512K 输入（priority）</td>
+<td>¥6.30</td>
+<td>¥25.20</td>
+<td>¥1.26</td>
+</tr>
+</tbody>
+</table></div>
+<p>（单位：元 / 百万 tokens，均为官方「永久五折」后价格。）</p>
+<p>实务建议：</p>
+<ul>
+<li><strong>Agent 长会话</strong>：上下文涨过 512K 后整单（包括输出）都按高档计费，建议在 450K 左右触发摘要压缩；</li>
+<li><strong>缓存优先</strong>：缓存读取只有输入价的 1/5，固定 system prompt 与工具定义、只追加消息；</li>
+<li><strong>priority 通道</strong>按标准价 1.5 倍计费，只给 SLA 敏感的请求开（<code>service_tier=&quot;priority&quot;</code>）。</li>
+</ul>
+<hr />
+<h2>二、thinking 与 <code>&lt;think&gt;</code> 标签：M3 的三种输出形态</h2>
+<p>M3 支持 thinking 与 non-thinking 两种模式，官方说明两种模式<strong>共享同一套定价</strong>。OpenAI 兼容接口下的行为：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>请求参数</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>省略 <code>thinking</code> 或 <code>{&quot;type&quot;: &quot;adaptive&quot;}</code></td>
+<td>开启 thinking</td>
+</tr>
+<tr>
+<td><code>{&quot;type&quot;: &quot;disabled&quot;}</code></td>
+<td>跳过 thinking，直接回答（适合对话、补全等延迟敏感场景）</td>
+</tr>
+<tr>
+<td><code>reasoning_split=false</code>（默认表现）</td>
+<td>思考内容以 <code>&lt;think&gt;…&lt;/think&gt;</code> 保留在 <code>content</code> 中</td>
+</tr>
+<tr>
+<td><code>reasoning_split=true</code></td>
+<td>思考内容拆到 <code>reasoning_content</code> 字段</td>
+</tr>
+</tbody>
+</table></div>
+<p>两条硬规则：</p>
+<ol>
+<li><strong>多轮对话必须完整保留 assistant 消息</strong>（包括 <code>&lt;think&gt;</code> 部分），官方文档明确要求，不要为了「干净」把思考内容剥掉再回传；</li>
+<li><strong><code>max_tokens</code> 包含思考 tokens</strong>：设得太小会出现 <code>finish_reason=length</code> 且 <code>content</code> 为空，新接入建议用 <code>max_completion_tokens</code> 并留足余量。</li>
+</ol>
+<p>另外，<code>reasoning_effort</code> 只对 MiniMax 更新的 <code>MiniMax-M3.1-Flash-Preview</code> 生效，对 M3 无效；该预览模型目前仅通过 MiniMax 的订阅套餐提供，按量 API 仍以 M3 为主。</p>
+<hr />
+<h2>三、MiniMax M3 API 价格：官方 vs tryallapi.com</h2>
+<p><code>MiniMax-M3</code>：<code>model_ratio=0.15</code>、<code>completion_ratio=4</code>、<code>cache_ratio=0.2</code>，换算基价为输入 $0.30、输出 $1.20、缓存读 $0.06；并配置了阶梯倍率：输入超过 512K 后输入、输出、缓存均 ×2（与官方 &gt;512K 档一致）。2026-10-05 可见分组（≤512K 档）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-Deployed-2</td>
+<td>1</td>
+<td>$0.30</td>
+<td>$1.20</td>
+<td>$0.06</td>
+</tr>
+<tr>
+<td>Self-Deployed-3</td>
+<td>1.5</td>
+<td>$0.45</td>
+<td>$1.80</td>
+<td>$0.09</td>
+</tr>
+<tr>
+<td>Hailuo-3</td>
+<td>2.2</td>
+<td>$0.66</td>
+<td>$2.64</td>
+<td>$0.132</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。<strong>以控制台为准。</strong></p>
+<p>怎么选：只用 MiniMax、需要 priority 通道或订阅套餐 → 官方开放平台；需要在同一项目里同时调用 Claude、GPT、DeepSeek 等，统一 Key 与账单 → tryallapi.com。</p>
+<hr />
+<h2>四、MiniMax M3 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（经 tryallapi，拆分思考内容）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;MiniMax-M3&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;这段 Triton kernel 为什么跑不满带宽？&quot;}],
+    max_completion_tokens=8192,              # 思考 tokens 也计入，留足余量
+    extra_body={&quot;reasoning_split&quot;: True},    # 思考内容放到 reasoning_content
+)
+msg = r.choices[0].message
+print(getattr(msg, &quot;reasoning_content&quot;, None))
+print(msg.content)
+</code></pre>
+<p><code>reasoning_split</code> 是 MiniMax 的扩展参数；经聚合透传时，先用一条短请求确认返回结构，再决定前端如何解析。</p>
+<h3>3. 关闭思考（低延迟场景）</h3>
+<pre><code class="language-python">r = client.chat.completions.create(
+    model=&quot;MiniMax-M3&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;补全这个函数的 docstring&quot;}],
+    extra_body={&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}},
+)
+</code></pre>
+<h3>4. 视频理解</h3>
+<pre><code class="language-python">r = client.chat.completions.create(
+    model=&quot;MiniMax-M3&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: [
+        {&quot;type&quot;: &quot;video_url&quot;, &quot;video_url&quot;: {&quot;url&quot;: &quot;https://example.com/demo.mp4&quot;}},
+        {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;总结这段操作录屏里用户卡住的步骤&quot;},
+    ]}],
+)
+</code></pre>
+<p>官方限制：视频支持 MP4 / AVI / MOV / MKV，<code>fps</code> 默认 1（可取 0.2～5），URL 或 base64 视频最大 50 MB，图片最大 10 MB，请求体最大 64 MB。</p>
+<h3>5. 对照：官方直连（国内）</h3>
+<pre><code class="language-python">client = OpenAI(api_key=os.environ[&quot;MINIMAX_API_KEY&quot;], base_url=&quot;https://api.minimax.cn/v1&quot;)
+</code></pre>
+<hr />
+<h2>五、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code> 为空，<code>finish_reason=length</code></td>
+<td><code>max_tokens</code> 被思考 tokens 用完</td>
+<td>调大 <code>max_completion_tokens</code></td>
+</tr>
+<tr>
+<td>前端显示一堆 <code>&lt;think&gt;</code></td>
+<td>OpenAI 格式默认把思考写进 content</td>
+<td>传 <code>reasoning_split=true</code> 或前端折叠显示</td>
+</tr>
+<tr>
+<td>多轮后回答质量下降</td>
+<td>回传时删掉了 <code>&lt;think&gt;</code> 部分</td>
+<td>完整保留 assistant 消息</td>
+</tr>
+<tr>
+<td>账单突然翻倍</td>
+<td>单次输入超过 512K</td>
+<td>摘要压缩，控制在 512K 以内</td>
+</tr>
+<tr>
+<td><code>reasoning_effort</code> 没效果</td>
+<td>该参数只对 M3.1-Flash-Preview 生效</td>
+<td>M3 用 <code>thinking</code> 开关</td>
+</tr>
+<tr>
+<td>请求体过大</td>
+<td>超过 64 MB</td>
+<td>视频先压缩或改用文件上传</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>六、MiniMax M3 FAQ</h2>
+<p><strong>Q1：MiniMax M3 的模型 ID 是什么？</strong><br />
+<code>MiniMax-M3</code>（注意大小写），官方与 tryallapi.com 同名。</p>
+<p><strong>Q2：官方价格多少？</strong><br />
+国内每百万 tokens，单次输入 ≤512K：输入 ¥2.10、输出 ¥8.40、缓存读取 ¥0.42；&gt;512K：¥4.20 / ¥16.80 / ¥0.84。国际价 $0.30 / $1.20 / $0.06（≤512K）。</p>
+<p><strong>Q3：上下文多长？</strong><br />
+最高 1M tokens，依托 MSA 稀疏注意力。</p>
+<p><strong>Q4：thinking 和 non-thinking 价格一样吗？</strong><br />
+一样。官方说明两种模式共享同一套定价，可在请求时切换。</p>
+<p><strong>Q5：怎么关闭思考？</strong><br />
+OpenAI 格式传 <code>{&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}}</code>，M3 会跳过思考直接回答。</p>
+<p><strong>Q6：priority 通道多少钱？</strong><br />
+<code>service_tier=&quot;priority&quot;</code> 按标准价 1.5 倍计费，例如 ≤512K 档输入 ¥3.15、输出 ¥12.60。</p>
+<p><strong>Q7：国内怎么经 tryallapi 调用？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，Key 用 <code>TRYALLAPI_KEY</code>，模型 <code>MiniMax-M3</code>，OpenAI 兼容格式。</p>
+<p><strong>Q8：tryallapi 怎么计费？</strong><br />
+基价 $0.30 / $1.20 × 分组倍率（1、1.5、2.2），输入超过 512K 后再 ×2，以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-5-5-api/">Claude Sonnet 5.5 API 国内中转调用指南与价格</a>：官方 $2/$10、缓存读 $0.20；1M 上下文、128K 输出，5 项会返回 400 的迁移变更。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://www.minimaxi.com/blog/minimax-m3" target="_blank" rel="noopener noreferrer">MiniMax M3 发布博客</a> · <a href="https://platform.minimaxi.com/docs/guides/pricing-paygo.md" target="_blank" rel="noopener noreferrer">按量计费价格</a> · <a href="https://platform.minimaxi.com/docs/api-reference/text-openai-api.md" target="_blank" rel="noopener noreferrer">OpenAI 兼容接口</a> · <a href="https://platform.minimaxi.com/docs/guides/text-generation.md" target="_blank" rel="noopener noreferrer">文本生成指南</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-05｜最后更新：2026-10-05｜更新日志：2026-10-05 首版（价格与倍率取自 MiniMax 官方文档与 tryallapi.com 公开接口，取数时间 2026-10-05，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>MiniMax M3 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">查看 MiniMax M3 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=minimax-m3-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

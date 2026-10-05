@@ -24,14 +24,15 @@ SITE_NAME = "tryallapi.com"
 BRAND_URL = "https://tryallapi.com/"
 INDEXNOW_KEY = "38abb406c94e51cafcb5b529f816bfff"
 HOME_TITLE = "AI 大模型 API 国内中转调用指南与价格汇总 | tryallapi.com"
-HOME_DESC = "GPT、Claude、Gemini、DeepSeek、Grok、Qwen、Kimi 等大模型 API 国内中转调用指南：官方价格、分组倍率、接入教程与代码示例。"
+HOME_DESC = "GPT、Claude、Gemini、DeepSeek、Kimi、MiMo、混元等大模型 API 国内中转调用指南：官方价格、分组倍率、接入教程与代码。"
 TITLE_TPL = "{name} API 国内中转调用指南：价格、教程与代码（2026）"
 TITLE_MAX = 32      # 加权长度：汉字/全角 = 1，ASCII = 0.5
 DESC_MAX = 80       # 描述按字符数计（不加权），≤80
 RELATED_N = 6
-VENDOR_ORDER = ["OpenAI", "Anthropic", "Google", "DeepSeek", "xAI", "Qwen", "Moonshot"]
+VENDOR_ORDER = ["OpenAI", "Anthropic", "Google", "DeepSeek", "xAI", "Qwen", "Moonshot", "Xiaomi", "Tencent", "MiniMax"]
 VENDOR_LABEL = {"OpenAI": "OpenAI", "Anthropic": "Anthropic（Claude）", "Google": "Google（Gemini）",
-                "DeepSeek": "DeepSeek", "xAI": "xAI（Grok）", "Qwen": "阿里通义（Qwen）", "Moonshot": "Moonshot（Kimi）"}
+                "DeepSeek": "DeepSeek", "xAI": "xAI（Grok）", "Qwen": "阿里通义（Qwen）", "Moonshot": "Moonshot（Kimi）",
+                "Xiaomi": "小米（MiMo）", "Tencent": "腾讯混元（Hy）", "MiniMax": "MiniMax"}
 FORBIDDEN = ["待填", "待核对", "TODO", "TBD", "fonts.googleapis", "fonts.gstatic"]
 
 ROOT = Path(__file__).resolve().parent
@@ -340,7 +341,7 @@ def home_page(arts):
 <header class="hero">
 <p class="eyebrow">共 {len(arts)} 篇 · 更新于 <time datetime="{last}">{last}</time></p>
 <h1>AI 大模型 API 国内中转调用指南与价格汇总</h1>
-<p class="lead">国内开发者调用 GPT、Claude、Gemini、DeepSeek、Grok、Qwen、Kimi 等大模型 API 时，常见的问题是网络不通、境外支付和账号限制。本站按模型整理调用指南：每篇都写清官方价格与上下文参数、官方 / 云厂商 / 聚合平台三类方案的对比、在 <a href="{e(utm(BRAND_URL, 'home', 'hub'))}" target="_blank" rel="noopener">tryallapi.com</a> 用 OpenAI 兼容接口接入的步骤，以及 Python、Node.js、cURL 代码和常见报错排查。</p>
+<p class="lead">国内开发者调用 GPT、Claude、Gemini、DeepSeek、Grok、Qwen、Kimi、MiMo、混元、MiniMax 等大模型 API 时，常见的问题是网络不通、境外支付和账号限制。本站按模型整理调用指南：每篇都写清官方价格与上下文参数、官方 / 云厂商 / 聚合平台三类方案的对比、在 <a href="{e(utm(BRAND_URL, 'home', 'hub'))}" target="_blank" rel="noopener">tryallapi.com</a> 用 OpenAI 兼容接口接入的步骤，以及 Python、Node.js、cURL 代码和常见报错排查。</p>
 <p class="lead">价格与分组倍率都注明了取数日期，计费规则统一为「官方价 × 分组倍率」，最终以官方页面和控制台为准。</p>
 <p class="vendor-nav">{nav}</p>
 </header>
@@ -407,7 +408,7 @@ def build_images(arts, force):
     og_dir.mkdir(parents=True, exist_ok=True)
     state_p = DATA / "og-state.json"
     state = json.loads(state_p.read_text()) if state_p.exists() else {}
-    jobs = [("index", "AI 大模型 API 国内调用指南", "价格汇总 · 接入教程 · 代码示例", f"{len(arts)} 个模型 · GPT / Claude / Gemini / DeepSeek / Grok / Qwen / Kimi")]
+    jobs = [("index", "AI 大模型 API 国内调用指南", "价格汇总 · 接入教程 · 代码示例", f"{len(arts)} 个模型 · GPT / Claude / Gemini / DeepSeek / Grok / Qwen / Kimi / MiniMax")]
     for a in arts:
         jobs.append((a["slug"], f"{a['name']} API", "国内中转调用指南：价格、教程与代码", f"{a['vendor']} · {a['model_id']}"))
     chrome = None

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>混元 Hy4 Preview API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="腾讯混元 Hy4 preview API 国内调用与价格：官方 ¥6/¥18、1M 上下文、思考回填规则，tryallapi.com 接入代码。">
+<link rel="canonical" href="https://docs.tryallapi.com/hy4-preview-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="混元 Hy4 Preview API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="腾讯混元 Hy4 preview API 国内调用与价格：官方 ¥6/¥18、1M 上下文、思考回填规则，tryallapi.com 接入代码。">
+<meta property="og:url" content="https://docs.tryallapi.com/hy4-preview-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/hy4-preview-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="混元 Hy4 Preview API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="腾讯混元 Hy4 preview API 国内调用与价格：官方 ¥6/¥18、1M 上下文、思考回填规则，tryallapi.com 接入代码。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/hy4-preview-api.png">
+<meta property="article:published_time" content="2026-10-05">
+<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:section" content="Tencent">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "混元 Hy4 Preview API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "腾讯混元 Hy4 preview API 国内调用与价格：官方 ¥6/¥18、1M 上下文、思考回填规则，tryallapi.com 接入代码。",
+   "image": [
+    "https://docs.tryallapi.com/og/hy4-preview-api.png"
+   ],
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/hy4-preview-api/",
+   "url": "https://docs.tryallapi.com/hy4-preview-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "混元 Hy4 Preview API（hy4-preview）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "混元 Hy4 Preview API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/hy4-preview-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Hy4 preview 的模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "hy4-preview，TokenHub 与 tryallapi.com 上同名。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "每百万 tokens 输入 ¥6、输出 ¥18，缓存命中最低 ¥0.3（腾讯官方发布稿）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文有多长？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "上下文窗口 1M，最大输入 960K，最大输出 64K。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hy4 preview 是开源的吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "是。腾讯在 2026-08-28 发布时同步开源，总参数 770B、激活参数 49B。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持哪些协议？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "OpenAI Chat Completions、OpenAI Responses 和 Anthropic Messages；tryallapi.com 上提供 openai 与 anthropic 两种端点。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么开启或调节深度思考？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "传 {\"thinking\": {\"type\": \"enabled\"}} 开启，reasoning_effort 默认 high；Python OpenAI SDK 通过 extra_body 传入。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，Key 用 TRYALLAPI_KEY，模型 hy4-preview。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "基价 $0.834 / $2.501 × 分组倍率；2026-10-05 仅 hunyuan-1 分组（1.9），约合 $1.585 / $4.752 美元额度，以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">混元 Hy4 Preview API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">腾讯混元（Hy） · <code>hy4-preview</code></p>
+<h1>混元 Hy4 Preview API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-05">2026-10-05</time> · 更新 <time datetime="2026-10-05">2026-10-05</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。Hy4 preview 的参数、价格与调用方式来自腾讯官方发布稿与腾讯云 TokenHub「混元调用指南」；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-05（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>2026-08-28，腾讯混元发布并开源新一代大语言模型 <strong>Hy4 preview</strong>：总参数 770B、激活参数 49B，上下文突破 1M，定位「为生产力而生」，重点优化软件工程、办公分析、游戏开发和科研场景。官方定价每百万 tokens 输入 ¥6、输出 ¥18，缓存命中最低 ¥0.3。本文讲清楚它和 Hy3 的区别、思考模式参数，以及如何经 tryallapi.com 调用。</p>
+<hr />
+<h2>Hy4 preview 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>hy4-preview</code></td>
+<td><a href="https://www.tencentcloud.com/zh/document/product/1300/80695" target="_blank" rel="noopener noreferrer">TokenHub 混元调用指南</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-08-28，同步开源</td>
+<td><a href="https://www.tencent.com/zh-cn/tencent-releases-and-open-sources-tencent-hy4-preview/" target="_blank" rel="noopener noreferrer">腾讯官方发布稿</a></td>
+</tr>
+<tr>
+<td>参数规模</td>
+<td>总参数 770B，激活参数 49B</td>
+<td>官方发布稿</td>
+</tr>
+<tr>
+<td>上下文 / 最大输入 / 最大输出</td>
+<td>1M / 960K / 64K</td>
+<td>TokenHub 调用指南</td>
+</tr>
+<tr>
+<td>协议</td>
+<td>OpenAI Chat Completions、OpenAI Responses、Anthropic Messages</td>
+<td>TokenHub 调用指南</td>
+</tr>
+<tr>
+<td>官方价（每百万 tokens）</td>
+<td>输入 ¥6；输出 ¥18；缓存命中最低 ¥0.3</td>
+<td>官方发布稿</td>
+</tr>
+<tr>
+<td>思考强度</td>
+<td><code>reasoning_effort</code> 默认 <code>high</code></td>
+<td>TokenHub 调用指南</td>
+</tr>
+<tr>
+<td>官方文档示例 Base URL</td>
+<td><code>https://tokenhub-intl.tencentcloudmaas.com/v1</code></td>
+<td>TokenHub 调用指南</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>hy4-preview</code>；端点 <code>openai</code>、<code>anthropic</code>；分组 hunyuan-1</td>
+<td><code>/api/pricing</code> 2026-10-05</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>Hy4 preview 的上下文是 Hy3 的 4 倍（1M vs 256K），但最大输出 64K，比 Hy3 的 128K 还少一半；需要超长输出的任务要拆段。</li>
+<li>思考模式下做工具调用，官方要求每一轮都回填历史 <code>reasoning_content</code>，否则效果会打折扣。</li>
+<li>tryallapi.com 标定基价 $0.834 / $2.501，当前仅 hunyuan-1 分组（倍率 1.9），实际 ≈ $1.585 / $4.752（美元额度），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、Hy4 preview 和 Hy3 怎么选</h2>
+<p>TokenHub 同时提供两代混元主力模型，规格差异很明显：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>hy4-preview</code></th>
+<th><code>hy3</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定位</td>
+<td>新一代生产力模型，Agent 与复杂任务执行全面升级</td>
+<td>兼顾效果与性价比，强化 Coding、长文、推理和 Agent</td>
+</tr>
+<tr>
+<td>上下文窗口</td>
+<td>1M</td>
+<td>256K</td>
+</tr>
+<tr>
+<td>最大输入</td>
+<td>960K</td>
+<td>192K</td>
+</tr>
+<tr>
+<td>最大输出</td>
+<td>64K</td>
+<td>128K</td>
+</tr>
+<tr>
+<td>默认 <code>reasoning_effort</code></td>
+<td><code>high</code></td>
+<td><code>high</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>选型建议：</p>
+<ul>
+<li><strong>整仓代码、长合同、多份财报一起读</strong> → Hy4 preview，960K 输入能一次塞进去；</li>
+<li><strong>一次要生成很长的文档或代码文件</strong>（超过 64K tokens）→ Hy3 的 128K 输出更合适，或者让 Hy4 分章节输出；</li>
+<li>Hy4 目前是 preview 版本，官方说明正式版会跟进，「Hy4 的下一批模型也将在近期陆续上线」，生产环境建议在配置里保留模型名开关，方便切换。</li>
+</ul>
+<hr />
+<h2>二、官方披露的实测：盲测与自我优化</h2>
+<p>腾讯给出的几组数字，比通用榜单更贴近真实工作流：</p>
+<ul>
+<li><strong>内部工程盲测</strong>：163 名内部专家、203 个工程任务，Hy4 preview 均分 2.99/4，略高于 GLM 5.3（2.92）和 Kimi K3（2.94）；</li>
+<li><strong>参与自身研发</strong>：Hy4 preview 首次参与训练方法、数据策略、评估体系和底层算子的自动优化，形成初步的「递归自我改进」闭环；</li>
+<li><strong>推理基础设施优化</strong>：模型自主分析推理系统瓶颈，围绕算子融合、通信优化多轮迭代，端到端吞吐相较基线提升 31.8%。</li>
+</ul>
+<p>这些都是腾讯官方口径，适合作为选型参考；落到自己的业务，仍建议用 20～50 条真实任务做小规模对比。</p>
+<hr />
+<h2>三、混元 Hy4 preview API 价格：官方 vs tryallapi.com</h2>
+<h3>官方价</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项（每百万 tokens）</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>¥6</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>¥18</td>
+</tr>
+<tr>
+<td>缓存命中</td>
+<td>最低 ¥0.3</td>
+</tr>
+</tbody>
+</table></div>
+<h3>tryallapi.com（≈ 基价 × 分组倍率）</h3>
+<p><code>hy4-preview</code>：<code>model_ratio=0.417</code>、<code>completion_ratio≈3</code>、<code>cache_ratio=0.05</code>，换算基价为输入 $0.834、输出 $2.501、缓存读约 $0.042。2026-10-05 只有一个可用分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hunyuan-1</td>
+<td>1.9</td>
+<td>≈ $1.585</td>
+<td>≈ $4.752</td>
+<td>≈ $0.079</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。<strong>以控制台为准。</strong></p>
+<p>怎么选：只用混元、已有腾讯云账号和发票流程 → TokenHub 官方直连；同一个项目还要调 Claude、GPT、DeepSeek 等，希望统一一个 Key 和账单 → tryallapi.com。</p>
+<hr />
+<h2>四、混元 Hy4 preview 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python：开启深度思考</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;hy4-preview&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;分析这份季度报表里毛利率下滑的三个主要原因&quot;}],
+    extra_body={&quot;thinking&quot;: {&quot;type&quot;: &quot;enabled&quot;}, &quot;reasoning_effort&quot;: &quot;high&quot;},
+)
+msg = r.choices[0].message
+# OpenAI SDK 没有声明 reasoning_content 字段，按官方示例用 getattr 读取
+print(&quot;思考过程:&quot;, getattr(msg, &quot;reasoning_content&quot;, None))
+print(&quot;最终回答:&quot;, msg.content)
+</code></pre>
+<h3>3. 流式输出并拿到 usage</h3>
+<pre><code class="language-python">stream = client.chat.completions.create(
+    model=&quot;hy4-preview&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;写一个贪吃蛇网页小游戏&quot;}],
+    stream=True,
+    stream_options={&quot;include_usage&quot;: True},  # 最后一个 chunk 返回完整 usage
+)
+for chunk in stream:
+    if chunk.choices and chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end=&quot;&quot;, flush=True)
+    if chunk.usage:
+        print(&quot;\nusage:&quot;, chunk.usage)
+</code></pre>
+<h3>4. 结构化输出（JSON Schema）</h3>
+<pre><code class="language-python">schema = {&quot;type&quot;: &quot;object&quot;,
+          &quot;properties&quot;: {&quot;name&quot;: {&quot;type&quot;: &quot;string&quot;}, &quot;age&quot;: {&quot;type&quot;: &quot;integer&quot;}},
+          &quot;required&quot;: [&quot;name&quot;, &quot;age&quot;]}
+r = client.chat.completions.create(
+    model=&quot;hy4-preview&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;提取人物信息：张三，35 岁，高级软件工程师&quot;}],
+    response_format={&quot;type&quot;: &quot;json_schema&quot;, &quot;json_schema&quot;: {&quot;name&quot;: &quot;person_info&quot;, &quot;schema&quot;: schema}},
+)
+print(r.choices[0].message.content)
+</code></pre>
+<h3>5. cURL（聚合）</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;hy4-preview&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<p>经聚合透传时，先用一条短请求确认返回里是否带 <code>reasoning_content</code> 与 <code>reasoning_tokens</code>，再接入正式业务。</p>
+<hr />
+<h2>五、交错式思考：工具调用的回填规则</h2>
+<p>TokenHub 文档把「深度思考 + 工具调用」称为交错式思考（Interleaved Thinking），流程是：</p>
+<ol>
+<li>第 1 轮：模型返回 <code>reasoning_content</code> + <code>tool_calls</code>（<code>finish_reason=tool_calls</code>）；</li>
+<li>业务执行工具，把结果以 <code>role: &quot;tool&quot;</code>、带上 <code>tool_call_id</code> 追加到 messages；</li>
+<li><strong>同时把第 1 轮 assistant 消息原样回写，<code>reasoning_content</code> 必须保留</strong>；</li>
+<li>第 2 轮继续请求，模型可能再次调用工具，也可能给出最终答案；直到结束，每一轮都按此回填。</li>
+</ol>
+<pre><code class="language-python">assistant_msg = {
+    &quot;role&quot;: &quot;assistant&quot;,
+    &quot;content&quot;: msg1.content,
+    &quot;reasoning_content&quot;: getattr(msg1, &quot;reasoning_content&quot;, &quot;&quot;),
+    &quot;tool_calls&quot;: [{&quot;id&quot;: tc.id, &quot;type&quot;: tc.type,
+                    &quot;function&quot;: {&quot;name&quot;: tc.function.name, &quot;arguments&quot;: tc.function.arguments}}
+                   for tc in (msg1.tool_calls or [])],
+}
+messages.append(assistant_msg)
+</code></pre>
+<p>另外两条官方规则：多轮对话的消息顺序须为 <code>system（可选）→ user → assistant → user …</code>，并且<strong>必须以 user 结尾</strong>；普通多轮对话里回写 assistant 消息时，也建议同时带上 <code>content</code> 与 <code>reasoning_content</code>，避免推理上下文丢失。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工具调用多轮后效果变差</td>
+<td>没回填 <code>reasoning_content</code></td>
+<td>整条 assistant 消息原样回写</td>
+</tr>
+<tr>
+<td>输出到一半被截断</td>
+<td>超过 64K 最大输出</td>
+<td>分章节输出，或改用 Hy3</td>
+</tr>
+<tr>
+<td>读不到 <code>reasoning_content</code></td>
+<td>OpenAI SDK 未声明该字段</td>
+<td>用 <code>getattr(msg, &quot;reasoning_content&quot;, None)</code></td>
+</tr>
+<tr>
+<td>401</td>
+<td>TokenHub Key 与 tryallapi Key 混用</td>
+<td>按 Base URL 对应 Key</td>
+</tr>
+<tr>
+<td>账单偏高</td>
+<td>默认 <code>high</code> 思考，reasoning tokens 计入输出</td>
+<td>简单任务降低思考强度</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>六、混元 Hy4 preview FAQ</h2>
+<p><strong>Q1：Hy4 preview 的模型 ID 是什么？</strong><br />
+<code>hy4-preview</code>，TokenHub 与 tryallapi.com 上同名。</p>
+<p><strong>Q2：官方价格多少？</strong><br />
+每百万 tokens 输入 ¥6、输出 ¥18，缓存命中最低 ¥0.3（腾讯官方发布稿）。</p>
+<p><strong>Q3：上下文有多长？</strong><br />
+上下文窗口 1M，最大输入 960K，最大输出 64K。</p>
+<p><strong>Q4：Hy4 preview 是开源的吗？</strong><br />
+是。腾讯在 2026-08-28 发布时同步开源，总参数 770B、激活参数 49B。</p>
+<p><strong>Q5：支持哪些协议？</strong><br />
+OpenAI Chat Completions、OpenAI Responses 和 Anthropic Messages；tryallapi.com 上提供 <code>openai</code> 与 <code>anthropic</code> 两种端点。</p>
+<p><strong>Q6：怎么开启或调节深度思考？</strong><br />
+传 <code>{&quot;thinking&quot;: {&quot;type&quot;: &quot;enabled&quot;}}</code> 开启，<code>reasoning_effort</code> 默认 <code>high</code>；Python OpenAI SDK 通过 <code>extra_body</code> 传入。</p>
+<p><strong>Q7：国内怎么经 tryallapi 调用？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，Key 用 <code>TRYALLAPI_KEY</code>，模型 <code>hy4-preview</code>。</p>
+<p><strong>Q8：tryallapi 怎么计费？</strong><br />
+基价 $0.834 / $2.501 × 分组倍率；2026-10-05 仅 hunyuan-1 分组（1.9），约合 $1.585 / $4.752 美元额度，以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-5-5-api/">Claude Sonnet 5.5 API 国内中转调用指南与价格</a>：官方 $2/$10、缓存读 $0.20；1M 上下文、128K 输出，5 项会返回 400 的迁移变更。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://www.tencent.com/zh-cn/tencent-releases-and-open-sources-tencent-hy4-preview/" target="_blank" rel="noopener noreferrer">腾讯发布并开源 Hy4 preview</a> · <a href="https://www.tencentcloud.com/zh/document/product/1300/80695" target="_blank" rel="noopener noreferrer">TokenHub 混元调用指南</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-05｜最后更新：2026-10-05｜更新日志：2026-10-05 首版（价格与倍率取自腾讯官方发布稿、腾讯云 TokenHub 文档与 tryallapi.com 公开接口，取数时间 2026-10-05，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>混元 Hy4 Preview API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">查看 混元 Hy4 Preview API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=hy4-preview-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

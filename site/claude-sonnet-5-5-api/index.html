@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Sonnet 5.5 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Claude Sonnet 5.5 API 国内中转调用与价格：官方 $2/$10、1M 上下文、5 项迁移变更，tryallapi.com 分组倍率与代码。">
+<link rel="canonical" href="https://docs.tryallapi.com/claude-sonnet-5-5-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Claude Sonnet 5.5 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Claude Sonnet 5.5 API 国内中转调用与价格：官方 $2/$10、1M 上下文、5 项迁移变更，tryallapi.com 分组倍率与代码。">
+<meta property="og:url" content="https://docs.tryallapi.com/claude-sonnet-5-5-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/claude-sonnet-5-5-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude Sonnet 5.5 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Claude Sonnet 5.5 API 国内中转调用与价格：官方 $2/$10、1M 上下文、5 项迁移变更，tryallapi.com 分组倍率与代码。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/claude-sonnet-5-5-api.png">
+<meta property="article:published_time" content="2026-10-05">
+<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:section" content="Anthropic">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Claude Sonnet 5.5 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Claude Sonnet 5.5 API 国内中转调用与价格：官方 $2/$10、1M 上下文、5 项迁移变更，tryallapi.com 分组倍率与代码。",
+   "image": [
+    "https://docs.tryallapi.com/og/claude-sonnet-5-5-api.png"
+   ],
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/claude-sonnet-5-5-api/",
+   "url": "https://docs.tryallapi.com/claude-sonnet-5-5-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Claude Sonnet 5.5 API（claude-sonnet-5-5）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Claude Sonnet 5.5 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/claude-sonnet-5-5-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Claude Sonnet 5.5 的模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Claude API 与 tryallapi.com 都是 claude-sonnet-5-5；Amazon Bedrock 为 anthropic.claude-sonnet-5-5。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Sonnet 5.5 官方价格是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "每百万 tokens 输入 $2、输出 $10、缓存读 $0.20、5 分钟缓存写 $2.50、1 小时缓存写 $4；Batch 五折。与 Sonnet 5 同价。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "1M tokens 上下文，同步接口最大输出 128K；Batch API 加 beta 头可到 300K。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么关闭思考？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不能再用 disabled。发送 thinking: {\"type\": \"between_tools\"} 关闭前置思考，effort 需为 low / medium / high。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "为什么设置 temperature 会报 400？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Sonnet 5.5 不接受非默认的 temperature、top_p、top_k，删除这些参数即可。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么调用 Claude Sonnet 5.5？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "在 tryallapi.com 生成 Key：Anthropic 协议 base_url=https://tryallapi.com，OpenAI 兼容 base_url=https://tryallapi.com/v1，模型 claude-sonnet-5-5。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi.com 上怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "标定基价与官方一致，实际 ≈ 基价 × 分组倍率；2026-10-05 可见 Kiro-Claude-1（0.17648）到 AWS-Claude-3（2.2）等分组，以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "从 Sonnet 4.6 升级值得吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "单价低三分之一、上下文同为 1M；但要按本文第一节处理 5 项破坏性变更，并重新调 effort。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Claude Sonnet 5.5 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">Anthropic（Claude） · <code>claude-sonnet-5-5</code></p>
+<h1>Claude Sonnet 5.5 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-05">2026-10-05</time> · 更新 <time datetime="2026-10-05">2026-10-05</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。Claude Sonnet 5.5 的参数、价格与行为变更来自 Anthropic 官方文档；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-05（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>Claude Sonnet 5.5 于 2026-09-28 发布，是 Anthropic 当前「速度 + 智能」组合最好的 Sonnet 档。它和 Sonnet 5 同价、同 tokenizer，但有 <strong>5 项会让旧代码直接 400 的破坏性变更</strong>。本文先讲这些坑，再给国内经 tryallapi.com 调用的价格与代码。</p>
+<hr />
+<h2>Claude Sonnet 5.5 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>claude-sonnet-5-5</code>（Bedrock：<code>anthropic.claude-sonnet-5-5</code>）</td>
+<td><a href="https://platform.claude.com/docs/en/models/sonnet-5-5/overview" target="_blank" rel="noopener noreferrer">官方模型页</a></td>
+</tr>
+<tr>
+<td>发布 / 退役</td>
+<td>2026-09-28 发布；退役不早于 2027-09-28</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1M tokens / 128K（Batch API 加 <code>output-300k-2026-03-24</code> beta 头可到 300K）</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>思考</td>
+<td>Adaptive thinking 默认开启，默认 effort=<code>high</code></td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>输入 → 输出</td>
+<td>文本 + 图片 → 文本</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026 年 6 月</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>官方价（每百万 tokens）</td>
+<td>输入 $2；输出 $10；缓存读 $0.20；5 分钟缓存写 $2.50；1 小时缓存写 $4；Batch 五折</td>
+<td><a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">官方定价</a></td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点 <code>anthropic</code>（/v1/messages）与 <code>openai</code>（/v1/chat/completions）</td>
+<td><code>/api/pricing</code> 2026-10-05</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td>OpenAI 兼容：<code>https://tryallapi.com/v1</code>；Anthropic / Claude Code：<code>https://tryallapi.com</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>官方价 $2 / $10，比 Sonnet 4.6 的 $3 / $15 低三分之一，和 Sonnet 5 持平；1M 上下文按标准价计费，不另收长上下文溢价。</li>
+<li>从 Sonnet 5 迁移不能只改模型名：<code>thinking: disabled</code>、强制工具调用、非默认 <code>temperature</code> 都会返回 400。</li>
+<li>tryallapi.com 上 Sonnet 5.5 的标定基价与官方一致，实际扣费 ≈ 基价 × 分组倍率（2026-10-05 可见 0.17648～2.2），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、Claude Sonnet 5.5 的 5 项破坏性变更（迁移必读）</h2>
+<p>官方「What's new」列出的变更，几乎都和 Agent / 工具调用代码有关：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>变更</th>
+<th>旧写法会怎样</th>
+<th>新写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关闭前置思考</td>
+<td><code>thinking: {&quot;type&quot;: &quot;disabled&quot;}</code> → 400 <code>invalid_request_error</code></td>
+<td><code>thinking: {&quot;type&quot;: &quot;between_tools&quot;}</code>，仅在 effort 为 <code>low</code> / <code>medium</code> / <code>high</code> 时可用</td>
+</tr>
+<tr>
+<td>强制工具调用</td>
+<td><code>tool_choice</code> 为 <code>any</code> 或 <code>{&quot;type&quot;:&quot;tool&quot;}</code> → 400</td>
+<td>保留 <code>auto</code>，配合 strict tool use 或结构化输出；在提示词里写清何时调用工具</td>
+</tr>
+<tr>
+<td>思考块绑定模型与对话</td>
+<td>回放思考块前改动了 system / tools / 早先消息 → 400（2026-08-31 之后创建的账号默认强校验）</td>
+<td>对话保持「只追加」，用会话中途的 system message 改指令</td>
+</tr>
+<tr>
+<td>计算机操作工具</td>
+<td>Claude API / Google Cloud 上声明 <code>computer_20251124</code> → 400</td>
+<td>改用 <code>computer_toolset_20260801</code>（Bedrock 仍接受旧工具）</td>
+</tr>
+<tr>
+<td>Advisor 工具</td>
+<td>以 Opus 4.8 / Opus 4.7 / Sonnet 5 作为 advisor → 400</td>
+<td>换成 Sonnet 5.5 接受的 advisor（如 Opus 5、Opus 5.5）</td>
+</tr>
+</tbody>
+</table></div>
+<p>另外两条「不报错但行为变了」的细节：</p>
+<ul>
+<li><strong>工具调用之间的较长说明改为 <code>thinking</code> 块返回</strong>。默认 <code>display: &quot;omitted&quot;</code> 时这些块文本为空，前端会在工具调用间「静默」；用 <code>between_tools</code>，或在 adaptive 模式下设置 <code>display</code>，文本才会回来。</li>
+<li><strong><code>temperature</code>、<code>top_p</code>、<code>top_k</code> 设为非默认值直接 400</strong>。很多 SDK 封装默认带 <code>temperature=0.7</code>，迁移前务必删掉。</li>
+</ul>
+<p>还有两点利好：最小可缓存 prompt 从 Sonnet 5 的 1,024 tokens 降到 <strong>512 tokens</strong>；effort 档位重新校准过，官方建议 Agent 编码从 <code>medium</code> 起步，难任务再升 <code>high</code>，不要直接沿用 Sonnet 5 的设置。</p>
+<hr />
+<h2>二、Sonnet 5.5、Sonnet 4.6 与 Opus 5.5 怎么选</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Sonnet 5.5</th>
+<th>Sonnet 4.6</th>
+<th>Opus 5.5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方价（输入 / 输出）</td>
+<td>$2 / $10</td>
+<td>$3 / $15</td>
+<td>$4 / $20</td>
+</tr>
+<tr>
+<td>上下文 / 输出</td>
+<td>1M / 128K</td>
+<td>1M / 128K</td>
+<td>1M / 128K</td>
+</tr>
+<tr>
+<td>思考</td>
+<td>Adaptive，默认 <code>high</code>，可 <code>between_tools</code></td>
+<td>Adaptive</td>
+<td>Adaptive（始终开启），默认 <code>medium</code></td>
+</tr>
+<tr>
+<td>延迟（官方相对值）</td>
+<td>Fast</td>
+<td>—</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td>缓存读</td>
+<td>基础输入价的 10%</td>
+<td>基础输入价的 10%</td>
+<td>基础输入价的 5%</td>
+</tr>
+</tbody>
+</table></div>
+<p>对国内团队的实际建议：</p>
+<ul>
+<li><strong>新项目默认 Sonnet 5.5</strong>：单价比 4.6 低，能力更新；要求「能关掉前置思考」的低延迟链路，用 <code>between_tools</code>。</li>
+<li><strong>仍在 4.6 上的生产流量</strong>：先在灰度环境跑一轮回归，重点检查 <code>temperature</code>、<code>tool_choice</code>、思考块回放三处，再切换。</li>
+<li><strong>最难的长程任务</strong>：Opus 5.5 单价翻倍，但思考始终开启；可以让 Sonnet 5.5 做主执行，难点交给 Opus 5.5。官方说明在 Claude API / Google Cloud 上 Opus 5.5 能读取 Sonnet 5.5 的思考块，而 Sonnet 5.5 读不了 Opus 5.5 的，所以中途换模型只适合「向上切换」。</li>
+</ul>
+<hr />
+<h2>三、Claude Sonnet 5.5 API 价格：官方 vs tryallapi.com</h2>
+<h3>官方价（2026-10-05 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项</th>
+<th>每百万 tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$2.00</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$10.00</td>
+</tr>
+<tr>
+<td>缓存读</td>
+<td>$0.20</td>
+</tr>
+<tr>
+<td>5 分钟缓存写</td>
+<td>$2.50</td>
+</tr>
+<tr>
+<td>1 小时缓存写</td>
+<td>$4.00</td>
+</tr>
+<tr>
+<td>Batch API</td>
+<td>输入、输出均五折（$1 / $5）</td>
+</tr>
+<tr>
+<td>仅美国推理（inference_geo）</td>
+<td>输入、输出 1.1 倍</td>
+</tr>
+</tbody>
+</table></div>
+<h3>tryallapi.com 分组估算（≈ 基价 × 分组倍率）</h3>
+<p><code>claude-sonnet-5-5</code>：<code>model_ratio=1</code>、<code>completion_ratio=5</code>、<code>cache_ratio=0.1</code>、5 分钟缓存写 1.25、1 小时缓存写 2，换算后标定基价与官方一致（$2 / $10 / 缓存读 $0.20）。2026-10-05 可见分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kiro-Claude-1</td>
+<td>0.17648</td>
+<td>≈ $0.35</td>
+<td>≈ $1.76</td>
+<td>≈ $0.035</td>
+</tr>
+<tr>
+<td>Claude-Code-1</td>
+<td>0.35294</td>
+<td>≈ $0.71</td>
+<td>≈ $3.53</td>
+<td>≈ $0.071</td>
+</tr>
+<tr>
+<td>Claude-Code-2</td>
+<td>0.58824</td>
+<td>≈ $1.18</td>
+<td>≈ $5.88</td>
+<td>≈ $0.118</td>
+</tr>
+<tr>
+<td>AWS-Bedrock-2</td>
+<td>1.17648</td>
+<td>≈ $2.35</td>
+<td>≈ $11.76</td>
+<td>≈ $0.235</td>
+</tr>
+<tr>
+<td>AWS-Claude-2</td>
+<td>1.76472</td>
+<td>≈ $3.53</td>
+<td>≈ $17.65</td>
+<td>≈ $0.353</td>
+</tr>
+<tr>
+<td>AWS-Claude-3</td>
+<td>2.2</td>
+<td>$4.40</td>
+<td>$22.00</td>
+<td>$0.44</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。低倍率分组适合个人开发与 Claude Code，高倍率的 AWS 分组通常对应不同上游线路，按稳定性需求选择。<strong>以控制台为准。</strong></p>
+<hr />
+<h2>四、Claude Sonnet 5.5 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Anthropic SDK（推荐，原生支持 thinking / effort）</h3>
+<pre><code class="language-python"># pip install -U anthropic
+import os
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com&quot;,   # Anthropic 协议不带 /v1
+)
+msg = client.messages.create(
+    model=&quot;claude-sonnet-5-5&quot;,
+    max_tokens=4096,
+    thinking={&quot;type&quot;: &quot;between_tools&quot;},   # 关闭前置思考；不要再写 &quot;disabled&quot;
+    output_config={&quot;effort&quot;: &quot;medium&quot;},    # between_tools 只接受 low / medium / high
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;把这段 Python 改写成异步版本，并说明改动点&quot;}],
+)
+for block in msg.content:
+    if block.type == &quot;text&quot;:
+        print(block.text)
+</code></pre>
+<p>注意：不要传 <code>temperature</code> / <code>top_p</code> / <code>top_k</code>；需要 <code>xhigh</code> / <code>max</code> 时省略 <code>thinking</code> 字段（即 adaptive）。</p>
+<h3>3. OpenAI 兼容（Cursor、Dify、Cherry Studio 等）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;claude-sonnet-5-5&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;列出这份需求文档中的验收标准&quot;}],
+)
+print(r.choices[0].message.content)
+</code></pre>
+<h3>4. cURL（Anthropic Messages）</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/messages \
+  -H &quot;x-api-key: $TRYALLAPI_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;claude-sonnet-5-5&quot;,&quot;max_tokens&quot;:1024,&quot;thinking&quot;:{&quot;type&quot;:&quot;between_tools&quot;},&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<h3>5. Claude Code</h3>
+<pre><code class="language-bash">export ANTHROPIC_BASE_URL=&quot;https://tryallapi.com&quot;
+export ANTHROPIC_AUTH_TOKEN=&quot;$TRYALLAPI_KEY&quot;
+export ANTHROPIC_MODEL=&quot;claude-sonnet-5-5&quot;
+claude
+</code></pre>
+<hr />
+<h2>五、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400：提示使用 <code>between_tools</code></td>
+<td>仍在传 <code>thinking: {&quot;type&quot;: &quot;disabled&quot;}</code></td>
+<td>改成 <code>between_tools</code></td>
+</tr>
+<tr>
+<td>400：<code>tool_choice: type &quot;tool&quot; and &quot;any&quot; are not supported</code></td>
+<td>强制工具调用</td>
+<td>改 <code>auto</code> + strict tool use</td>
+</tr>
+<tr>
+<td>400：temperature 相关</td>
+<td>SDK / 框架默认带了非默认采样参数</td>
+<td>删掉 <code>temperature</code> / <code>top_p</code> / <code>top_k</code></td>
+</tr>
+<tr>
+<td>400：<code>between_tools</code> + <code>xhigh</code> / <code>max</code></td>
+<td>该组合不被接受</td>
+<td>降到 <code>high</code>，或改用 adaptive</td>
+</tr>
+<tr>
+<td>400：回放思考块失败</td>
+<td>改动了思考块之前的 system / tools / 历史消息</td>
+<td>对话只追加；或去掉被编辑轮之后的思考块</td>
+</tr>
+<tr>
+<td>401</td>
+<td>tryallapi Key 与 Anthropic 官方 Key 混用</td>
+<td>检查 <code>ANTHROPIC_AUTH_TOKEN</code> / <code>x-api-key</code></td>
+</tr>
+<tr>
+<td>404</td>
+<td>Base URL 写错（Anthropic 协议多加了 <code>/v1</code>）</td>
+<td>Claude Code 用 <code>https://tryallapi.com</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>六、Claude Sonnet 5.5 FAQ</h2>
+<p><strong>Q1：Claude Sonnet 5.5 的模型 ID 是什么？</strong><br />
+Claude API 与 tryallapi.com 都是 <code>claude-sonnet-5-5</code>；Amazon Bedrock 为 <code>anthropic.claude-sonnet-5-5</code>。</p>
+<p><strong>Q2：Claude Sonnet 5.5 官方价格是多少？</strong><br />
+每百万 tokens 输入 $2、输出 $10、缓存读 $0.20、5 分钟缓存写 $2.50、1 小时缓存写 $4；Batch 五折。与 Sonnet 5 同价。</p>
+<p><strong>Q3：上下文和最大输出是多少？</strong><br />
+1M tokens 上下文，同步接口最大输出 128K；Batch API 加 beta 头可到 300K。</p>
+<p><strong>Q4：怎么关闭思考？</strong><br />
+不能再用 <code>disabled</code>。发送 <code>thinking: {&quot;type&quot;: &quot;between_tools&quot;}</code> 关闭前置思考，effort 需为 low / medium / high。</p>
+<p><strong>Q5：为什么设置 temperature 会报 400？</strong><br />
+Sonnet 5.5 不接受非默认的 <code>temperature</code>、<code>top_p</code>、<code>top_k</code>，删除这些参数即可。</p>
+<p><strong>Q6：国内怎么调用 Claude Sonnet 5.5？</strong><br />
+在 tryallapi.com 生成 Key：Anthropic 协议 <code>base_url=https://tryallapi.com</code>，OpenAI 兼容 <code>base_url=https://tryallapi.com/v1</code>，模型 <code>claude-sonnet-5-5</code>。</p>
+<p><strong>Q7：tryallapi.com 上怎么计费？</strong><br />
+标定基价与官方一致，实际 ≈ 基价 × 分组倍率；2026-10-05 可见 Kiro-Claude-1（0.17648）到 AWS-Claude-3（2.2）等分组，以控制台为准。</p>
+<p><strong>Q8：从 Sonnet 4.6 升级值得吗？</strong><br />
+单价低三分之一、上下文同为 1M；但要按本文第一节处理 5 项破坏性变更，并重新调 effort。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/claude-opus-5-5-api/">Claude Opus 5.5 API 国内中转调用指南与价格</a>：官方 $4/$20、缓存读 $0.20；Claude Code settings.json 与双协议接入。</li>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://platform.claude.com/docs/en/models/sonnet-5-5/overview" target="_blank" rel="noopener noreferrer">Sonnet 5.5 模型页</a> · <a href="https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5" target="_blank" rel="noopener noreferrer">What's new in Sonnet 5.5</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Claude 定价</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-05｜最后更新：2026-10-05｜更新日志：2026-10-05 首版（价格与倍率取自 Anthropic 官方文档与 tryallapi.com 公开接口，取数时间 2026-10-05，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Claude Sonnet 5.5 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">查看 Claude Sonnet 5.5 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-sonnet-5-5-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

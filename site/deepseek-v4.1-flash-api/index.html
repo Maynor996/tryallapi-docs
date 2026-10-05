@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek V4.1 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="DeepSeek V4.1 Flash API 国内调用与价格：高峰 ¥2/¥8、空闲半价，新模型名 deepseek-flash，tryallapi 代码。">
+<link rel="canonical" href="https://docs.tryallapi.com/deepseek-v4.1-flash-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="DeepSeek V4.1 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="DeepSeek V4.1 Flash API 国内调用与价格：高峰 ¥2/¥8、空闲半价，新模型名 deepseek-flash，tryallapi 代码。">
+<meta property="og:url" content="https://docs.tryallapi.com/deepseek-v4.1-flash-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/deepseek-v4.1-flash-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DeepSeek V4.1 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="DeepSeek V4.1 Flash API 国内调用与价格：高峰 ¥2/¥8、空闲半价，新模型名 deepseek-flash，tryallapi 代码。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/deepseek-v4.1-flash-api.png">
+<meta property="article:published_time" content="2026-10-05">
+<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:section" content="DeepSeek">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "DeepSeek V4.1 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "DeepSeek V4.1 Flash API 国内调用与价格：高峰 ¥2/¥8、空闲半价，新模型名 deepseek-flash，tryallapi 代码。",
+   "image": [
+    "https://docs.tryallapi.com/og/deepseek-v4.1-flash-api.png"
+   ],
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/deepseek-v4.1-flash-api/",
+   "url": "https://docs.tryallapi.com/deepseek-v4.1-flash-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "DeepSeek V4.1 API（deepseek-v4.1-flash）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "DeepSeek V4.1 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/deepseek-v4.1-flash-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "DeepSeek V4.1 Flash 的模型名是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方 API 是 deepseek-flash；tryallapi.com 上是 deepseek-v4.1-flash。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "高峰时段每百万 tokens：缓存命中 ¥0.04、未命中 ¥2、输出 ¥8；空闲时段减半（¥0.02 / ¥1 / ¥4）。美元价为 $0.006 / $0.30 / $1.20（高峰）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "高峰时段是什么时候？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "北京时间周一至周五 9:00–12:00、14:00–18:00，不含法定节假日；其余时间都是空闲时段。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "上下文 1M tokens，最大输出 384K。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "deepseek-v4-pro 还能用吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方说明 2026-09-14 12:00 之后、V4.1 Pro 上线之前，deepseek-v4-pro 的请求全部路由到 V4.1 Flash，并按 Flash 单价计费。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么关闭思考模式？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "OpenAI 格式传 {\"thinking\": {\"type\": \"disabled\"}}（OpenAI SDK 放在 extra_body）；Responses API 用 reasoning.effort=none。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，Key 用 TRYALLAPI_KEY，模型 deepseek-v4.1-flash；也支持 Anthropic 协议端点。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "基价 $0.30 / $1.20（与官方美元高峰价一致）× 分组倍率；2026-10-05 可见 Self-Deployed-2（1）与 Self-Deployed-3（1.5），以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">DeepSeek V4.1 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">DeepSeek · <code>deepseek-v4.1-flash</code></p>
+<h1>DeepSeek V4.1 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-05">2026-10-05</time> · 更新 <time datetime="2026-10-05">2026-10-05</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。DeepSeek V4.1 Flash 的架构、价格与参数来自 DeepSeek 官方新闻与 API 文档；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-05（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>DeepSeek 在 2026-09-10 发布 <strong>DeepSeek V4.1 Flash</strong>，这是 V4.1 系列目前唯一上线的型号。和以往不同，官方 API 的模型名去掉了版本号，改叫 <code>deepseek-flash</code>；tryallapi.com 上的模型 ID 则是 <code>deepseek-v4.1-flash</code>。本文把这两个名字、峰谷计价和思考模式一次讲清楚。</p>
+<hr />
+<h2>DeepSeek V4.1 Flash 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>官方模型名</td>
+<td><code>deepseek-flash</code>（模型版本 DeepSeek-V4.1-Flash）</td>
+<td><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener noreferrer">官方定价页</a></td>
+</tr>
+<tr>
+<td>tryallapi.com 模型 ID</td>
+<td><code>deepseek-v4.1-flash</code>；端点 <code>openai</code>、<code>anthropic</code></td>
+<td><code>/api/pricing</code> 2026-10-05</td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-09-10；新价格同日 12:00 生效</td>
+<td><a href="https://www.deepseek.com/news/deepseek-v4-1-flash/" target="_blank" rel="noopener noreferrer">官方发布文</a></td>
+</tr>
+<tr>
+<td>结构</td>
+<td>552B 参数 MoE，Causal-Encoder-Decoder，输入激活 8B、输出激活 16B</td>
+<td>官方发布文</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1M / 384K</td>
+<td>官方定价页</td>
+</tr>
+<tr>
+<td>能力</td>
+<td>思考模式（默认开）与非思考模式、工具调用、JSON Output、图像理解、Anthropic 与 Responses 兼容</td>
+<td>官方定价页</td>
+</tr>
+<tr>
+<td>官方价（高峰，每百万 tokens）</td>
+<td>缓存命中 ¥0.04；未命中 ¥2；输出 ¥8（美元 $0.006 / $0.30 / $1.20）</td>
+<td>官方定价页</td>
+</tr>
+<tr>
+<td>官方价（空闲）</td>
+<td>高峰价的一半：¥0.02 / ¥1 / ¥4</td>
+<td>官方定价页</td>
+</tr>
+<tr>
+<td>官方 Base URL</td>
+<td>OpenAI：<code>https://api.deepseek.com</code>；Anthropic：<code>https://api.deepseek.com/anthropic</code></td>
+<td>官方定价页</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>V4.1 Flash 官方高峰价 ¥2 / ¥8（输入未命中 / 输出），空闲时段直接半价；缓存命中只要 ¥0.04，Agent 类长会话最省钱。</li>
+<li>官方旧名 <code>deepseek-v4-flash</code> 已被路由到 V4.1 Flash；2026-09-14 12:00 之后 <code>deepseek-v4-pro</code> 也按 V4.1 Flash 服务和计费（直到 V4.1 Pro 上线）。</li>
+<li>tryallapi.com 标定基价等于官方美元高峰价（$0.30 / $1.20），实际 ≈ 基价 × 分组倍率（1 或 1.5），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、两个模型名与「静默路由」：先把配置理清</h2>
+<p>DeepSeek 这次改名带来的混乱，比模型本身更容易踩坑：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>你在代码里写的</th>
+<th>实际由谁服务</th>
+<th>计费</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deepseek-flash</code>（官方直连）</td>
+<td>DeepSeek-V4.1-Flash</td>
+<td>Flash 价</td>
+</tr>
+<tr>
+<td><code>deepseek-v4-flash</code> / <code>deepseek-v4-flash-vision-exp</code>（官方直连）</td>
+<td>已下线，临时路由到 V4.1 Flash</td>
+<td>Flash 价</td>
+</tr>
+<tr>
+<td><code>deepseek-v4-pro</code>（官方直连，2026-09-14 12:00 后）</td>
+<td>路由到 V4.1 Flash，直到 V4.1 Pro 上线</td>
+<td>Flash 价</td>
+</tr>
+<tr>
+<td><code>deepseek-v4.1-flash</code>（tryallapi.com）</td>
+<td>tryallapi 上架的 V4.1 Flash</td>
+<td>基价 × 分组倍率</td>
+</tr>
+</tbody>
+</table></div>
+<p>建议：官方直连统一改成 <code>deepseek-flash</code>，不要依赖「临时路由」；经 tryallapi 调用则写 <code>deepseek-v4.1-flash</code>。评测报告里同时记下模型名和响应里的版本信息，否则过几个月很难复现「当时到底跑的是哪个模型」。</p>
+<p><strong>为什么 Flash 能替代 V4 Pro？</strong> 官方说明：V4.1 Flash 采用输入、输出不对称的新结构，输入激活只有 8B、输出激活 16B，并且 KV Cache 对 HBM 的需求降到上一代的 1/4、对 SSD 的需求降到 1/8。经官方测试，它在性能、费用、速度、总用时上全面超过 V4 Pro，所以官方计划有序下线 V4 Pro。</p>
+<hr />
+<h2>二、峰谷计价：同一个任务，挑时间就能省一半</h2>
+<p>官方高峰时段为 <strong>北京时间周一至周五 9:00–12:00、14:00–18:00</strong>（不含法定节假日），其余时间（含周末、节假日全天）为空闲时段，价格是高峰的一半：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项（每百万 tokens）</th>
+<th>高峰</th>
+<th>空闲</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入（缓存命中）</td>
+<td>¥0.04（$0.006）</td>
+<td>¥0.02（$0.003）</td>
+</tr>
+<tr>
+<td>输入（缓存未命中）</td>
+<td>¥2（$0.30）</td>
+<td>¥1（$0.15）</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>¥8（$1.20）</td>
+<td>¥4（$0.60）</td>
+</tr>
+</tbody>
+</table></div>
+<p>实务做法：</p>
+<ul>
+<li><strong>批量离线任务</strong>（数据清洗、批量摘要、评测集跑分）放到晚上或周末；</li>
+<li><strong>在线 Agent</strong> 无法挪时间，就靠缓存：缓存命中价只有未命中的 1/50，固定 system prompt 和工具定义、对话只追加，是最直接的降本手段；</li>
+<li>官方并发上限为 2500（Flash），高并发压测前先看限速文档。</li>
+</ul>
+<p>tryallapi.com 公开接口没有峰谷字段，按基价 × 分组倍率估算即可，见第三节。</p>
+<hr />
+<h2>三、DeepSeek V4.1 Flash API 价格：官方 vs tryallapi.com</h2>
+<p><code>deepseek-v4.1-flash</code>：<code>model_ratio=0.15</code>、<code>completion_ratio=4</code>、<code>cache_ratio=0.02</code>，换算基价为输入 $0.30、输出 $1.20、缓存读 $0.006（与官方美元高峰价一致）。2026-10-05 可见分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-Deployed-2</td>
+<td>1</td>
+<td>$0.30</td>
+<td>$1.20</td>
+<td>$0.006</td>
+</tr>
+<tr>
+<td>Self-Deployed-3</td>
+<td>1.5</td>
+<td>$0.45</td>
+<td>$1.80</td>
+<td>$0.009</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。<strong>以控制台为准。</strong></p>
+<p>怎么选：只用 DeepSeek、能在官方开票充值、任务可挪到空闲时段 → 官方直连最便宜；已有 GPT / Claude / Gemini 工具链、希望一个 Key 管理多家模型 → 走 tryallapi.com。</p>
+<hr />
+<h2>四、DeepSeek V4.1 Flash 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（OpenAI SDK，经 tryallapi）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;deepseek-v4.1-flash&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;给这段 SQL 找出可能的慢查询原因&quot;}],
+    reasoning_effort=&quot;high&quot;,                      # low / high / max
+    extra_body={&quot;thinking&quot;: {&quot;type&quot;: &quot;enabled&quot;}}, # 非思考模式改为 &quot;disabled&quot;
+)
+msg = r.choices[0].message
+print(getattr(msg, &quot;reasoning_content&quot;, None))  # 思维链（若上游返回）
+print(msg.content)
+</code></pre>
+<p>思考强度与开关参数来自 DeepSeek 官方「思考模式」文档；经聚合透传时，先用一条短请求确认返回里是否带 <code>reasoning_content</code>。</p>
+<h3>3. 对照：官方直连</h3>
+<pre><code class="language-python">client = OpenAI(api_key=os.environ[&quot;DEEPSEEK_API_KEY&quot;], base_url=&quot;https://api.deepseek.com&quot;)
+r = client.chat.completions.create(model=&quot;deepseek-flash&quot;, messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;ping&quot;}])
+</code></pre>
+<h3>4. cURL（聚合）</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;deepseek-v4.1-flash&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}],&quot;thinking&quot;:{&quot;type&quot;:&quot;disabled&quot;}}'
+</code></pre>
+<h3>5. 图片理解</h3>
+<p>V4.1 Flash 原生支持视觉，按 OpenAI 多模态格式在 <code>content</code> 里放 <code>image_url</code> 即可；旧的 <code>deepseek-v4-flash-vision-exp</code> 不必再单独接。</p>
+<hr />
+<h2>五、思考模式与工具调用的两个硬规则</h2>
+<ol>
+<li><strong>思考模式默认开启，effort 默认 <code>high</code></strong>。传入的 <code>medium</code> 会映射为 <code>high</code>、<code>xhigh</code> 映射为 <code>high</code>、<code>ultra</code> 映射为 <code>max</code>；想省钱就显式写 <code>low</code> 或关闭思考。</li>
+<li><strong>带 <code>tools</code> 的请求，后续每一轮都必须完整回传 <code>reasoning_content</code></strong>，否则返回 400。最简单的写法是把 <code>response.choices[0].message</code> 原样 append 回 messages。不带 tools 的普通多轮对话，<code>reasoning_content</code> 不需要回传，传了也会被忽略。</li>
+</ol>
+<p>另外，思考模式下 <code>temperature</code>、<code>presence_penalty</code>、<code>frequency_penalty</code> 不生效（不报错）；<code>top_p</code> 只在思考模式下生效，取值范围 0.95–1.0。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400（工具调用第二轮）</td>
+<td>没回传 <code>reasoning_content</code></td>
+<td>整条 assistant 消息原样追加</td>
+</tr>
+<tr>
+<td>账单比预期高</td>
+<td>默认思考 + 高峰时段</td>
+<td>降 effort、关思考或挪到空闲时段</td>
+</tr>
+<tr>
+<td>401</td>
+<td>tryallapi Key 与 DeepSeek Key 混用</td>
+<td>按 Base URL 对应 Key</td>
+</tr>
+<tr>
+<td>404 / 模型不存在</td>
+<td>在 tryallapi 写了 <code>deepseek-flash</code></td>
+<td>聚合用 <code>deepseek-v4.1-flash</code></td>
+</tr>
+<tr>
+<td>改 temperature 没效果</td>
+<td>思考模式忽略该参数</td>
+<td>正常现象</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>六、DeepSeek V4.1 Flash FAQ</h2>
+<p><strong>Q1：DeepSeek V4.1 Flash 的模型名是什么？</strong><br />
+官方 API 是 <code>deepseek-flash</code>；tryallapi.com 上是 <code>deepseek-v4.1-flash</code>。</p>
+<p><strong>Q2：官方价格多少？</strong><br />
+高峰时段每百万 tokens：缓存命中 ¥0.04、未命中 ¥2、输出 ¥8；空闲时段减半（¥0.02 / ¥1 / ¥4）。美元价为 $0.006 / $0.30 / $1.20（高峰）。</p>
+<p><strong>Q3：高峰时段是什么时候？</strong><br />
+北京时间周一至周五 9:00–12:00、14:00–18:00，不含法定节假日；其余时间都是空闲时段。</p>
+<p><strong>Q4：上下文和最大输出？</strong><br />
+上下文 1M tokens，最大输出 384K。</p>
+<p><strong>Q5：deepseek-v4-pro 还能用吗？</strong><br />
+官方说明 2026-09-14 12:00 之后、V4.1 Pro 上线之前，<code>deepseek-v4-pro</code> 的请求全部路由到 V4.1 Flash，并按 Flash 单价计费。</p>
+<p><strong>Q6：怎么关闭思考模式？</strong><br />
+OpenAI 格式传 <code>{&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}}</code>（OpenAI SDK 放在 <code>extra_body</code>）；Responses API 用 <code>reasoning.effort=none</code>。</p>
+<p><strong>Q7：国内怎么经 tryallapi 调用？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，Key 用 <code>TRYALLAPI_KEY</code>，模型 <code>deepseek-v4.1-flash</code>；也支持 Anthropic 协议端点。</p>
+<p><strong>Q8：tryallapi 怎么计费？</strong><br />
+基价 $0.30 / $1.20（与官方美元高峰价一致）× 分组倍率；2026-10-05 可见 Self-Deployed-2（1）与 Self-Deployed-3（1.5），以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/deepseek-v3.2-api/">DeepSeek V3.2 API 国内中转调用指南与价格</a>：官方已转向 V4 系列；需要锁定 deepseek-v3.2 的旧项目怎么继续调用。</li>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-5-5-api/">Claude Sonnet 5.5 API 国内中转调用指南与价格</a>：官方 $2/$10、缓存读 $0.20；1M 上下文、128K 输出，5 项会返回 400 的迁移变更。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://www.deepseek.com/news/deepseek-v4-1-flash/" target="_blank" rel="noopener noreferrer">V4.1 Flash 发布文</a> · <a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener noreferrer">模型与价格</a> · <a href="https://api-docs.deepseek.com/zh-cn/guides/thinking_mode" target="_blank" rel="noopener noreferrer">思考模式</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-05｜最后更新：2026-10-05｜更新日志：2026-10-05 首版（价格与倍率取自 DeepSeek 官方文档与 tryallapi.com 公开接口，取数时间 2026-10-05，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>DeepSeek V4.1 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">查看 DeepSeek V4.1 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=deepseek-v4.1-flash-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

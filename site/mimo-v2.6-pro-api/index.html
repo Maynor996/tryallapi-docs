@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MiMo V2.6 Pro API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="小米 MiMo-V2.6-Pro API 国内调用与价格：官方 ¥3/¥6、缓存命中 ¥0.025、1M 上下文，tryallapi.com 接入代码与排查。">
+<link rel="canonical" href="https://docs.tryallapi.com/mimo-v2.6-pro-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="MiMo V2.6 Pro API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="小米 MiMo-V2.6-Pro API 国内调用与价格：官方 ¥3/¥6、缓存命中 ¥0.025、1M 上下文，tryallapi.com 接入代码与排查。">
+<meta property="og:url" content="https://docs.tryallapi.com/mimo-v2.6-pro-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/mimo-v2.6-pro-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MiMo V2.6 Pro API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="小米 MiMo-V2.6-Pro API 国内调用与价格：官方 ¥3/¥6、缓存命中 ¥0.025、1M 上下文，tryallapi.com 接入代码与排查。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/mimo-v2.6-pro-api.png">
+<meta property="article:published_time" content="2026-10-05">
+<meta property="article:modified_time" content="2026-10-05">
+<meta property="article:section" content="Xiaomi">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "MiMo V2.6 Pro API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "小米 MiMo-V2.6-Pro API 国内调用与价格：官方 ¥3/¥6、缓存命中 ¥0.025、1M 上下文，tryallapi.com 接入代码与排查。",
+   "image": [
+    "https://docs.tryallapi.com/og/mimo-v2.6-pro-api.png"
+   ],
+   "datePublished": "2026-10-05",
+   "dateModified": "2026-10-05",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/mimo-v2.6-pro-api/",
+   "url": "https://docs.tryallapi.com/mimo-v2.6-pro-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "MiMo V2.6 Pro API（mimo-v2.6-pro）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "MiMo V2.6 Pro API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/mimo-v2.6-pro-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "MiMo-V2.6-Pro 的模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "mimo-v2.6-pro，官方要求全小写；tryallapi.com 上同名。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "国内每百万 tokens：缓存命中 ¥0.025、未命中 ¥3、输出 ¥6；海外 $0.0036 / $0.435 / $0.87。缓存写入限时免费。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Batch API 便宜多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Batch 价格是实时 API 的一半：¥0.0125 / ¥1.5 / ¥3。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "上下文 1M tokens，最大输出 128K。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "UltraSpeed 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "mimo-v2.6-pro-ultraspeed，官方称推理速度最高 20 倍，国内价 ¥0.25 / ¥30 / ¥60，不支持 Batch。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "MiMo-V2.5-Pro 还能用多久？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方公告 mimo-v2.5-pro 与 mimo-v2.5 于北京时间 2026-10-21 10:00 下线，建议尽快迁移到 V2.6。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，Key 用 TRYALLAPI_KEY，模型 mimo-v2.6-pro，OpenAI 兼容格式。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "基价 $0.435 / $0.87（与官方海外价一致）× 分组倍率；2026-10-05 可见 1、1.5、2.2 三档，以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">MiMo V2.6 Pro API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">小米（MiMo） · <code>mimo-v2.6-pro</code></p>
+<h1>MiMo V2.6 Pro API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-05">2026-10-05</time> · 更新 <time datetime="2026-10-05">2026-10-05</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。MiMo-V2.6-Pro 的参数与价格来自小米 MiMo 官方发布页、模型页与定价文档；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-05（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>小米在 2026-09-22 发布并开源 MiMo-V2.6 系列（Pro 与 Flash 两个原生全模态模型）。<strong>MiMo-V2.6-Pro</strong> 是旗舰：万亿参数级、1M 上下文、文本 / 图片 / 视频 / 音频输入，官方称在 Artificial Analysis 综合智能指数上拿到 46 分。它最大的卖点是价格：输入 ¥3、输出 ¥6，缓存命中只要 ¥0.025。</p>
+<hr />
+<h2>MiMo-V2.6-Pro 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>mimo-v2.6-pro</code>（官方要求全小写）</td>
+<td><a href="https://mimo.mi.com/docs/zh-CN/news/latest/v2-6" target="_blank" rel="noopener noreferrer">官方发布页</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-09-22，权重与技术报告开源</td>
+<td>官方发布页</td>
+</tr>
+<tr>
+<td>模态</td>
+<td>输入：文本、图片、视频、音频；输出：文本</td>
+<td><a href="https://mimo.mi.com/models/en-US/mimo-v2.6-pro" target="_blank" rel="noopener noreferrer">官方模型页</a></td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1M / 128K</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>默认限额</td>
+<td>RPM 100，TPM 10M</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>能力</td>
+<td>深度思考、工具调用、流式、联网搜索、结构化输出、上下文缓存</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>国内价（每百万 tokens）</td>
+<td>缓存命中 ¥0.025；未命中 ¥3；输出 ¥6</td>
+<td><a href="https://mimo.mi.com/static/docs/price/pay-as-you-go.md" target="_blank" rel="noopener noreferrer">官方定价</a></td>
+</tr>
+<tr>
+<td>海外价（每百万 tokens）</td>
+<td>$0.0036 / $0.435 / $0.87</td>
+<td>官方定价</td>
+</tr>
+<tr>
+<td>缓存写入</td>
+<td>限时免费</td>
+<td>官方定价</td>
+</tr>
+<tr>
+<td>官方 Base URL</td>
+<td><code>https://api.xiaomimimo.com/v1</code>（兼容 OpenAI 与 Anthropic 协议）</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>mimo-v2.6-pro</code>；端点 <code>openai</code></td>
+<td><code>/api/pricing</code> 2026-10-05</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>官方国内价 ¥3 / ¥6，Batch API 再打五折（¥1.5 / ¥3）；缓存命中 ¥0.025，是未命中价的 1/120。</li>
+<li>需要极低延迟时有 <code>mimo-v2.6-pro-ultraspeed</code>（官方称最高 20 倍推理速度），但单价是标准版的 10 倍，且不支持 Batch。</li>
+<li>tryallapi.com 标定基价等于官方美元价（$0.435 / $0.87），实际 ≈ 基价 × 分组倍率（1～2.2），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、MiMo-V2.6-Pro 的三种计费形态怎么选</h2>
+<p>小米把同一个模型拆成三种调用方式，价格差距是数量级的：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>调用方式</th>
+<th>模型名</th>
+<th>缓存命中</th>
+<th>未命中输入</th>
+<th>输出</th>
+<th>适合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实时 API</td>
+<td><code>mimo-v2.6-pro</code></td>
+<td>¥0.025</td>
+<td>¥3.00</td>
+<td>¥6.00</td>
+<td>在线对话、Agent</td>
+</tr>
+<tr>
+<td>Batch API</td>
+<td><code>mimo-v2.6-pro</code></td>
+<td>¥0.0125</td>
+<td>¥1.50</td>
+<td>¥3.00</td>
+<td>离线批处理、评测、数据生成</td>
+</tr>
+<tr>
+<td>UltraSpeed</td>
+<td><code>mimo-v2.6-pro-ultraspeed</code></td>
+<td>¥0.25</td>
+<td>¥30.00</td>
+<td>¥60.00</td>
+<td>强实时交互、对响应速度极敏感</td>
+</tr>
+</tbody>
+</table></div>
+<p>经验法则：</p>
+<ul>
+<li><strong>能异步就走 Batch</strong>：同一个模型，价格直接减半；</li>
+<li><strong>UltraSpeed 只给真正卡延迟的环节</strong>（比如语音助手的首轮回复），其余步骤仍用标准版；</li>
+<li><strong>把缓存当成第一优先级</strong>：命中价与未命中价相差 120 倍，长 system prompt、工具定义、固定知识库前缀都应保持稳定，让请求尽量命中缓存。</li>
+</ul>
+<p>另外注意：官方定价页写明，按量付费使用开放平台的普通 API Key、按实际 Token 扣账户余额，<strong>与 Token Plan 套餐额度不互通</strong>，别把两套配置混在一起。</p>
+<hr />
+<h2>二、迁移提醒：MiMo-V2.5 系列 10 月 21 日下线</h2>
+<p>官方定价页写明：<code>mimo-v2.5-pro</code> 与 <code>mimo-v2.5</code> 将于 <strong>北京时间 2026-10-21 10:00 正式下线</strong>，目前 <code>mimo-v2.5-pro</code> 与 <code>mimo-v2.6-pro</code> 同价（¥3 / ¥6）。也就是说，升级到 V2.6-Pro 不涨价，但不升级会在三周后直接失效。</p>
+<p>迁移清单：</p>
+<ol>
+<li>把配置里的 <code>mimo-v2.5-pro</code> 改为 <code>mimo-v2.6-pro</code>，<code>mimo-v2.5</code> 改为 <code>mimo-v2.6-flash</code>（官方定价页把二者列为同价对应关系）；</li>
+<li>模型名一律小写，官方特别注明调用时使用 <code>mimo-v2.6-pro</code>、<code>mimo-v2.6-flash</code>、<code>mimo-v2.6-pro-ultraspeed</code>；</li>
+<li>V2.6 新增原生音频、视频理解，如果原来在外面单独做 ASR 再喂文本，可以评估直接多模态输入；</li>
+<li>跑一轮回归：官方称 V2.6 在长程软件工程基准 DeepSWE v1.1 上，Pro 从 58.4 提升到 72.6，行为变化不小，提示词可能需要微调。</li>
+</ol>
+<hr />
+<h2>三、MiMo-V2.6-Pro API 价格：官方 vs tryallapi.com</h2>
+<h3>官方价（2026-10-05 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项（每百万 tokens）</th>
+<th>国内（¥）</th>
+<th>海外（$）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入（缓存命中）</td>
+<td>0.025</td>
+<td>0.0036</td>
+</tr>
+<tr>
+<td>输入（缓存未命中）</td>
+<td>3.00</td>
+<td>0.435</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>6.00</td>
+<td>0.87</td>
+</tr>
+<tr>
+<td>Batch：命中 / 未命中 / 输出</td>
+<td>0.0125 / 1.50 / 3.00</td>
+<td>0.0018 / 0.2175 / 0.435</td>
+</tr>
+</tbody>
+</table></div>
+<p>联网搜索插件单独按次计费（国内 ¥16 / 千次），不含在 token 价里。</p>
+<h3>tryallapi.com 分组估算（≈ 基价 × 分组倍率）</h3>
+<p><code>mimo-v2.6-pro</code>：<code>model_ratio=0.2175</code>、<code>completion_ratio=2</code>、<code>cache_ratio=0.0083</code>，换算基价为输入 $0.435、输出 $0.87、缓存读约 $0.0036。2026-10-05 可见分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-Deployed-2</td>
+<td>1</td>
+<td>$0.435</td>
+<td>$0.87</td>
+</tr>
+<tr>
+<td>Self-Deployed-3 / Xiaomi-1</td>
+<td>1.5</td>
+<td>≈ $0.65</td>
+<td>≈ $1.31</td>
+</tr>
+<tr>
+<td>Xiaomi-2</td>
+<td>2.2</td>
+<td>≈ $0.96</td>
+<td>≈ $1.91</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。<strong>以控制台为准。</strong></p>
+<hr />
+<h2>四、MiMo-V2.6-Pro 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（经 tryallapi，OpenAI 兼容）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;mimo-v2.6-pro&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;根据这份接口文档生成 pytest 用例&quot;}],
+    max_completion_tokens=4096,
+)
+print(r.choices[0].message.content)
+</code></pre>
+<h3>3. 关闭深度思考（官方示例写法）</h3>
+<p>小米官方模型页的示例用 <code>extra_body</code> 关闭思考，适合简单问答、分类等不需要长推理的请求：</p>
+<pre><code class="language-python">r = client.chat.completions.create(
+    model=&quot;mimo-v2.6-pro&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;把下面 20 条评论按情绪分类&quot;}],
+    extra_body={&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}},
+)
+</code></pre>
+<p>经聚合调用时，先用一条短请求确认该参数是否生效（看返回的 usage 是否还有大量推理 tokens）。</p>
+<h3>4. 对照：官方直连</h3>
+<pre><code class="language-python">client = OpenAI(api_key=os.environ[&quot;MIMO_API_KEY&quot;], base_url=&quot;https://api.xiaomimimo.com/v1&quot;)
+</code></pre>
+<h3>5. cURL（聚合）</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/chat/completions \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;mimo-v2.6-pro&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<hr />
+<h2>五、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型不存在</td>
+<td>写成 <code>MiMo-V2.6-Pro</code> 等大小写混合形式</td>
+<td>改为全小写 <code>mimo-v2.6-pro</code></td>
+</tr>
+<tr>
+<td>10 月 21 日后突然报错</td>
+<td>仍在调用 <code>mimo-v2.5-pro</code> / <code>mimo-v2.5</code></td>
+<td>迁移到 V2.6</td>
+</tr>
+<tr>
+<td>429</td>
+<td>超出 RPM 100 / TPM 10M 的默认限额</td>
+<td>退避重试、降并发，或改走 Batch</td>
+</tr>
+<tr>
+<td>401</td>
+<td>按量 Key、Token Plan Key、tryallapi Key 混用</td>
+<td>一个环境只配一套 Key 和 Base URL</td>
+</tr>
+<tr>
+<td>账单偏高</td>
+<td>简单任务也开着深度思考</td>
+<td>简单任务关闭思考，复杂任务再开</td>
+</tr>
+<tr>
+<td>首字慢</td>
+<td>长上下文 + 深度思考</td>
+<td>精简上下文、利用缓存，或评估 UltraSpeed</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>六、MiMo-V2.6-Pro FAQ</h2>
+<p><strong>Q1：MiMo-V2.6-Pro 的模型 ID 是什么？</strong><br />
+<code>mimo-v2.6-pro</code>，官方要求全小写；tryallapi.com 上同名。</p>
+<p><strong>Q2：官方价格多少？</strong><br />
+国内每百万 tokens：缓存命中 ¥0.025、未命中 ¥3、输出 ¥6；海外 $0.0036 / $0.435 / $0.87。缓存写入限时免费。</p>
+<p><strong>Q3：Batch API 便宜多少？</strong><br />
+Batch 价格是实时 API 的一半：¥0.0125 / ¥1.5 / ¥3。</p>
+<p><strong>Q4：上下文和最大输出？</strong><br />
+上下文 1M tokens，最大输出 128K。</p>
+<p><strong>Q5：UltraSpeed 是什么？</strong><br />
+<code>mimo-v2.6-pro-ultraspeed</code>，官方称推理速度最高 20 倍，国内价 ¥0.25 / ¥30 / ¥60，不支持 Batch。</p>
+<p><strong>Q6：MiMo-V2.5-Pro 还能用多久？</strong><br />
+官方公告 <code>mimo-v2.5-pro</code> 与 <code>mimo-v2.5</code> 于北京时间 2026-10-21 10:00 下线，建议尽快迁移到 V2.6。</p>
+<p><strong>Q7：国内怎么经 tryallapi 调用？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，Key 用 <code>TRYALLAPI_KEY</code>，模型 <code>mimo-v2.6-pro</code>，OpenAI 兼容格式。</p>
+<p><strong>Q8：tryallapi 怎么计费？</strong><br />
+基价 $0.435 / $0.87（与官方海外价一致）× 分组倍率；2026-10-05 可见 1、1.5、2.2 三档，以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/claude-sonnet-5-5-api/">Claude Sonnet 5.5 API 国内中转调用指南与价格</a>：官方 $2/$10、缓存读 $0.20；1M 上下文、128K 输出，5 项会返回 400 的迁移变更。</li>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://mimo.mi.com/docs/zh-CN/news/latest/v2-6" target="_blank" rel="noopener noreferrer">MiMo-V2.6 发布</a> · <a href="https://mimo.mi.com/models/en-US/mimo-v2.6-pro" target="_blank" rel="noopener noreferrer">MiMo-V2.6-Pro 模型页</a> · <a href="https://mimo.mi.com/static/docs/price/pay-as-you-go.md" target="_blank" rel="noopener noreferrer">按量计费价格</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-05｜最后更新：2026-10-05｜更新日志：2026-10-05 首版（价格与倍率取自小米 MiMo 官方文档与 tryallapi.com 公开接口，取数时间 2026-10-05，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>MiMo V2.6 Pro API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">查看 MiMo V2.6 Pro API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=mimo-v2.6-pro-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>
