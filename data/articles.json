@@ -152,6 +152,51 @@
    "date_published": "2026-10-05",
    "description": "MiniMax-M3 API 国内调用与价格：512K 分档 ¥2.1/¥8.4、1M 上下文、think 标签处理，tryallapi.com 倍率与代码。",
    "summary": "≤512K 输入 ¥2.1/¥8.4、超出翻倍；MSA 稀疏注意力，1M 上下文，think 标签处理。"
+  },
+  {
+   "slug": "gpt-6-sol-api",
+   "name": "GPT-6 Sol",
+   "model_id": "gpt-6-sol",
+   "vendor": "OpenAI",
+   "date_published": "2026-10-06",
+   "description": "GPT-6 Sol（gpt-6-sol）API 国内调用指南：官方价格 $2/$10、105万上下文、none 推理与函数调用规则及中转代码。",
+   "summary": "gpt-6-sol 官方价 $2/$10、105万上下文，支持 none 推理，附国内中转调用代码"
+  },
+  {
+   "slug": "claude-fable-5-1-api",
+   "name": "Claude Fable 5.1",
+   "model_id": "claude-fable-5-1",
+   "vendor": "Anthropic",
+   "date_published": "2026-10-06",
+   "description": "Claude Fable 5.1 API 价格与国内调用：$10/$50、缓存读$0.25、1M上下文，附迁移要点与代码",
+   "summary": "Fable 5.1 缓存读降75%：价格、3项破坏性变更与国内调用代码"
+  },
+  {
+   "slug": "gemini-3.8-flash-api",
+   "name": "Gemini 3.8 Flash",
+   "model_id": "gemini-3.8-flash",
+   "vendor": "Google",
+   "date_published": "2026-10-06",
+   "description": "Gemini 3.8 Flash API 国内调用：限时价格$0.75/$3.75、2027年翻倍，thinking_level与中转代码",
+   "summary": "gemini-3.8-flash限时价$0.75/$3.75，2027年翻倍；默认medium不支持minimal"
+  },
+  {
+   "slug": "glm-5.3-api",
+   "name": "GLM-5.3",
+   "model_id": "glm-5.3",
+   "vendor": "Zhipu",
+   "date_published": "2026-10-06",
+   "description": "GLM-5.3 API 国内调用：官方价格输入¥8/输出¥28、1M上下文、强制思考三档，附tryallapi中转OpenAI与Claude Code代码",
+   "summary": "GLM-5.3 强制思考、1M 上下文，官方 ¥8/¥28，附 tryallapi 国内中转调用代码"
+  },
+  {
+   "slug": "doubao-seed-2-1-pro-api",
+   "name": "豆包 Seed 2.1 Pro",
+   "model_id": "doubao-seed-2-1-pro-260915",
+   "vendor": "ByteDance",
+   "date_published": "2026-10-06",
+   "description": "豆包 Seed 2.1 Pro API 国内调用指南：官方价格¥6/¥30、1M上下文不分档、思考参数与tryallapi代码示例",
+   "summary": "Doubao-Seed-2.1-Pro 260915：1M上下文统一价¥6/¥30，默认high思考，附国内调用代码"
   }
  ]
 }

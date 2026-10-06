@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT-6 Sol API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="GPT-6 Sol（gpt-6-sol）API 国内调用指南：官方价格 $2/$10、105万上下文、none 推理与函数调用规则及中转代码。">
+<link rel="canonical" href="https://docs.tryallapi.com/gpt-6-sol-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="GPT-6 Sol API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="GPT-6 Sol（gpt-6-sol）API 国内调用指南：官方价格 $2/$10、105万上下文、none 推理与函数调用规则及中转代码。">
+<meta property="og:url" content="https://docs.tryallapi.com/gpt-6-sol-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/gpt-6-sol-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GPT-6 Sol API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="GPT-6 Sol（gpt-6-sol）API 国内调用指南：官方价格 $2/$10、105万上下文、none 推理与函数调用规则及中转代码。">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/gpt-6-sol-api.png">
+<meta property="article:published_time" content="2026-10-06">
+<meta property="article:modified_time" content="2026-10-06">
+<meta property="article:section" content="OpenAI">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "GPT-6 Sol API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "GPT-6 Sol（gpt-6-sol）API 国内调用指南：官方价格 $2/$10、105万上下文、none 推理与函数调用规则及中转代码。",
+   "image": [
+    "https://docs.tryallapi.com/og/gpt-6-sol-api.png"
+   ],
+   "datePublished": "2026-10-06",
+   "dateModified": "2026-10-06",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/gpt-6-sol-api/",
+   "url": "https://docs.tryallapi.com/gpt-6-sol-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "GPT-6 Sol API（gpt-6-sol）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "GPT-6 Sol API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/gpt-6-sol-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "GPT-6 Sol 的 API 模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "gpt-6-sol，官方快照同名，tryallapi.com 上也是 gpt-6-sol。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6 Sol 什么时候发布的？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "2026-09-22（美国时间），与 GPT-6 Luna 同日发布，同时上线 OpenAI API、ChatGPT Work 和 Codex。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6 Sol 官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "每百万 tokens：输入 $2.00、缓存读 $0.20、缓存写 $2.50、输出 $10.00（≤272K 输入）；输入超过 272K 时整单变为 $4.00 / $0.40 / $5.00 / $15.00。Batch / Flex 为标准价的一半，Fast 模式为 2 倍。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6 Sol 上下文多长、最多输出多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "上下文 1,050,000 tokens，最大输出 128,000 tokens，知识截止 2026-04-20。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "gpt-6-sol 和 gpt-6.1-sol 有什么区别？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "两者标价都是 $2 / $10，上下文相同。6.1 Sol 缓存读更便宜（$0.10 对 $0.20）、知识截止更晚（2026-04-30），但不支持 none 推理强度，Chat Completions 中也不支持工具调用；gpt-6-sol 支持 none，并且在 none 下可以用 Chat Completions 函数调用。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6 Sol 支持哪些推理强度？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "none、low、medium（默认）、high、xhigh、max。只有 none 时可以使用 temperature、top_p 等采样参数。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GPT-6 Sol 能处理图片和音频吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "支持图片输入，输出只有文本；不支持音频和视频。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用 GPT-6 Sol？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，Key 用环境变量 TRYALLAPI_KEY，模型填 gpt-6-sol，Chat Completions 和 Responses 两种格式都可以。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 上 GPT-6 Sol 怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "基价 $2 / $10 / 缓存读 $0.20 × 分组倍率（0.07354～1.8），输入超过 272K 后输入与缓存 ×2、输出 ×1.5，以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">GPT-6 Sol API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">OpenAI · <code>gpt-6-sol</code></p>
+<h1>GPT-6 Sol API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-06">2026-10-06</time> · 更新 <time datetime="2026-10-06">2026-10-06</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。gpt-6-sol 的模型 ID、发布时间、价格、上下文与参数来自 OpenAI 官方模型页、API Changelog、GPT-6 使用指南与发布博客《Introducing GPT‑6 Sol and Luna》；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-06（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>OpenAI 在 2026-09-22（美国时间）发布 <strong>GPT-6 Sol</strong>（<code>gpt-6-sol</code>），和 GPT-6 Luna 一起把 GPT-6 Astra 的训练方法带到更便宜的档位。官方定价是输入 $2、输出 $10（每百万 tokens），比 GPT-5.6 Sol 的促销价 $4 / $20 便宜一半。9 月 29 日 OpenAI 又发布了 GPT-6.1 Sol，但 <code>gpt-6-sol</code> 并没有下线，官方弃用页还把它列为 <code>gpt-5.1</code> 和 <code>gpt-5.3-codex</code> 的推荐替代模型。它的 API 和 6.1 Sol、Astra 有两处关键差别：<strong>支持 <code>none</code> 推理强度</strong>；<strong>Chat Completions 里只有 <code>reasoning_effort=&quot;none&quot;</code> 时才能用函数调用</strong>。下面逐项说明。</p>
+<hr />
+<h2>gpt-6-sol 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>gpt-6-sol</code>（快照同名）</td>
+<td><a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">官方模型页</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-09-22（美国时间），同日上线 API、ChatGPT Work 与 Codex</td>
+<td><a href="https://developers.openai.com/api/docs/changelog" target="_blank" rel="noopener noreferrer">API Changelog</a> · <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener noreferrer">发布博客</a></td>
+</tr>
+<tr>
+<td>定位</td>
+<td>面向复杂编码与 Agent 工作流；官方提示更新的 Sol 模型是 GPT-6.1 Sol</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1,050,000 tokens / 128,000 tokens</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026-04-20</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>模态</td>
+<td>输入：文本、图片；输出：文本；不支持音频、视频</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>标准价（≤272K 输入，每百万 tokens）</td>
+<td>输入 $2.00；缓存读 $0.20；缓存写 $2.50；输出 $10.00</td>
+<td>官方模型页 · API Changelog</td>
+</tr>
+<tr>
+<td>长上下文（&gt;272K 输入）</td>
+<td>整单输入与缓存 ×2、输出 ×1.5</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>其他处理档位</td>
+<td>Batch / Flex 为标准价 50%；Fast 模式 2 倍；区域处理加价 10%</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>reasoning.effort</td>
+<td><code>none</code>、<code>low</code>、<code>medium</code>（默认）、<code>high</code>、<code>xhigh</code>、<code>max</code></td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>工具</td>
+<td>Responses API 支持 Web 搜索、文件搜索、图像生成、Code Interpreter、Hosted Shell、Apply Patch、Skills、Computer use、MCP、Tool search；不支持微调</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>gpt-6-sol</code>；端点 <code>openai</code>、<code>openai-response</code>；含 272K 阶梯倍率</td>
+<td><code>/api/pricing</code> 2026-10-06</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li><code>gpt-6-sol</code> 官方价 $2 / $10，缓存读 $0.20；输入超过 272K 后整单变成 $4 / $15 / $0.40，长会话要控制在 272K 以内。</li>
+<li>这是 GPT-6 家族里少数<strong>支持 <code>reasoning.effort=&quot;none&quot;</code></strong> 的型号（另一个是 Luna）；Chat Completions 带工具时必须用 <code>none</code>，要「推理 + 工具」就走 Responses API。</li>
+<li>tryallapi.com 标定基价与官方标准价一致（$2 / $10 / $0.20），同样配置了 272K 阶梯；实际 ≈ 基价 × 分组倍率（0.07354～1.8），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、gpt-6-sol、gpt-6.1-sol、gpt-6-luna 怎么选</h2>
+<p>三者都是 1,050,000 上下文、128,000 最大输出，文本 + 图片输入。差别集中在价格细节和参数支持上（数据均来自三款模型的官方模型页）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>gpt-6-sol</code></th>
+<th><code>gpt-6.1-sol</code></th>
+<th><code>gpt-6-luna</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发布</td>
+<td>2026-09-22</td>
+<td>2026-09-29</td>
+<td>2026-09-22</td>
+</tr>
+<tr>
+<td>输入 / 输出</td>
+<td>$2.00 / $10.00</td>
+<td>$2.00 / $10.00</td>
+<td>$0.10 / $0.50</td>
+</tr>
+<tr>
+<td>缓存读</td>
+<td>$0.20（输入价 10%）</td>
+<td>$0.10（输入价 5%）</td>
+<td>$0.01（输入价 10%）</td>
+</tr>
+<tr>
+<td>缓存写</td>
+<td>$2.50</td>
+<td>$2.50</td>
+<td>$0.125</td>
+</tr>
+<tr>
+<td><code>none</code> 推理强度</td>
+<td>支持</td>
+<td>不支持（<code>none</code>、<code>minimal</code> 都不支持）</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Chat Completions + 工具</td>
+<td>仅 <code>reasoning_effort=&quot;none&quot;</code> 时可用函数调用</td>
+<td>不支持工具调用，需走 Responses</td>
+<td>仅 <code>none</code> 时可用函数调用</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026-04-20</td>
+<td>2026-04-30</td>
+<td>2026-05-18</td>
+</tr>
+</tbody>
+</table></div>
+<p>选择建议：</p>
+<ul>
+<li><strong>已经在用 <code>gpt-6-sol</code> 且依赖 <code>none</code>（低延迟、无推理）</strong>：继续用 <code>gpt-6-sol</code> 最省事。官方 GPT-6 指南提醒，切换到 6.1 Sol 前要看迁移说明，<code>none</code> 需要改成 <code>low</code>。</li>
+<li><strong>缓存命中率很高的 Agent</strong>：6.1 Sol 的缓存读价是 <code>gpt-6-sol</code> 的一半，标价相同时这类负载用 6.1 Sol 更便宜。</li>
+<li><strong>高并发、轻任务</strong>：Luna 的输入 / 输出价是 Sol 的 1/20，可以先用 Luna 跑通，再把难题路由到 Sol。</li>
+</ul>
+<p>官方发布博客给出的参考数据：AutomationBench 上 <code>gpt-6-sol</code>（xhigh）得分 33.2%、每任务成本 $0.27；DeepSWE v1.1 上 <code>gpt-6-sol</code>（max）得分 68.8%。这些是官方测试环境的结果，实际效果请用自己的任务评测。</p>
+<p>另外，官方 Changelog 记录 2026-09-25 修复了一个影响 GPT-6 Sol / Luna 图片理解的编码 bug。如果你在 9 月 25 日之前用 <code>gpt-6-sol</code> 跑过图片相关评测，官方建议重跑一遍。</p>
+<hr />
+<h2>二、reasoning.effort 与 <code>none</code>：gpt-6-sol 的参数规则</h2>
+<p><code>gpt-6-sol</code> 支持 6 档推理强度：<code>none</code>、<code>low</code>、<code>medium</code>（默认）、<code>high</code>、<code>xhigh</code>、<code>max</code>。Responses API 里写 <code>reasoning.effort</code>，Chat Completions 里写 <code>reasoning_effort</code>。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐写法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chat Completions，不带工具</td>
+<td>任意推理强度</td>
+<td>正常使用</td>
+</tr>
+<tr>
+<td>Chat Completions，带 <code>tools</code></td>
+<td><code>reasoning_effort=&quot;none&quot;</code></td>
+<td>官方模型页：Chat Completions 只在 <code>none</code> 时支持函数调用</td>
+</tr>
+<tr>
+<td>推理 + 函数调用 / 内置工具</td>
+<td>Responses API</td>
+<td>内置工具（Web 搜索、Hosted Shell、MCP 等）只在 Responses 中可用</td>
+</tr>
+<tr>
+<td>需要 <code>temperature</code> / <code>top_p</code></td>
+<td>只能配 <code>none</code></td>
+<td>推理强度不是 <code>none</code> 时要移除 <code>temperature</code>、<code>top_p</code>、<code>top_logprobs</code>；Chat Completions 还要移除 <code>logprobs</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>迁移要点（来自官方 GPT-6 指南）：</p>
+<ol>
+<li><strong>从 GPT-5.x 迁移</strong>：先保留原来实际生效的推理强度；如果原来用 <code>minimal</code>，从 <code>low</code> 起步对比。</li>
+<li><strong>多轮对话里调推理强度</strong>：用 <code>configuration_update</code> 输入项调高或调低推理强度，请求级的 <code>reasoning.effort</code> 保持不变，这样提示前缀缓存不会失效（适用范围以官方兼容性说明为准）。</li>
+<li><strong>从 GPT-5.5 或更早版本迁移</strong>：把 <code>prompt_cache_retention</code> 换成 <code>prompt_cache_options.ttl</code>，取值 <code>&quot;30m&quot;</code>。</li>
+</ol>
+<hr />
+<h2>三、计价细节：272K 分档、缓存写与处理档位</h2>
+<p>官方模型页给出的完整规则：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>档位（每百万 tokens）</th>
+<th>输入</th>
+<th>缓存读</th>
+<th>缓存写</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard，≤272K 输入</td>
+<td>$2.00</td>
+<td>$0.20</td>
+<td>$2.50</td>
+<td>$10.00</td>
+</tr>
+<tr>
+<td>Standard，&gt;272K 输入（整单）</td>
+<td>$4.00</td>
+<td>$0.40</td>
+<td>$5.00</td>
+<td>$15.00</td>
+</tr>
+<tr>
+<td>Batch / Flex（标准价 50%，≤272K）</td>
+<td>$1.00</td>
+<td>$0.10</td>
+<td>$1.25</td>
+<td>$5.00</td>
+</tr>
+<tr>
+<td>Fast 模式（标准价 2 倍，≤272K）</td>
+<td>$4.00</td>
+<td>$0.40</td>
+<td>$5.00</td>
+<td>$20.00</td>
+</tr>
+</tbody>
+</table></div>
+<p>（Batch / Flex / Fast 行按官方「50%」「2x」规则换算；区域处理再加 10%。）</p>
+<p>实务建议：</p>
+<ul>
+<li><strong>长会话控制在 272K 以内</strong>：超过后整单（包括输出）都按高档计费，建议在 250K 左右触发压缩；</li>
+<li><strong>缓存写不是免费的</strong>：缓存写按输入价 1.25 倍计费，缓存读只有 10%。固定 system prompt 和工具定义、只追加消息，让写一次、读多次；</li>
+<li><strong>离线任务用 Batch</strong>：评测、批量改写这类不赶时间的任务直接省一半；</li>
+<li><strong>EU 数据驻留</strong>：仅 Standard、Flex、Batch 可用，Fast 模式不支持 EU 数据驻留。</li>
+</ul>
+<hr />
+<h2>四、GPT-6 Sol API 价格：官方 vs tryallapi.com</h2>
+<p><code>gpt-6-sol</code>：<code>model_ratio=1</code>、<code>completion_ratio=5</code>、<code>cache_ratio=0.1</code>、<code>cache_creation_ratio=1.25</code>，换算基价为输入 $2.00、输出 $10.00、缓存读 $0.20、缓存写 $2.50，与官方标准价一致；同时配置了阶梯倍率：输入超过 272K 后，输入与缓存 ×2、输出 ×1.5（与官方长上下文规则一致）。2026-10-06 可见分组（≤272K 档）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex-Gpt-1</td>
+<td>0.07354</td>
+<td>$0.147</td>
+<td>$0.735</td>
+<td>$0.0147</td>
+</tr>
+<tr>
+<td>Codex-Gpt-2</td>
+<td>0.11766</td>
+<td>$0.235</td>
+<td>$1.18</td>
+<td>$0.0235</td>
+</tr>
+<tr>
+<td>Codex-Gpt-3</td>
+<td>0.14706</td>
+<td>$0.294</td>
+<td>$1.47</td>
+<td>$0.0294</td>
+</tr>
+<tr>
+<td>Azure-Gpt-2</td>
+<td>0.2</td>
+<td>$0.40</td>
+<td>$2.00</td>
+<td>$0.04</td>
+</tr>
+<tr>
+<td>Azure-Gpt-3</td>
+<td>0.44</td>
+<td>$0.88</td>
+<td>$4.40</td>
+<td>$0.088</td>
+</tr>
+<tr>
+<td>Azure-Gpt-4</td>
+<td>0.88</td>
+<td>$1.76</td>
+<td>$8.80</td>
+<td>$0.176</td>
+</tr>
+<tr>
+<td>Openai-Gpt-1</td>
+<td>1.17648</td>
+<td>$2.35</td>
+<td>$11.76</td>
+<td>$0.235</td>
+</tr>
+<tr>
+<td>Azure-Gpt-5</td>
+<td>1.2</td>
+<td>$2.40</td>
+<td>$12.00</td>
+<td>$0.24</td>
+</tr>
+<tr>
+<td>Openai-Gpt-2</td>
+<td>1.4706</td>
+<td>$2.94</td>
+<td>$14.71</td>
+<td>$0.294</td>
+</tr>
+<tr>
+<td>Azure-Gpt-6</td>
+<td>1.8</td>
+<td>$3.60</td>
+<td>$18.00</td>
+<td>$0.36</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。<strong>以控制台为准。</strong></p>
+<p>怎么选：需要 Batch / Flex 折扣、EU 数据驻留或官方 SLA → OpenAI 官方平台；国内网络直连、需要在同一项目里同时调用 GPT、Claude、Gemini、DeepSeek 等，统一 Key 与账单 → tryallapi.com。</p>
+<hr />
+<h2>五、GPT-6 Sol 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python：Chat Completions（经 tryallapi）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;gpt-6-sol&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;帮我重构这段 Python 代码，降低圈复杂度&quot;}],
+    reasoning_effort=&quot;medium&quot;,          # none / low / medium / high / xhigh / max
+)
+print(r.choices[0].message.content)
+print(r.usage)
+</code></pre>
+<h3>3. Chat Completions + 函数调用（必须 <code>none</code>）</h3>
+<pre><code class="language-python">tools = [{
+    &quot;type&quot;: &quot;function&quot;,
+    &quot;function&quot;: {
+        &quot;name&quot;: &quot;get_order_status&quot;,
+        &quot;description&quot;: &quot;查询订单状态&quot;,
+        &quot;parameters&quot;: {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {&quot;order_id&quot;: {&quot;type&quot;: &quot;string&quot;}},
+            &quot;required&quot;: [&quot;order_id&quot;],
+        },
+    },
+}]
+r = client.chat.completions.create(
+    model=&quot;gpt-6-sol&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;订单 A1024 到哪了？&quot;}],
+    tools=tools,
+    reasoning_effort=&quot;none&quot;,            # gpt-6-sol 在 Chat Completions 中仅 none 支持函数调用
+)
+print(r.choices[0].message.tool_calls)
+</code></pre>
+<h3>4. Responses API：推理 + 工具（经 tryallapi）</h3>
+<pre><code class="language-python">r = client.responses.create(
+    model=&quot;gpt-6-sol&quot;,
+    input=&quot;读一下这个报错日志，给出最可能的根因和修复步骤：……&quot;,
+    reasoning={&quot;effort&quot;: &quot;high&quot;},
+    tools=[{
+        &quot;type&quot;: &quot;function&quot;,
+        &quot;name&quot;: &quot;search_repo&quot;,
+        &quot;description&quot;: &quot;在代码仓库中搜索关键字&quot;,
+        &quot;parameters&quot;: {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: {&quot;query&quot;: {&quot;type&quot;: &quot;string&quot;}},
+            &quot;required&quot;: [&quot;query&quot;],
+        },
+    }],
+)
+print(r.output_text)
+</code></pre>
+<p>tryallapi.com 的 <code>gpt-6-sol</code> 同时开放 <code>openai</code>（Chat Completions）与 <code>openai-response</code>（Responses）端点。经聚合调用时，建议先用一条短请求确认返回结构；OpenAI 托管的内置工具（Web 搜索、Hosted Shell 等）是否可用，以控制台和实测为准。</p>
+<h3>5. curl</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/responses \
+  -H &quot;Authorization: Bearer $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;: &quot;gpt-6-sol&quot;, &quot;input&quot;: &quot;用三句话解释什么是幂等接口&quot;, &quot;reasoning&quot;: {&quot;effort&quot;: &quot;low&quot;}}'
+</code></pre>
+<h3>6. 对照：官方直连</h3>
+<pre><code class="language-python">client = OpenAI(api_key=os.environ[&quot;OPENAI_API_KEY&quot;])  # 默认 https://api.openai.com/v1
+</code></pre>
+<hr />
+<h2>六、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chat Completions 传 <code>tools</code> 报参数错误</td>
+<td><code>gpt-6-sol</code> 只在 <code>reasoning_effort=&quot;none&quot;</code> 时支持函数调用</td>
+<td>改成 <code>none</code>，或改用 Responses API</td>
+</tr>
+<tr>
+<td>传 <code>temperature</code> / <code>top_p</code> 报不支持</td>
+<td>推理强度不是 <code>none</code> 时不支持这些采样参数</td>
+<td>删除参数，或设为 <code>none</code></td>
+</tr>
+<tr>
+<td>返回 <code>logprobs</code> 相关错误</td>
+<td>推理模式下不支持 <code>logprobs</code> / <code>top_logprobs</code></td>
+<td>删除相关参数</td>
+</tr>
+<tr>
+<td>账单比预期高很多</td>
+<td>单次输入超过 272K，整单按 2 倍输入、1.5 倍输出计费</td>
+<td>压缩上下文，控制在 272K 以内</td>
+</tr>
+<tr>
+<td>缓存费用偏高</td>
+<td>缓存写按 1.25 倍输入价计费，前缀频繁变化导致反复写入</td>
+<td>固定前缀，只追加消息</td>
+</tr>
+<tr>
+<td>换成 <code>gpt-6.1-sol</code> 后报 <code>none</code> 不支持</td>
+<td>6.1 Sol 不支持 <code>none</code> / <code>minimal</code></td>
+<td>改用 <code>low</code>，或继续用 <code>gpt-6-sol</code></td>
+</tr>
+<tr>
+<td>429 <code>slow_down</code></td>
+<td>流量增长过快</td>
+<td>按 <code>Retry-After</code> 延后重试或指数退避</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、GPT-6 Sol FAQ</h2>
+<p><strong>Q1：GPT-6 Sol 的 API 模型 ID 是什么？</strong><br />
+<code>gpt-6-sol</code>，官方快照同名，tryallapi.com 上也是 <code>gpt-6-sol</code>。</p>
+<p><strong>Q2：GPT-6 Sol 什么时候发布的？</strong><br />
+2026-09-22（美国时间），与 GPT-6 Luna 同日发布，同时上线 OpenAI API、ChatGPT Work 和 Codex。</p>
+<p><strong>Q3：GPT-6 Sol 官方价格多少？</strong><br />
+每百万 tokens：输入 $2.00、缓存读 $0.20、缓存写 $2.50、输出 $10.00（≤272K 输入）；输入超过 272K 时整单变为 $4.00 / $0.40 / $5.00 / $15.00。Batch / Flex 为标准价的一半，Fast 模式为 2 倍。</p>
+<p><strong>Q4：GPT-6 Sol 上下文多长、最多输出多少？</strong><br />
+上下文 1,050,000 tokens，最大输出 128,000 tokens，知识截止 2026-04-20。</p>
+<p><strong>Q5：gpt-6-sol 和 gpt-6.1-sol 有什么区别？</strong><br />
+两者标价都是 $2 / $10，上下文相同。6.1 Sol 缓存读更便宜（$0.10 对 $0.20）、知识截止更晚（2026-04-30），但不支持 <code>none</code> 推理强度，Chat Completions 中也不支持工具调用；<code>gpt-6-sol</code> 支持 <code>none</code>，并且在 <code>none</code> 下可以用 Chat Completions 函数调用。</p>
+<p><strong>Q6：GPT-6 Sol 支持哪些推理强度？</strong><br />
+<code>none</code>、<code>low</code>、<code>medium</code>（默认）、<code>high</code>、<code>xhigh</code>、<code>max</code>。只有 <code>none</code> 时可以使用 <code>temperature</code>、<code>top_p</code> 等采样参数。</p>
+<p><strong>Q7：GPT-6 Sol 能处理图片和音频吗？</strong><br />
+支持图片输入，输出只有文本；不支持音频和视频。</p>
+<p><strong>Q8：国内怎么经 tryallapi 调用 GPT-6 Sol？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，Key 用环境变量 <code>TRYALLAPI_KEY</code>，模型填 <code>gpt-6-sol</code>，Chat Completions 和 Responses 两种格式都可以。</p>
+<p><strong>Q9：tryallapi 上 GPT-6 Sol 怎么计费？</strong><br />
+基价 $2 / $10 / 缓存读 $0.20 × 分组倍率（0.07354～1.8），输入超过 272K 后输入与缓存 ×2、输出 ×1.5，以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-5.4-api/">GPT-5.4 API 国内中转调用指南与价格</a>：官方 $2.50/$15、缓存 $0.25；超 272K 长上下文加价与 Responses 端点。</li>
+<li><a href="/gpt-6-astra-api/">GPT-6 Astra API 国内中转调用指南与价格</a>：OpenAI 旗舰：官方 $10/$50、缓存输入 $1；官方 / Azure / 聚合三种方案对比。</li>
+<li><a href="/gpt-6.1-sol-api/">GPT-6.1 Sol API 国内中转调用指南与价格</a>：官方 $2/$10、缓存输入 $0.10，105 万上下文；工具调用走 Responses API。</li>
+<li><a href="/claude-fable-5-1-api/">Claude Fable 5.1 API 国内中转调用指南与价格</a>：Fable 5.1 缓存读降75%：价格、3项破坏性变更与国内调用代码</li>
+<li><a href="/gemini-3.8-flash-api/">Gemini 3.8 Flash API 国内中转调用指南与价格</a>：gemini-3.8-flash限时价$0.75/$3.75，2027年翻倍；默认medium不支持minimal</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">GPT-6 Sol 模型页</a> · <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener noreferrer">Introducing GPT‑6 Sol and Luna</a> · <a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer">Using GPT-6 指南</a> · <a href="https://developers.openai.com/api/docs/changelog" target="_blank" rel="noopener noreferrer">API Changelog</a> · <a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer">GPT-6.1 Sol 模型页</a> · <a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer">GPT-6 Luna 模型页</a> · <a href="https://developers.openai.com/api/docs/deprecations" target="_blank" rel="noopener noreferrer">弃用说明</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-06｜最后更新：2026-10-06｜更新日志：2026-10-06 首版（价格与参数取自 OpenAI 官方模型页、Changelog 与发布博客，tryallapi.com 数据取自公开接口，取数时间 2026-10-06，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>GPT-6 Sol API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">查看 GPT-6 Sol API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gpt-6-sol-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

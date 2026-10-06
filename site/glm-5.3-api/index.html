@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GLM-5.3 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="GLM-5.3 API 国内调用：官方价格输入¥8/输出¥28、1M上下文、强制思考三档，附tryallapi中转OpenAI与Claude Code代码">
+<link rel="canonical" href="https://docs.tryallapi.com/glm-5.3-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="GLM-5.3 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="GLM-5.3 API 国内调用：官方价格输入¥8/输出¥28、1M上下文、强制思考三档，附tryallapi中转OpenAI与Claude Code代码">
+<meta property="og:url" content="https://docs.tryallapi.com/glm-5.3-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/glm-5.3-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GLM-5.3 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="GLM-5.3 API 国内调用：官方价格输入¥8/输出¥28、1M上下文、强制思考三档，附tryallapi中转OpenAI与Claude Code代码">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/glm-5.3-api.png">
+<meta property="article:published_time" content="2026-10-06">
+<meta property="article:modified_time" content="2026-10-06">
+<meta property="article:section" content="Zhipu">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "GLM-5.3 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "GLM-5.3 API 国内调用：官方价格输入¥8/输出¥28、1M上下文、强制思考三档，附tryallapi中转OpenAI与Claude Code代码",
+   "image": [
+    "https://docs.tryallapi.com/og/glm-5.3-api.png"
+   ],
+   "datePublished": "2026-10-06",
+   "dateModified": "2026-10-06",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/glm-5.3-api/",
+   "url": "https://docs.tryallapi.com/glm-5.3-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "GLM-5.3 API（glm-5.3）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "GLM-5.3 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/glm-5.3-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "GLM-5.3 的 API 模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "glm-5.3（全小写），智谱开放平台、Z.ai 与 tryallapi.com 均使用这个 ID。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GLM-5.3 什么时候发布的？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "智谱开放平台发布记录为 2026-08-19 上线，Z.ai 国际站发布记录为 2026-08-18。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GLM-5.3 官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "国内每百万 tokens：输入 ¥8、输出 ¥28、缓存命中 ¥2，缓存存储限时免费；国际价输入 $1.4、缓存输入 $0.26、输出 $4.4。1M 上下文内不分输入长度档位。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "上下文 1M tokens，最大输出 128K tokens，目前只支持文本输入。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GLM-5.3 能关闭思考吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不能。GLM-5.3 始终启用思考，传 thinking.type: \"disabled\" 会报错；想要更快、更省，就把 reasoning_effort 设为 low。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "reasoning_effort 有哪些取值？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "标准 API 只接受 low、high、max，默认 max，其他值会报错；GLM Coding Plan 端点会把 minimal 映射为 low、medium 映射为 high、xhigh 映射为 max。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "GLM-5.3 工具调用有什么限制？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "tool_choice 默认且仅支持 auto；可用 stream=True 加 tool_stream=True 流式获取工具参数；多轮工具调用需回传 reasoning_content 以保持交错式思考连贯。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用 GLM-5.3？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "OpenAI 兼容用 base_url=https://tryallapi.com/v1，Anthropic SDK 与 Claude Code 用 https://tryallapi.com，Key 放在 TRYALLAPI_KEY，模型填 glm-5.3；计费 ≈ 基价 $1.40 / $4.40 × 分组倍率（0.6～2.2），以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">GLM-5.3 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">智谱（GLM） · <code>glm-5.3</code></p>
+<h1>GLM-5.3 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-06">2026-10-06</time> · 更新 <time datetime="2026-10-06">2026-10-06</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。GLM-5.3 的模型 ID、发布时间、价格、上下文与参数来自智谱开放平台文档（docs.bigmodel.cn）、API 定价页、Z.ai 国际站文档与官方发布记录；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-06（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>智谱在 2026-08-19 上线新一代旗舰 <strong>GLM-5.3</strong>。它和 GLM-5.2 用的是同一个基础模型，所有提升都来自后训练，重点在复杂软件工程、终端操作和长程 Agent 任务。对 API 调用方来说，变化主要有三处：<strong>思考强制开启，<code>thinking.type: &quot;disabled&quot;</code> 会直接报错</strong>；<strong><code>reasoning_effort</code> 只接受 <code>low</code> / <code>high</code> / <code>max</code> 三个值，默认 <code>max</code></strong>；<strong>1M 上下文按单一价格计费，不像 GLM-5.1 / GLM-5 那样按 32K 输入长度分档</strong>。下面分别说明，并给出经 tryallapi.com 的 OpenAI 兼容与 Anthropic 格式（含 Claude Code）调用代码。</p>
+<hr />
+<h2>glm-5.3 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>glm-5.3</code>（小写）</td>
+<td><a href="https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3" target="_blank" rel="noopener noreferrer">智谱 GLM-5.3 模型页</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-08-19（开放平台发布记录；Z.ai 国际站记为 2026-08-18）</td>
+<td><a href="https://docs.bigmodel.cn/cn/update/new-releases" target="_blank" rel="noopener noreferrer">模型与产品发布记录</a> · <a href="https://docs.z.ai/release-notes/new-released" target="_blank" rel="noopener noreferrer">Z.ai Release Notes</a></td>
+</tr>
+<tr>
+<td>定位</td>
+<td>与 GLM-5.2 相同基础模型，提升全部来自后训练；强化编程与 Agent 任务</td>
+<td>智谱 GLM-5.3 模型页</td>
+</tr>
+<tr>
+<td>输入模态</td>
+<td>仅文本</td>
+<td>智谱 GLM-5.3 模型页</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1M tokens / 128K tokens</td>
+<td>智谱 GLM-5.3 模型页 · <a href="https://docs.bigmodel.cn/cn/guide/start/migrate-to-glm-new" target="_blank" rel="noopener noreferrer">迁移至 GLM-5.3</a></td>
+</tr>
+<tr>
+<td>思考</td>
+<td>始终开启，仅支持 <code>thinking.type: &quot;enabled&quot;</code>；<code>reasoning_effort</code> 可选 <code>low</code> / <code>high</code> / <code>max</code>，默认 <code>max</code></td>
+<td>智谱 GLM-5.3 模型页 · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/thinking" target="_blank" rel="noopener noreferrer">深度思考</a></td>
+</tr>
+<tr>
+<td>国内价（每百万 tokens）</td>
+<td>输入 ¥8；输出 ¥28；缓存命中 ¥2；缓存存储限时免费</td>
+<td><a href="https://docs.bigmodel.cn/cn/guide/start/pricing" target="_blank" rel="noopener noreferrer">智谱 API 定价</a></td>
+</tr>
+<tr>
+<td>国际价（每百万 tokens）</td>
+<td>输入 $1.4；缓存输入 $0.26；输出 $4.4；缓存存储限时免费</td>
+<td><a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener noreferrer">Z.ai Pricing</a></td>
+</tr>
+<tr>
+<td>工具调用</td>
+<td>Function Calling（<code>tool_choice</code> 默认且仅支持 <code>auto</code>）；支持 <code>tool_stream=true</code> 流式输出工具参数</td>
+<td><a href="https://docs.bigmodel.cn/cn/guide/capabilities/function-calling" target="_blank" rel="noopener noreferrer">工具调用</a> · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/stream-tool" target="_blank" rel="noopener noreferrer">工具流式输出</a></td>
+</tr>
+<tr>
+<td>官方 Base URL（国内）</td>
+<td>Chat Completion：<code>https://open.bigmodel.cn/api/paas/v4</code>；Response：<code>https://open.bigmodel.cn/api/v1</code>；Anthropic：<code>https://open.bigmodel.cn/api/anthropic</code></td>
+<td>智谱 GLM-5.3 模型页</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>glm-5.3</code>；端点 <code>openai</code>（/v1/chat/completions）与 <code>anthropic</code>（/v1/messages）</td>
+<td><code>/api/pricing</code> 2026-10-06</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td>OpenAI 兼容：<code>https://tryallapi.com/v1</code>；Anthropic / Claude Code：<code>https://tryallapi.com</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>GLM-5.3 不能关思考：从 GLM-5.2 迁移时，把 <code>disabled</code> 改成 <code>enabled</code> 并把 <code>reasoning_effort</code> 设为 <code>low</code>，否则请求失败。</li>
+<li>官方国内价 ¥8 / ¥28 / 缓存命中 ¥2，1M 上下文内不分输入长度档位；国际价 $1.4 / $4.4 / $0.26。</li>
+<li>tryallapi.com 标定基价与 Z.ai 国际价一致（$1.40 / $4.40 / $0.26），实际 ≈ 基价 × 分组倍率（0.6～2.2），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、思考只能开不能关：reasoning_effort 三档与迁移陷阱</h2>
+<p>GLM-5.3 是强制思考模型。官方参数表如下：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>可选值</th>
+<th>默认</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>thinking.type</code></td>
+<td><code>enabled</code></td>
+<td><code>enabled</code></td>
+<td>只支持开启思考；传 <code>disabled</code> 报错</td>
+</tr>
+<tr>
+<td><code>reasoning_effort</code></td>
+<td><code>low</code>、<code>high</code>、<code>max</code></td>
+<td><code>max</code></td>
+<td><code>low</code> 轻量推理；<code>high</code> 增强推理；<code>max</code> 深度推理</td>
+</tr>
+</tbody>
+</table></div>
+<p>和 GLM-5.2 相比，最容易踩坑的是取值范围变窄了：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>写法</th>
+<th>GLM-5.2（标准 API）</th>
+<th>GLM-5.3（标准 API）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>thinking.type: &quot;disabled&quot;</code></td>
+<td>支持，直接回答</td>
+<td><strong>报错</strong></td>
+</tr>
+<tr>
+<td><code>reasoning_effort: &quot;none&quot;</code> / <code>&quot;minimal&quot;</code></td>
+<td>放弃思考</td>
+<td><strong>报错</strong>（仅支持 max / high / low）</td>
+</tr>
+<tr>
+<td><code>reasoning_effort: &quot;medium&quot;</code> / <code>&quot;xhigh&quot;</code></td>
+<td>分别映射为 high / max</td>
+<td><strong>报错</strong></td>
+</tr>
+<tr>
+<td><code>reasoning_effort: &quot;low&quot;</code></td>
+<td>映射为 high</td>
+<td>轻量推理（<code>low</code> 档仅 GLM-5.3 支持）</td>
+</tr>
+</tbody>
+</table></div>
+<p>注意：上面「报错」是<strong>标准 API</strong> 的规则。GLM Coding Plan 端点会做容错映射，比如 <code>thinking.type</code> 为 <code>disabled</code> / <code>false</code> 时按 <code>low</code> 继续请求，<code>minimal</code> 映射为 <code>low</code>，<code>medium</code> 映射为 <code>high</code>。所以同一段代码在 Coding Plan 能跑、换到按量 API 却报 400，多半是这个原因。</p>
+<p>怎么选档：官方在 Z.ai Code Bench 上公布的数据是，Max 档每项任务平均输出约 7.5 万 token，High 档约 5 万 token。思考 token 直接影响输出费用，日常补全、改写类任务用 <code>low</code>，复杂编码和长程 Agent 用 <code>max</code>（官方推荐）。</p>
+<p>采样参数方面，官方迁移指南给出的默认值是 <code>temperature=1.0</code>、<code>top_p=0.95</code>，建议两者只调一个。</p>
+<hr />
+<h2>二、1M 上下文不分档：GLM-5.3 的计价结构</h2>
+<p>GLM-5.1、GLM-5 都按 32K 输入长度分两档计价，GLM-5.3 与 GLM-5.2 一样不分档：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>计价档位</th>
+<th>输入</th>
+<th>输出</th>
+<th>缓存命中</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GLM-5.3</strong></td>
+<td>1M 上下文统一价</td>
+<td>¥8</td>
+<td>¥28</td>
+<td>¥2</td>
+</tr>
+<tr>
+<td>GLM-5.2</td>
+<td>1M 上下文统一价</td>
+<td>¥8</td>
+<td>¥28</td>
+<td>¥2</td>
+</tr>
+<tr>
+<td>GLM-5.1</td>
+<td>输入 [0, 32K)</td>
+<td>¥6</td>
+<td>¥24</td>
+<td>¥1.3</td>
+</tr>
+<tr>
+<td>GLM-5.1</td>
+<td>输入 ≥32K</td>
+<td>¥8</td>
+<td>¥28</td>
+<td>¥2</td>
+</tr>
+</tbody>
+</table></div>
+<p>（单位：元 / 百万 tokens，来自智谱 API 定价页；缓存存储当前限时免费。）</p>
+<p>几点实务结论：</p>
+<ul>
+<li><strong>短请求场景</strong>：输入普遍低于 32K 的业务，GLM-5.3 单价比 GLM-5.1 的低档贵（¥8 vs ¥6）；长上下文和 Agent 场景两者同价，GLM-5.3 能力更强。</li>
+<li><strong>缓存是主要省钱手段</strong>：缓存命中价 ¥2，是输入价的 1/4。上下文缓存为隐式自动识别，不需要手动配置；官方建议重复前缀在 500 token 以上才容易命中，命中数量看 <code>usage.prompt_tokens_details.cached_tokens</code>。</li>
+<li><strong>固定前缀</strong>：system prompt、工具定义、知识库放在最前面且保持完全一致，只在末尾追加消息。</li>
+</ul>
+<hr />
+<h2>三、工具调用：tool_stream、交错思考与 reasoning_content 回传</h2>
+<p>GLM-5.3 的 Function Calling 有三个要注意的点：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>能力</th>
+<th>官方说明</th>
+<th>接入要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tool_choice</code></td>
+<td>默认且仅支持 <code>auto</code></td>
+<td>不要传强制调用某个函数的写法</td>
+</tr>
+<tr>
+<td>工具流式输出</td>
+<td><code>stream=True</code> + <code>tool_stream=True</code>（默认关闭）</td>
+<td>流式拼接 <code>delta.tool_calls[*].function.arguments</code>；平台不会替你执行工具</td>
+</tr>
+<tr>
+<td>交错式思考</td>
+<td>默认支持，模型可在工具调用之间、收到工具结果后继续思考</td>
+<td><strong>必须把 <code>reasoning_content</code> 随 assistant 消息一起回传</strong></td>
+</tr>
+<tr>
+<td>保留式思考</td>
+<td>标准 API 默认关闭，Coding Plan 端点默认开启</td>
+<td>标准 API 传 <code>&quot;thinking&quot;: {&quot;type&quot;: &quot;enabled&quot;, &quot;clear_thinking&quot;: false}</code>，并原样回传完整的 reasoning content</td>
+</tr>
+</tbody>
+</table></div>
+<p>保留式思考主要推荐 Coding / Agent 场景使用。官方要求回传的 reasoning content 与原始生成序列完全一致，不要重排或修改，否则效果和缓存命中率都会下降。</p>
+<p>流式响应里，思考在 <code>delta.reasoning_content</code>，正式回答在 <code>delta.content</code>，前端应分开渲染。</p>
+<hr />
+<h2>四、GLM-5.3 API 价格：官方 vs tryallapi.com</h2>
+<h3>官方价</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项（每百万 tokens）</th>
+<th>国内（智谱开放平台）</th>
+<th>国际（Z.ai）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>¥8</td>
+<td>$1.4</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>¥28</td>
+<td>$4.4</td>
+</tr>
+<tr>
+<td>缓存命中</td>
+<td>¥2</td>
+<td>$0.26</td>
+</tr>
+<tr>
+<td>缓存存储</td>
+<td>限时免费</td>
+<td>限时免费</td>
+</tr>
+</tbody>
+</table></div>
+<h3>tryallapi.com（≈ 基价 × 分组倍率）</h3>
+<p><code>glm-5.3</code>：<code>model_ratio=0.7</code>、<code>completion_ratio≈3.143</code>、<code>cache_ratio=0.186</code>，换算基价为输入 $1.40、输出 $4.40、缓存读约 $0.26（与 Z.ai 国际价一致）。2026-10-06 可见分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Self-Deployed-1</td>
+<td>0.6</td>
+<td>$0.84</td>
+<td>$2.64</td>
+<td>≈ $0.156</td>
+</tr>
+<tr>
+<td>Self-Deployed-2</td>
+<td>1</td>
+<td>$1.40</td>
+<td>$4.40</td>
+<td>≈ $0.26</td>
+</tr>
+<tr>
+<td>Self-Deployed-3</td>
+<td>1.5</td>
+<td>$2.10</td>
+<td>$6.60</td>
+<td>≈ $0.39</td>
+</tr>
+<tr>
+<td>Alibaba-3</td>
+<td>2.2</td>
+<td>$3.08</td>
+<td>$9.68</td>
+<td>≈ $0.573</td>
+</tr>
+<tr>
+<td>glm-1</td>
+<td>2.2</td>
+<td>$3.08</td>
+<td>$9.68</td>
+<td>≈ $0.573</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。不同分组对应不同上游线路，按需求选择。<strong>以控制台为准。</strong></p>
+<p>怎么选：只用 GLM、需要 GLM Coding Plan 套餐或智谱官方发票 → 智谱开放平台直连；同一个项目里还要调 Claude、GPT、DeepSeek 等，希望一个 Key、一份账单 → tryallapi.com。</p>
+<hr />
+<h2>五、GLM-5.3 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（OpenAI 兼容，经 tryallapi）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;glm-5.3&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;这个 Go 服务的 goroutine 泄漏可能出在哪里？&quot;}],
+    max_tokens=32768,                              # 最大 128K，思考也会消耗输出
+    extra_body={
+        &quot;thinking&quot;: {&quot;type&quot;: &quot;enabled&quot;},           # GLM-5.3 只能是 enabled
+        &quot;reasoning_effort&quot;: &quot;high&quot;,                # low / high / max，默认 max
+    },
+)
+msg = r.choices[0].message
+print(getattr(msg, &quot;reasoning_content&quot;, None))   # 思考内容
+print(msg.content)                               # 正式回答
+</code></pre>
+<p><code>thinking</code>、<code>reasoning_effort</code> 通过 <code>extra_body</code> 透传；经聚合调用时先发一条短请求，确认返回里 <code>reasoning_content</code> 的结构，再决定前端如何解析。</p>
+<h3>3. 流式 + 工具参数流式（tool_stream）</h3>
+<pre><code class="language-python">tools = [{&quot;type&quot;: &quot;function&quot;, &quot;function&quot;: {
+    &quot;name&quot;: &quot;run_tests&quot;,
+    &quot;description&quot;: &quot;在指定目录运行单元测试&quot;,
+    &quot;parameters&quot;: {&quot;type&quot;: &quot;object&quot;,
+                   &quot;properties&quot;: {&quot;path&quot;: {&quot;type&quot;: &quot;string&quot;}},
+                   &quot;required&quot;: [&quot;path&quot;]},
+}}]
+
+stream = client.chat.completions.create(
+    model=&quot;glm-5.3&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;跑一下 ./pkg/cache 的测试并告诉我结果&quot;}],
+    tools=tools,
+    tool_choice=&quot;auto&quot;,                            # 仅支持 auto
+    stream=True,
+    extra_body={&quot;thinking&quot;: {&quot;type&quot;: &quot;enabled&quot;}, &quot;reasoning_effort&quot;: &quot;low&quot;, &quot;tool_stream&quot;: True},
+)
+reasoning, content, calls = &quot;&quot;, &quot;&quot;, {}
+for chunk in stream:
+    if not chunk.choices:
+        continue
+    d = chunk.choices[0].delta
+    if getattr(d, &quot;reasoning_content&quot;, None):
+        reasoning += d.reasoning_content
+    if d.content:
+        content += d.content
+    for tc in d.tool_calls or []:
+        c = calls.setdefault(tc.index, {&quot;id&quot;: tc.id, &quot;name&quot;: &quot;&quot;, &quot;arguments&quot;: &quot;&quot;})
+        if tc.function.name:
+            c[&quot;name&quot;] = tc.function.name
+        if tc.function.arguments:
+            c[&quot;arguments&quot;] += tc.function.arguments
+print(calls)
+# 回传工具结果时，assistant 消息里要带上 reasoning_content（交错式思考要求）
+</code></pre>
+<h3>4. Anthropic SDK（Anthropic 格式，经 tryallapi）</h3>
+<pre><code class="language-python"># pip install -U anthropic
+import os
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com&quot;,   # Anthropic 协议不带 /v1
+)
+msg = client.messages.create(
+    model=&quot;glm-5.3&quot;,
+    max_tokens=8192,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;给这个 Rust 函数补上错误处理并解释改动&quot;}],
+)
+for block in msg.content:
+    if block.type == &quot;text&quot;:
+        print(block.text)
+</code></pre>
+<p>cURL 版本：</p>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/messages \
+  -H &quot;x-api-key: $TRYALLAPI_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;glm-5.3&quot;,&quot;max_tokens&quot;:1024,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<h3>5. Claude Code（经 tryallapi）</h3>
+<pre><code class="language-bash">export ANTHROPIC_BASE_URL=&quot;https://tryallapi.com&quot;
+export ANTHROPIC_AUTH_TOKEN=&quot;$TRYALLAPI_KEY&quot;
+export ANTHROPIC_MODEL=&quot;glm-5.3&quot;
+export ANTHROPIC_DEFAULT_OPUS_MODEL=&quot;glm-5.3&quot;
+export ANTHROPIC_DEFAULT_SONNET_MODEL=&quot;glm-5.3&quot;
+claude
+</code></pre>
+<p>智谱官方的 Claude Code 切换指南（面向 GLM Coding Plan）还建议设置 <code>CLAUDE_CODE_AUTO_COMPACT_WINDOW=1000000</code> 来匹配 1M 上下文，并在会话中用 <code>/effort</code> 切换思考强度（默认 max）。</p>
+<h3>6. 对照：官方直连（国内）</h3>
+<pre><code class="language-python"># OpenAI 兼容
+client = OpenAI(api_key=os.environ[&quot;ZHIPU_API_KEY&quot;], base_url=&quot;https://open.bigmodel.cn/api/paas/v4&quot;)
+
+# Anthropic 兼容
+client = anthropic.Anthropic(api_key=os.environ[&quot;ZHIPU_API_KEY&quot;], base_url=&quot;https://open.bigmodel.cn/api/anthropic&quot;)
+</code></pre>
+<p>官方提示：订阅过 GLM Coding Plan 的账号（含已过期），目前只能通过 OpenAI Chat Completion 协议调用模型 API。</p>
+<hr />
+<h2>六、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400，迁移后请求失败</td>
+<td>仍传 <code>thinking.type: &quot;disabled&quot;</code></td>
+<td>改为 <code>enabled</code>，<code>reasoning_effort</code> 设 <code>low</code></td>
+</tr>
+<tr>
+<td>400，<code>reasoning_effort</code> 不合法</td>
+<td>传了 <code>medium</code> / <code>xhigh</code> / <code>minimal</code> / <code>none</code></td>
+<td>标准 API 只接受 <code>low</code> / <code>high</code> / <code>max</code></td>
+</tr>
+<tr>
+<td>回答前等待很久、输出费用偏高</td>
+<td>默认 <code>max</code> 深度推理</td>
+<td>轻任务改用 <code>low</code> 或 <code>high</code></td>
+</tr>
+<tr>
+<td>工具调用多轮后推理不连贯</td>
+<td>回传时丢掉了 <code>reasoning_content</code></td>
+<td>assistant 消息原样带上 <code>reasoning_content</code></td>
+</tr>
+<tr>
+<td>强制指定函数无效</td>
+<td><code>tool_choice</code> 仅支持 <code>auto</code></td>
+<td>用 prompt 和工具描述引导调用</td>
+</tr>
+<tr>
+<td>缓存一直不命中</td>
+<td>前缀太短或每次有变化</td>
+<td>固定前缀 500 token 以上，变化内容放末尾</td>
+</tr>
+<tr>
+<td>图片输入报错</td>
+<td>GLM-5.3 仅支持文本</td>
+<td>改用多模态的 GLM-5.3-Flash / FlashX</td>
+</tr>
+<tr>
+<td>Anthropic 格式 404</td>
+<td>Base URL 多写了 <code>/v1</code></td>
+<td>SDK / Claude Code 用 <code>https://tryallapi.com</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、GLM-5.3 FAQ</h2>
+<p><strong>Q1：GLM-5.3 的 API 模型 ID 是什么？</strong><br />
+<code>glm-5.3</code>（全小写），智谱开放平台、Z.ai 与 tryallapi.com 均使用这个 ID。</p>
+<p><strong>Q2：GLM-5.3 什么时候发布的？</strong><br />
+智谱开放平台发布记录为 2026-08-19 上线，Z.ai 国际站发布记录为 2026-08-18。</p>
+<p><strong>Q3：GLM-5.3 官方价格多少？</strong><br />
+国内每百万 tokens：输入 ¥8、输出 ¥28、缓存命中 ¥2，缓存存储限时免费；国际价输入 $1.4、缓存输入 $0.26、输出 $4.4。1M 上下文内不分输入长度档位。</p>
+<p><strong>Q4：上下文和最大输出是多少？</strong><br />
+上下文 1M tokens，最大输出 128K tokens，目前只支持文本输入。</p>
+<p><strong>Q5：GLM-5.3 能关闭思考吗？</strong><br />
+不能。GLM-5.3 始终启用思考，传 <code>thinking.type: &quot;disabled&quot;</code> 会报错；想要更快、更省，就把 <code>reasoning_effort</code> 设为 <code>low</code>。</p>
+<p><strong>Q6：reasoning_effort 有哪些取值？</strong><br />
+标准 API 只接受 <code>low</code>、<code>high</code>、<code>max</code>，默认 <code>max</code>，其他值会报错；GLM Coding Plan 端点会把 <code>minimal</code> 映射为 <code>low</code>、<code>medium</code> 映射为 <code>high</code>、<code>xhigh</code> 映射为 <code>max</code>。</p>
+<p><strong>Q7：GLM-5.3 工具调用有什么限制？</strong><br />
+<code>tool_choice</code> 默认且仅支持 <code>auto</code>；可用 <code>stream=True</code> 加 <code>tool_stream=True</code> 流式获取工具参数；多轮工具调用需回传 <code>reasoning_content</code> 以保持交错式思考连贯。</p>
+<p><strong>Q8：国内怎么经 tryallapi 调用 GLM-5.3？</strong><br />
+OpenAI 兼容用 <code>base_url=https://tryallapi.com/v1</code>，Anthropic SDK 与 Claude Code 用 <code>https://tryallapi.com</code>，Key 放在 <code>TRYALLAPI_KEY</code>，模型填 <code>glm-5.3</code>；计费 ≈ 基价 $1.40 / $4.40 × 分组倍率（0.6～2.2），以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-6-sol-api/">GPT-6 Sol API 国内中转调用指南与价格</a>：gpt-6-sol 官方价 $2/$10、105万上下文，支持 none 推理，附国内中转调用代码</li>
+<li><a href="/claude-fable-5-1-api/">Claude Fable 5.1 API 国内中转调用指南与价格</a>：Fable 5.1 缓存读降75%：价格、3项破坏性变更与国内调用代码</li>
+<li><a href="/gemini-3.8-flash-api/">Gemini 3.8 Flash API 国内中转调用指南与价格</a>：gemini-3.8-flash限时价$0.75/$3.75，2027年翻倍；默认medium不支持minimal</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://docs.bigmodel.cn/cn/guide/models/text/glm-5.3" target="_blank" rel="noopener noreferrer">GLM-5.3 模型页</a> · <a href="https://docs.bigmodel.cn/cn/guide/start/pricing" target="_blank" rel="noopener noreferrer">智谱 API 定价</a> · <a href="https://docs.bigmodel.cn/cn/guide/start/migrate-to-glm-new" target="_blank" rel="noopener noreferrer">迁移至 GLM-5.3</a> · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/thinking" target="_blank" rel="noopener noreferrer">深度思考</a> · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/thinking-mode" target="_blank" rel="noopener noreferrer">思考模式</a> · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/function-calling" target="_blank" rel="noopener noreferrer">工具调用</a> · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/stream-tool" target="_blank" rel="noopener noreferrer">工具流式输出</a> · <a href="https://docs.bigmodel.cn/cn/guide/capabilities/cache" target="_blank" rel="noopener noreferrer">上下文缓存</a> · <a href="https://docs.bigmodel.cn/cn/guide/develop/claude/introduction" target="_blank" rel="noopener noreferrer">Claude API 兼容</a></li>
+<li>国际站：<a href="https://docs.z.ai/guides/llm/glm-5.3" target="_blank" rel="noopener noreferrer">Z.ai GLM-5.3</a> · <a href="https://docs.z.ai/guides/overview/pricing" target="_blank" rel="noopener noreferrer">Z.ai Pricing</a> · <a href="https://z.ai/blog/glm-5.3" target="_blank" rel="noopener noreferrer">GLM-5.3 技术博客</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-06｜最后更新：2026-10-06｜更新日志：2026-10-06 首版（价格与参数取自智谱开放平台、Z.ai 官方文档与 tryallapi.com 公开接口，取数时间 2026-10-06，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>GLM-5.3 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">查看 GLM-5.3 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=glm-5.3-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

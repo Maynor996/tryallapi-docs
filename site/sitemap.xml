@@ -2,8 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://docs.tryallapi.com/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://docs.tryallapi.com/gpt-6-sol-api/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.tryallapi.com/claude-fable-5-1-api/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.tryallapi.com/gemini-3.8-flash-api/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.tryallapi.com/glm-5.3-api/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://docs.tryallapi.com/doubao-seed-2-1-pro-api/</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://docs.tryallapi.com/claude-sonnet-5-5-api/</loc>

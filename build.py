@@ -29,10 +29,11 @@ TITLE_TPL = "{name} API 国内中转调用指南：价格、教程与代码（20
 TITLE_MAX = 32      # 加权长度：汉字/全角 = 1，ASCII = 0.5
 DESC_MAX = 80       # 描述按字符数计（不加权），≤80
 RELATED_N = 6
-VENDOR_ORDER = ["OpenAI", "Anthropic", "Google", "DeepSeek", "xAI", "Qwen", "Moonshot", "Xiaomi", "Tencent", "MiniMax"]
+VENDOR_ORDER = ["OpenAI", "Anthropic", "Google", "DeepSeek", "xAI", "Qwen", "Moonshot", "Xiaomi", "Tencent", "MiniMax", "ByteDance", "Zhipu"]
 VENDOR_LABEL = {"OpenAI": "OpenAI", "Anthropic": "Anthropic（Claude）", "Google": "Google（Gemini）",
                 "DeepSeek": "DeepSeek", "xAI": "xAI（Grok）", "Qwen": "阿里通义（Qwen）", "Moonshot": "Moonshot（Kimi）",
-                "Xiaomi": "小米（MiMo）", "Tencent": "腾讯混元（Hy）", "MiniMax": "MiniMax"}
+                "Xiaomi": "小米（MiMo）", "Tencent": "腾讯混元（Hy）", "MiniMax": "MiniMax",
+                "ByteDance": "字节跳动（豆包 Seed）", "Zhipu": "智谱（GLM）"}
 FORBIDDEN = ["待填", "待核对", "TODO", "TBD", "fonts.googleapis", "fonts.gstatic"]
 
 ROOT = Path(__file__).resolve().parent

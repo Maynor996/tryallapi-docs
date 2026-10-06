@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Fable 5.1 API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Claude Fable 5.1 API 价格与国内调用：$10/$50、缓存读$0.25、1M上下文，附迁移要点与代码">
+<link rel="canonical" href="https://docs.tryallapi.com/claude-fable-5-1-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Claude Fable 5.1 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Claude Fable 5.1 API 价格与国内调用：$10/$50、缓存读$0.25、1M上下文，附迁移要点与代码">
+<meta property="og:url" content="https://docs.tryallapi.com/claude-fable-5-1-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/claude-fable-5-1-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude Fable 5.1 API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Claude Fable 5.1 API 价格与国内调用：$10/$50、缓存读$0.25、1M上下文，附迁移要点与代码">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/claude-fable-5-1-api.png">
+<meta property="article:published_time" content="2026-10-06">
+<meta property="article:modified_time" content="2026-10-06">
+<meta property="article:section" content="Anthropic">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Claude Fable 5.1 API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Claude Fable 5.1 API 价格与国内调用：$10/$50、缓存读$0.25、1M上下文，附迁移要点与代码",
+   "image": [
+    "https://docs.tryallapi.com/og/claude-fable-5-1-api.png"
+   ],
+   "datePublished": "2026-10-06",
+   "dateModified": "2026-10-06",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/claude-fable-5-1-api/",
+   "url": "https://docs.tryallapi.com/claude-fable-5-1-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Claude Fable 5.1 API（claude-fable-5-1）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Claude Fable 5.1 API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/claude-fable-5-1-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Claude Fable 5.1 的模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Claude API、Google Cloud、Microsoft Foundry、Claude Platform on AWS 和 tryallapi.com 都是 claude-fable-5-1；Amazon Bedrock 为 anthropic.claude-fable-5-1。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Fable 5.1 官方价格是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "每百万 tokens 输入 $10、输出 $50、5 分钟缓存写 $12.50、1 小时缓存写 $20、缓存读 $0.25；Batch API 为 $5 / $25。除缓存读外与 Fable 5 同价。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "1M tokens 上下文（默认即最大，整窗按标准价计费），同步 Messages API 最大输出 128K tokens。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Claude Fable 5.1 什么时候发布？知识截止到什么时候？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "2026-09-01 发布，官方承诺退役不早于 2027-09-01；可靠知识截止与训练数据截止均为 2026 年 6 月。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "能关闭思考吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不能。Fable 5.1 的 adaptive thinking 始终开启，传 disabled 会返回 400；想省 tokens 就把 effort 降到 medium 或 low。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "从 Fable 5 迁移要改哪些代码？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "改模型名之后，去掉 tool_choice 的 any / tool，保证对话历史只追加、思考块原样回传，重新调 effort，并在 Agent 循环中留意一轮只发一个工具调用的情况，最后重跑评测。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么调用 Claude Fable 5.1？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "在 tryallapi.com 生成 Key：Anthropic 协议 base_url=https://tryallapi.com，OpenAI 兼容 base_url=https://tryallapi.com/v1，模型 claude-fable-5-1；Claude Code 设置 ANTHROPIC_BASE_URL 与 ANTHROPIC_AUTH_TOKEN 即可。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi.com 上怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "标定基价与官方一致（$10 / $50 / 缓存读 $0.25），实际 ≈ 基价 × 分组倍率；2026-10-06 可见 Claude-Code-1（0.35294）到 AWS-Claude-3 / Anthropic-Claude-1（2.2）等分组，以控制台为准。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Fable 5.1 和 Opus 5.5 怎么选？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "官方建议多数负载先用 Opus 5.5（$4 / $20，延迟 Moderate）；高难度推理、长周期 Agent，或 Opus 5.5 调高 effort 后评测仍不达标时，再用 Fable 5.1（$10 / $50，延迟 Slower）。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Claude Fable 5.1 API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">Anthropic（Claude） · <code>claude-fable-5-1</code></p>
+<h1>Claude Fable 5.1 API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-06">2026-10-06</time> · 更新 <time datetime="2026-10-06">2026-10-06</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。Claude Fable 5.1 的参数、价格与行为变更来自 Anthropic 官方文档（模型总览、模型页、What's new、定价页、effort 文档）与 anthropic.com 官方发布文章；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-06（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>Claude Fable 5.1 于 2026-09-01 发布，是 Anthropic 当前能力最强的公开可用模型，官方定位是「高难度推理与长周期 Agent 任务」。它和 Fable 5 输入、输出同价（$10 / $50），但<strong>缓存读取只要基础输入价的 2.5%</strong>，比 Fable 5 便宜 75%，长会话 Agent 的总成本因此明显下降。代价是 3 项破坏性变更：强制工具调用直接 400、旧模型读不了它的思考块、改动历史会让思考块失效。本文先讲这些变化，再给国内经 tryallapi.com 调用的价格与代码。</p>
+<hr />
+<h2>claude-fable-5-1 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>claude-fable-5-1</code>（Bedrock：<code>anthropic.claude-fable-5-1</code>；Google Cloud / Microsoft Foundry / Claude Platform on AWS 同为 <code>claude-fable-5-1</code>）</td>
+<td><a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener noreferrer">官方模型页</a></td>
+</tr>
+<tr>
+<td>发布 / 退役</td>
+<td>2026-09-01 发布；退役不早于 2027-09-01</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>上下文 / 最大输出</td>
+<td>1M tokens（整窗按标准价）/ 128K（同步 Messages API）</td>
+<td><a href="https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1" target="_blank" rel="noopener noreferrer">What's new</a></td>
+</tr>
+<tr>
+<td>思考</td>
+<td>Adaptive thinking 始终开启；默认 effort=<code>high</code>，支持 <code>low</code> / <code>medium</code> / <code>high</code> / <code>xhigh</code> / <code>max</code></td>
+<td><a href="https://platform.claude.com/docs/en/build-with-claude/effort" target="_blank" rel="noopener noreferrer">Effort 文档</a></td>
+</tr>
+<tr>
+<td>输入 → 输出</td>
+<td>文本 + 图片 → 文本</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>可靠知识截止 2026 年 6 月；训练数据截止 2026 年 6 月</td>
+<td><a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener noreferrer">模型总览</a></td>
+</tr>
+<tr>
+<td>延迟（官方相对值）</td>
+<td>Slower（当前阵容中最慢档）</td>
+<td>模型总览</td>
+</tr>
+<tr>
+<td>官方价（每百万 tokens）</td>
+<td>输入 $10；输出 $50；5 分钟缓存写 $12.50；1 小时缓存写 $20；缓存读 $0.25；Batch 五折（$5 / $25）</td>
+<td><a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">官方定价</a></td>
+</tr>
+<tr>
+<td>Tokenizer</td>
+<td>与 Fable 5 相同（Opus 4.7 引入），同样文本比 Opus 4.7 之前的模型多约 30% tokens</td>
+<td>What's new</td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong>；端点 <code>anthropic</code>（/v1/messages）与 <code>openai</code>（/v1/chat/completions）</td>
+<td><code>/api/pricing</code> 2026-10-06</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td>OpenAI 兼容：<code>https://tryallapi.com/v1</code>；Anthropic / Claude Code：<code>https://tryallapi.com</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>官方价 $10 / $50，与 Fable 5 一致；缓存读从 $1 降到 $0.25，Anthropic 官方估算典型负载总成本降约 25%，重度 Agent 负载最多降约 45%。</li>
+<li>从 Fable 5 迁移不能只改模型名：<code>tool_choice</code> 为 <code>any</code> / <code>tool</code> 会 400，思考块只能「向上」跨模型保留，对话历史必须只追加。</li>
+<li>tryallapi.com 上 Fable 5.1 的标定基价与官方一致，实际扣费 ≈ 基价 × 分组倍率（2026-10-06 可见 0.35294～2.2），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、从 Fable 5 迁移：3 项破坏性变更</h2>
+<p>官方 What's new 把 Fable 5.1 相对 Fable 5 的变化分成「3 项破坏性 + 5 项新增」。先看会让旧代码出错的 3 项：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>变更</th>
+<th>旧写法会怎样</th>
+<th>新写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不支持强制工具调用</td>
+<td><code>tool_choice</code> 为 <code>{&quot;type&quot;:&quot;any&quot;}</code> 或 <code>{&quot;type&quot;:&quot;tool&quot;,&quot;name&quot;:&quot;...&quot;}</code> → 400 <code>invalid_request_error</code>（token 计数接口同样校验）</td>
+<td>保留 <code>auto</code>（默认）或 <code>none</code>；要合法 JSON 用 <code>strict: true</code> 的 strict tool use 或结构化输出；在提示词里写清「用 X 工具回答」</td>
+</tr>
+<tr>
+<td>旧模型读不了 Fable 5.1 的思考块</td>
+<td>对话从 Fable 5.1 切回 Fable 5 / Opus 5 等旧模型，这些轮次的推理会丢失；无法读取的块会被 API 静默丢弃（不计入 <code>input_tokens</code>、不计费）</td>
+<td>中途换模型只做「向上切换」；加 <code>thinking-binding-controls-2026-08-01</code> beta 头可在 <code>input_transformations</code> 里看到被丢弃的块</td>
+</tr>
+<tr>
+<td>改动历史会让思考块失效</td>
+<td>修改思考块之前的 <code>system</code>、<code>tools</code> 或早先消息 → 下一次请求 400（报错信息含 <code>The block is bound to a different conversation</code>）</td>
+<td>对话只追加；用会话中途的 system message / 中途工具变更代替改写；用服务端 compaction 或 context editing 裁剪上下文</td>
+</tr>
+</tbody>
+</table></div>
+<p>关于第 3 项的生效范围：官方说明该校验对 <strong>2026-08-31 及之后创建的账号</strong>强制执行；更早的账号只记录不匹配，除非请求里设置了 <code>thinking.block_binding.prefix_mismatch_behavior</code>。想先摸清自己的代码有没有改历史，可以带上述 beta 头并设 <code>prefix_mismatch_behavior: &quot;drop_block&quot;</code> 跑一轮，再看 <code>input_transformations</code> 里有没有 <code>reason: &quot;prefix_binding_mismatch&quot;</code>。</p>
+<p>以下几种常见写法都会让之后的思考块全部失效，迁移前逐项排查：</p>
+<ul>
+<li>编辑、重排或删除较早的轮次，同时保留后面的轮次；</li>
+<li>每次请求往早先轮次里临时塞一行提醒，下一次再删掉；</li>
+<li>同一会话中重建顶层 <code>system</code> 或 <code>tools</code>；</li>
+<li>图片 / 文档 URL 在后续请求里返回了不同的字节（校验看字节，不看 URL）。</li>
+</ul>
+<p>反过来，这些操作<strong>不会</strong>破坏思考块：从最早处成段删除思考块、服务端 compaction / context editing、移动 <code>cache_control</code> 标记、在请求之间修改 <code>effort</code>。</p>
+<p>与 Fable 5 <strong>保持不变</strong>、但从更老模型迁来的人最容易踩的限制：</p>
+<ul>
+<li><code>thinking: {&quot;type&quot;: &quot;enabled&quot;, &quot;budget_tokens&quot;: ...}</code> 和 <code>thinking: {&quot;type&quot;: &quot;disabled&quot;}</code> 都返回 400，省略 <code>thinking</code> 或传 <code>{&quot;type&quot;: &quot;adaptive&quot;}</code>；</li>
+<li>预填 assistant 回复（prefill）返回 400；</li>
+<li><code>temperature</code>、<code>top_p</code>、<code>top_k</code> 设为非默认值返回 400；</li>
+<li><code>thinking.display</code> 默认 <code>&quot;omitted&quot;</code>，可选 <code>&quot;summarized&quot;</code>，原始思维链不会返回；</li>
+<li>最小可缓存 prompt 长度 512 tokens。</li>
+</ul>
+<hr />
+<h2>二、缓存读 2.5%：为什么 Fable 5.1 跑长 Agent 更省钱</h2>
+<p>Fable 5.1 的缓存读倍率是 **0.025×**基础输入价，而其他 Claude 模型是 0.1×（Opus 5.5 为 0.05×）。缓存写倍率和 512 tokens 起缓存的门槛都没变。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项（每百万 tokens）</th>
+<th>Fable 5</th>
+<th>Fable 5.1</th>
+<th>Opus 5.5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入 / 输出</td>
+<td>$10 / $50</td>
+<td>$10 / $50</td>
+<td>$4 / $20</td>
+</tr>
+<tr>
+<td>5 分钟缓存写</td>
+<td>$12.50</td>
+<td>$12.50</td>
+<td>$5</td>
+</tr>
+<tr>
+<td>1 小时缓存写</td>
+<td>$20</td>
+<td>$20</td>
+<td>$8</td>
+</tr>
+<tr>
+<td>缓存读</td>
+<td>$1</td>
+<td><strong>$0.25</strong></td>
+<td>$0.20</td>
+</tr>
+<tr>
+<td>Batch（输入 / 输出）</td>
+<td>$5 / $25</td>
+<td>$5 / $25</td>
+<td>$2 / $10</td>
+</tr>
+</tbody>
+</table></div>
+<p>按官方价做个粗算：一次 Agent 循环请求带 200K tokens 已缓存前缀 + 5K 新输入 + 2K 输出——</p>
+<ul>
+<li>Fable 5：缓存读 0.2M × $1 = $0.20，新输入 $0.05，输出 $0.10，合计 <strong>$0.35</strong>；</li>
+<li>Fable 5.1：缓存读 0.2M × $0.25 = $0.05，新输入 $0.05，输出 $0.10，合计 <strong>$0.20</strong>。</li>
+</ul>
+<p>Agent 循环里每一步都会重读整段上下文，缓存读占比越高，降幅越接近官方给出的「最多约 45%」。要吃到这部分优惠，前提正是上一节的「只追加」：前缀不变，缓存才命中，思考块也才有效。</p>
+<p>其他官方计费规则：</p>
+<ul>
+<li>1M 上下文整窗按标准单价计费，不另收长上下文溢价；</li>
+<li><code>inference_geo: &quot;us&quot;</code>（仅美国推理）所有计费项 ×1.1；</li>
+<li>被安全分类器拒绝（<code>stop_reason: &quot;refusal&quot;</code>）且发生在任何输出之前的请求，在误报率低的类别中会计费（2026-09-24 之前不计费）；流式中途拒绝按已输入和已输出 tokens 正常计费。官方允许的 fallback 目标是 Claude Opus 4.8 和 Claude Opus 5。</li>
+</ul>
+<hr />
+<h2>三、effort、逐条消息调档与进度更新</h2>
+<p>Fable 5.1 思考始终开启，<strong>effort 是控制深度与成本的主开关</strong>。官方建议：从默认 <code>high</code> 起步；最吃能力的 Agent / 编码任务升到 <code>xhigh</code> 或 <code>max</code>；常规或延迟敏感任务在评测确认质量不降后降到 <code>medium</code> / <code>low</code>。<code>high</code> 及以上要把 <code>max_tokens</code> 设大，它是「思考 + 正文」的硬上限。</p>
+<p>另外 3 项新增能力（均为 beta）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>beta 头</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>逐条消息调 effort</td>
+<td><code>mid-conversation-output-config-2026-07-01</code></td>
+<td>插入一条 <code>{&quot;role&quot;:&quot;system&quot;,&quot;content&quot;:[],&quot;output_config&quot;:{&quot;effort&quot;:&quot;low&quot;}}</code>，从下一个 user 轮生效，<strong>不打断 prompt cache</strong>；Fable 5 不支持，会返回 400</td>
+</tr>
+<tr>
+<td>单轮生效的 system message</td>
+<td><code>mid-conversation-system-clear-at-2026-08-21</code></td>
+<td>system 消息加 <code>clear_at: &quot;next_user_message&quot;</code>，只对当前轮生效，之后不再渲染、不计输入 tokens，适合工具循环里的临时提醒</td>
+</tr>
+<tr>
+<td>工具调用之间的进度更新</td>
+<td><code>thinking-display-updates-2026-08-18</code></td>
+<td><code>thinking.display</code> 设为 <code>&quot;updates&quot;</code>，只返回进度说明、推理仍隐藏；默认 <code>&quot;omitted&quot;</code> 下这些块为空，长任务前端会显得「没动静」</td>
+</tr>
+</tbody>
+</table></div>
+<p>官方特别提示：在 Fable 5.1 上调 effort 优先用逐条消息的方式；改顶层 <code>output_config.effort</code> 会让缓存重来，而且模型倾向于延续之前轮次的风格，调档效果更弱。</p>
+<p>不改代码也会出现的行为差异（相对 Fable 5）：</p>
+<ul>
+<li><strong>并行工具调用更不稳定</strong>：可能一轮只发一个工具调用，增加轮次与耗时，可在提示词里加一句「批量执行相互独立的读取」；</li>
+<li><strong>长工具链中的进度说明更少</strong>，effort 越高越明显；</li>
+<li><strong><code>low</code> effort 下更常凭记忆作答</strong>，少调用搜索 / 检索工具；</li>
+<li><strong>改小处也倾向重写整个文件</strong>，输出 tokens 更多；</li>
+<li>聊天中更少用粗体、标题和列表；总结文档时更可能不加引号地复述原文。</li>
+</ul>
+<p>另外两点合规与数据相关信息：Fable 5.1 生成的文本在所有平台带 Anthropic 的统计文本水印（不增加 tokens、不含用户信息）；模型页注明它采用 30 天数据保留，未经 Anthropic 明确授权不提供零数据保留（ZDR）。</p>
+<hr />
+<h2>四、Claude Fable 5.1 API 价格：官方 vs tryallapi.com</h2>
+<h3>官方价（2026-10-06 核对）</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计费项</th>
+<th>每百万 tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>$10.00</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>$50.00</td>
+</tr>
+<tr>
+<td>5 分钟缓存写</td>
+<td>$12.50</td>
+</tr>
+<tr>
+<td>1 小时缓存写</td>
+<td>$20.00</td>
+</tr>
+<tr>
+<td>缓存读</td>
+<td>$0.25</td>
+</tr>
+<tr>
+<td>Batch API</td>
+<td>输入 $5、输出 $25（五折）</td>
+</tr>
+<tr>
+<td>仅美国推理（inference_geo）</td>
+<td>所有计费项 1.1 倍</td>
+</tr>
+</tbody>
+</table></div>
+<h3>tryallapi.com 分组估算（≈ 基价 × 分组倍率）</h3>
+<p><code>claude-fable-5-1</code>：<code>model_ratio=5</code>、<code>completion_ratio=5</code>、<code>cache_ratio=0.025</code>、5 分钟缓存写 1.25、1 小时缓存写 2，换算后标定基价与官方一致（$10 / $50 / 缓存读 $0.25）。2026-10-06 可见分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude-Code-1</td>
+<td>0.35294</td>
+<td>≈ $3.53</td>
+<td>≈ $17.65</td>
+<td>≈ $0.088</td>
+</tr>
+<tr>
+<td>Claude-Code-2</td>
+<td>0.58824</td>
+<td>≈ $5.88</td>
+<td>≈ $29.41</td>
+<td>≈ $0.147</td>
+</tr>
+<tr>
+<td>AWS-Claude-2</td>
+<td>1.76472</td>
+<td>≈ $17.65</td>
+<td>≈ $88.24</td>
+<td>≈ $0.441</td>
+</tr>
+<tr>
+<td>AWS-Claude-3</td>
+<td>2.2</td>
+<td>$22.00</td>
+<td>$110.00</td>
+<td>$0.55</td>
+</tr>
+<tr>
+<td>Anthropic-Claude-1</td>
+<td>2.2</td>
+<td>$22.00</td>
+<td>$110.00</td>
+<td>$0.55</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。缓存写同样按倍率折算，例如 Claude-Code-1 分组 5 分钟缓存写 ≈ $4.41、1 小时缓存写 ≈ $7.06。Claude-Code 分组倍率低，适合个人开发与 Claude Code；AWS / Anthropic 分组对应不同上游线路，按稳定性需求选择。<strong>以控制台为准。</strong></p>
+<hr />
+<h2>五、Claude Fable 5.1 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Anthropic SDK（推荐，原生支持 effort / thinking）</h3>
+<pre><code class="language-python"># pip install -U anthropic
+import os
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com&quot;,   # Anthropic 协议不带 /v1
+)
+
+# max_tokens 较大时用流式，避免长请求超时
+with client.messages.stream(
+    model=&quot;claude-fable-5-1&quot;,
+    max_tokens=32000,                      # 思考 + 正文的硬上限，high 及以上要留足
+    output_config={&quot;effort&quot;: &quot;high&quot;},      # low / medium / high / xhigh / max
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;审查这个仓库的数据库迁移脚本，列出可能导致数据丢失的步骤&quot;}],
+) as stream:
+    for text in stream.text_stream:
+        print(text, end=&quot;&quot;, flush=True)
+</code></pre>
+<p>注意：不要传 <code>thinking: {&quot;type&quot;: &quot;disabled&quot;}</code>、<code>temperature</code> / <code>top_p</code> / <code>top_k</code>，也不要预填 assistant 回复；<code>tool_choice</code> 只用 <code>auto</code> 或 <code>none</code>。beta 功能（逐条调 effort、<code>display: &quot;updates&quot;</code>）经聚合透传时，先用一条短请求确认返回结构再上线。</p>
+<h3>3. OpenAI 兼容（Cursor、Dify、Cherry Studio 等）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;claude-fable-5-1&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;把这份季度财报里的关键指标整理成表格，并指出同比变化最大的三项&quot;}],
+    max_tokens=16000,
+)
+print(r.choices[0].message.content)
+</code></pre>
+<p>很多框架会默认带 <code>temperature=0.7</code> 或强制工具调用，接入 Fable 5.1 前先在框架设置里关掉。</p>
+<h3>4. cURL（Anthropic Messages）</h3>
+<pre><code class="language-bash">curl https://tryallapi.com/v1/messages \
+  -H &quot;x-api-key: $TRYALLAPI_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;model&quot;:&quot;claude-fable-5-1&quot;,&quot;max_tokens&quot;:2048,&quot;output_config&quot;:{&quot;effort&quot;:&quot;low&quot;},&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;ping&quot;}]}'
+</code></pre>
+<h3>5. Claude Code</h3>
+<pre><code class="language-bash">export ANTHROPIC_BASE_URL=&quot;https://tryallapi.com&quot;
+export ANTHROPIC_AUTH_TOKEN=&quot;$TRYALLAPI_KEY&quot;
+export ANTHROPIC_MODEL=&quot;claude-fable-5-1&quot;
+claude
+</code></pre>
+<p>Anthropic 官方说明 Fable 5.1 在 Claude Code 中默认 High effort。Claude Code 会自动保持对话前缀不变，所以第一节的「改历史导致思考块失效」问题主要出现在自己拼 <code>messages</code> 的自研 Agent 里。</p>
+<h3>6. 对照：官方直连</h3>
+<pre><code class="language-python">client = anthropic.Anthropic(api_key=os.environ[&quot;ANTHROPIC_API_KEY&quot;])  # 默认 https://api.anthropic.com
+</code></pre>
+<hr />
+<h2>六、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400：<code>tool_choice: type &quot;tool&quot; and &quot;any&quot; are not supported for this model.</code></td>
+<td>强制工具调用</td>
+<td>改 <code>auto</code> + strict tool use，或改用结构化输出</td>
+</tr>
+<tr>
+<td>400：<code>The block is bound to a different conversation</code></td>
+<td>回放思考块前改动了 system / tools / 历史消息</td>
+<td>对话只追加；或用 <code>prefix_mismatch_behavior: &quot;drop_block&quot;</code> 丢弃失效块</td>
+</tr>
+<tr>
+<td>400：thinking 相关</td>
+<td>传了 <code>disabled</code> 或 <code>enabled</code> + <code>budget_tokens</code></td>
+<td>省略 <code>thinking</code> 或传 <code>{&quot;type&quot;: &quot;adaptive&quot;}</code></td>
+</tr>
+<tr>
+<td>400：temperature 相关</td>
+<td>SDK / 框架默认带了非默认采样参数</td>
+<td>删掉 <code>temperature</code> / <code>top_p</code> / <code>top_k</code></td>
+</tr>
+<tr>
+<td>400：prefill 相关</td>
+<td>最后一条是 assistant 预填</td>
+<td>去掉预填，改在提示词里约束格式</td>
+</tr>
+<tr>
+<td>输出被截断或正文为空</td>
+<td><code>max_tokens</code> 被思考 tokens 用完</td>
+<td>调大 <code>max_tokens</code> 并使用流式</td>
+</tr>
+<tr>
+<td>长任务前端「没动静」</td>
+<td><code>thinking.display</code> 默认 <code>omitted</code>，进度块为空</td>
+<td>用 <code>display: &quot;updates&quot;</code>（beta）或在提示词里要求阶段性汇报</td>
+</tr>
+<tr>
+<td><code>stop_reason: &quot;refusal&quot;</code></td>
+<td>安全分类器拒绝</td>
+<td>改写请求，或按官方方案 fallback 到 Opus 4.8 / Opus 5</td>
+</tr>
+<tr>
+<td>401</td>
+<td>tryallapi Key 与 Anthropic 官方 Key 混用</td>
+<td>检查 <code>ANTHROPIC_AUTH_TOKEN</code> / <code>x-api-key</code></td>
+</tr>
+<tr>
+<td>404</td>
+<td>Base URL 写错（Anthropic 协议多加了 <code>/v1</code>）</td>
+<td>Anthropic SDK / Claude Code 用 <code>https://tryallapi.com</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、Claude Fable 5.1 FAQ</h2>
+<p><strong>Q1：Claude Fable 5.1 的模型 ID 是什么？</strong><br />
+Claude API、Google Cloud、Microsoft Foundry、Claude Platform on AWS 和 tryallapi.com 都是 <code>claude-fable-5-1</code>；Amazon Bedrock 为 <code>anthropic.claude-fable-5-1</code>。</p>
+<p><strong>Q2：Claude Fable 5.1 官方价格是多少？</strong><br />
+每百万 tokens 输入 $10、输出 $50、5 分钟缓存写 $12.50、1 小时缓存写 $20、缓存读 $0.25；Batch API 为 $5 / $25。除缓存读外与 Fable 5 同价。</p>
+<p><strong>Q3：上下文和最大输出是多少？</strong><br />
+1M tokens 上下文（默认即最大，整窗按标准价计费），同步 Messages API 最大输出 128K tokens。</p>
+<p><strong>Q4：Claude Fable 5.1 什么时候发布？知识截止到什么时候？</strong><br />
+2026-09-01 发布，官方承诺退役不早于 2027-09-01；可靠知识截止与训练数据截止均为 2026 年 6 月。</p>
+<p><strong>Q5：能关闭思考吗？</strong><br />
+不能。Fable 5.1 的 adaptive thinking 始终开启，传 <code>disabled</code> 会返回 400；想省 tokens 就把 effort 降到 <code>medium</code> 或 <code>low</code>。</p>
+<p><strong>Q6：从 Fable 5 迁移要改哪些代码？</strong><br />
+改模型名之后，去掉 <code>tool_choice</code> 的 <code>any</code> / <code>tool</code>，保证对话历史只追加、思考块原样回传，重新调 effort，并在 Agent 循环中留意一轮只发一个工具调用的情况，最后重跑评测。</p>
+<p><strong>Q7：国内怎么调用 Claude Fable 5.1？</strong><br />
+在 tryallapi.com 生成 Key：Anthropic 协议 <code>base_url=https://tryallapi.com</code>，OpenAI 兼容 <code>base_url=https://tryallapi.com/v1</code>，模型 <code>claude-fable-5-1</code>；Claude Code 设置 <code>ANTHROPIC_BASE_URL</code> 与 <code>ANTHROPIC_AUTH_TOKEN</code> 即可。</p>
+<p><strong>Q8：tryallapi.com 上怎么计费？</strong><br />
+标定基价与官方一致（$10 / $50 / 缓存读 $0.25），实际 ≈ 基价 × 分组倍率；2026-10-06 可见 Claude-Code-1（0.35294）到 AWS-Claude-3 / Anthropic-Claude-1（2.2）等分组，以控制台为准。</p>
+<p><strong>Q9：Fable 5.1 和 Opus 5.5 怎么选？</strong><br />
+官方建议多数负载先用 Opus 5.5（$4 / $20，延迟 Moderate）；高难度推理、长周期 Agent，或 Opus 5.5 调高 effort 后评测仍不达标时，再用 Fable 5.1（$10 / $50，延迟 Slower）。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/claude-sonnet-5-5-api/">Claude Sonnet 5.5 API 国内中转调用指南与价格</a>：官方 $2/$10、缓存读 $0.20；1M 上下文、128K 输出，5 项会返回 400 的迁移变更。</li>
+<li><a href="/claude-sonnet-4-6-api/">Claude Sonnet 4.6 API 国内中转调用指南与价格</a>：官方 $3/$15、缓存读 $0.30；Claude Code ANTHROPIC_BASE_URL 配置。</li>
+<li><a href="/claude-opus-5-5-api/">Claude Opus 5.5 API 国内中转调用指南与价格</a>：官方 $4/$20、缓存读 $0.20；Claude Code settings.json 与双协议接入。</li>
+<li><a href="/gpt-6-sol-api/">GPT-6 Sol API 国内中转调用指南与价格</a>：gpt-6-sol 官方价 $2/$10、105万上下文，支持 none 推理，附国内中转调用代码</li>
+<li><a href="/gemini-3.8-flash-api/">Gemini 3.8 Flash API 国内中转调用指南与价格</a>：gemini-3.8-flash限时价$0.75/$3.75，2027年翻倍；默认medium不支持minimal</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener noreferrer">Claude Fable 5.1 模型页</a> · <a href="https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1" target="_blank" rel="noopener noreferrer">What's new in Claude Fable 5.1</a> · <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener noreferrer">模型总览</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Claude 定价</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/effort" target="_blank" rel="noopener noreferrer">Effort 参数</a> · <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank" rel="noopener noreferrer">官方发布：Introducing Claude Fable 5.1 and Claude Mythos 5.1</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入海外大模型的实践问题。</em>
+<em>首发：2026-10-06｜最后更新：2026-10-06｜更新日志：2026-10-06 首版（价格与倍率取自 Anthropic 官方文档与 tryallapi.com 公开接口，取数时间 2026-10-06，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Claude Fable 5.1 API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">查看 Claude Fable 5.1 API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=claude-fable-5-1-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

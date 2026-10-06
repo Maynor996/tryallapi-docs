@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini 3.8 Flash API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="Gemini 3.8 Flash API 国内调用：限时价格$0.75/$3.75、2027年翻倍，thinking_level与中转代码">
+<link rel="canonical" href="https://docs.tryallapi.com/gemini-3.8-flash-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Gemini 3.8 Flash API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="Gemini 3.8 Flash API 国内调用：限时价格$0.75/$3.75、2027年翻倍，thinking_level与中转代码">
+<meta property="og:url" content="https://docs.tryallapi.com/gemini-3.8-flash-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/gemini-3.8-flash-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gemini 3.8 Flash API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="Gemini 3.8 Flash API 国内调用：限时价格$0.75/$3.75、2027年翻倍，thinking_level与中转代码">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/gemini-3.8-flash-api.png">
+<meta property="article:published_time" content="2026-10-06">
+<meta property="article:modified_time" content="2026-10-06">
+<meta property="article:section" content="Google">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "Gemini 3.8 Flash API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "Gemini 3.8 Flash API 国内调用：限时价格$0.75/$3.75、2027年翻倍，thinking_level与中转代码",
+   "image": [
+    "https://docs.tryallapi.com/og/gemini-3.8-flash-api.png"
+   ],
+   "datePublished": "2026-10-06",
+   "dateModified": "2026-10-06",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/gemini-3.8-flash-api/",
+   "url": "https://docs.tryallapi.com/gemini-3.8-flash-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "Gemini 3.8 Flash API（gemini-3.8-flash）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Gemini 3.8 Flash API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/gemini-3.8-flash-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Gemini 3.8 Flash 的模型 ID 是什么？有 preview 后缀吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "gemini-3.8-flash，是 Stable 版，没有 -preview 后缀。2026-09-02 以 GA 形式发布，tryallapi.com 上同名。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Gemini 3.8 Flash 官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "2026-12-31 前的标准价为每百万 tokens 输入 $0.75、输出 $3.75（含思考 tokens）、缓存读取 $0.075；2027-01-01 起为 $1.50 / $7.50 / $0.15。Batch 和 Flex 按标准价五折，Priority 为 $1.35 / $6.75。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "价格会按 prompt 长度或音频输入分档吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不会。官方价格页对 3.8 Flash 只列了一档，没有 200K 之类的长度阶梯，也没有单独的音频输入价，这一点和 3 Flash Preview、3.1 Pro Preview 不同。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出有多长？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "输入上限 1,048,576 tokens，输出上限 65,536 tokens。输入支持文本、图片、视频、音频和 PDF，输出只有文本。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "thinking 能关掉吗？支持哪些档位？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "不能关闭。可选 low、medium、high，默认 medium；minimal 不支持，传入会报错。旧代码里的 thinking_budget 要换成 thinking_level。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "为什么 3.8 Flash 有时比 3.7 Flash 更费 token？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "这是官方的设计取向：复杂任务中它会拆分推理步骤、反复调用工具并自我验证，effort 越高越明显。日常任务用 low 可以减少消耗，官方也说明 3.7 Flash 会继续完整支持。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "OpenAI 兼容格式：base_url=https://tryallapi.com/v1，Key 用 TRYALLAPI_KEY，模型填 gemini-3.8-flash。Gemini 原生格式：POST https://tryallapi.com/v1beta/models/gemini-3.8-flash:generateContent，请求头 x-goog-api-key。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "tryallapi 怎么计费？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "基价 $0.75 / $3.75 / 缓存读 $0.075（等于官方限时价）× 分组倍率，2026-10-06 共有 9 个分组，倍率 0.14706～1.91178，以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">Gemini 3.8 Flash API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">Google（Gemini） · <code>gemini-3.8-flash</code></p>
+<h1>Gemini 3.8 Flash API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-06">2026-10-06</time> · 更新 <time datetime="2026-10-06">2026-10-06</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。gemini-3.8-flash 的模型 ID、发布日期、价格、上下文与参数来自 Google 官方的 Gemini API 文档（模型页、价格页、Release notes、What's new 指南）、Google 官方发布博客和 Google DeepMind 模型卡；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-06（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>Google 在 2026-09-02 以正式版（GA）形式发布了 <strong>Gemini 3.8 Flash</strong>（<code>gemini-3.8-flash</code>），官方称它是目前最强的 Flash 模型，主打长周期软件工程、自主 Agent 和复杂的企业工作流。和前几代 Flash 相比，它的 API 有四点需要注意：<strong>限时价只到 2026-12-31，2027 年起翻倍</strong>；<strong>默认思考档位是 <code>medium</code>，不支持 <code>minimal</code>（传了直接报错）</strong>；<strong>官方明确说它“会更卖力”，复杂任务会多花 token</strong>；迁移清单要求去掉 <code>temperature</code>、<code>top_p</code>、<code>top_k</code> 和 <code>thinking_budget</code>。下面逐条说明。</p>
+<hr />
+<h2>gemini-3.8-flash 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>gemini-3.8-flash</code>（Stable 版，无 <code>-preview</code> 后缀）</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash" target="_blank" rel="noopener noreferrer">官方模型页</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>2026-09-02，GA</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener noreferrer">Release notes</a> · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" target="_blank" rel="noopener noreferrer">官方发布博客</a></td>
+</tr>
+<tr>
+<td>输入 / 输出模态</td>
+<td>输入：文本、图片、视频、音频、PDF；输出：仅文本</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>输入上限 1,048,576 tokens；输出上限 65,536 tokens</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>思考</td>
+<td><code>thinking_level</code> 可选 <code>low</code> / <code>medium</code> / <code>high</code>，默认 <code>medium</code>；<code>minimal</code> 不支持，会返回错误</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/latest-model" target="_blank" rel="noopener noreferrer">What's new 指南</a> · <a href="https://ai.google.dev/gemini-api/docs/thinking" target="_blank" rel="noopener noreferrer">Thinking 文档</a></td>
+</tr>
+<tr>
+<td>标准价（每百万 tokens，截至 2026-12-31）</td>
+<td>输入 $0.75；输出 $3.75（含思考 tokens）；缓存读取 $0.075；缓存存储 $0.50 / 百万 tokens / 小时</td>
+<td><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">官方价格页</a></td>
+</tr>
+<tr>
+<td>标准价（2027-01-01 起）</td>
+<td>输入 $1.50；输出 $7.50；缓存读取 $0.15；缓存存储 $1.00 / 百万 tokens / 小时</td>
+<td>官方价格页</td>
+</tr>
+<tr>
+<td>Batch / Flex</td>
+<td>标准价的一半：$0.375 / $1.875 / $0.0375（2027 年起 $0.75 / $3.75 / $0.075）</td>
+<td>官方价格页</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>$1.35 / $6.75 / $0.135（2027 年起 $2.70 / $13.50 / $0.27）</td>
+<td>官方价格页</td>
+</tr>
+<tr>
+<td>内置工具</td>
+<td>代码执行、Computer Use（Preview）、File Search、函数调用、Google Maps 与 Google Search grounding、结构化输出、URL context；不支持 Live API、图片生成和音频生成</td>
+<td>官方模型页</td>
+</tr>
+<tr>
+<td>知识截止</td>
+<td>2026 年 3 月</td>
+<td><a href="https://deepmind.google/models/model-cards/gemini-3-8-flash/" target="_blank" rel="noopener noreferrer">DeepMind 模型卡</a></td>
+</tr>
+<tr>
+<td>官方 Base URL</td>
+<td>原生：<code>https://generativelanguage.googleapis.com/v1beta</code>；OpenAI 兼容：<code>https://generativelanguage.googleapis.com/v1beta/openai/</code></td>
+<td><a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank" rel="noopener noreferrer">OpenAI 兼容文档</a></td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>gemini-3.8-flash</code>；端点类型 <code>gemini</code> + <code>openai</code>；9 个分组</td>
+<td><code>/api/pricing</code> 2026-10-06</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td>OpenAI 兼容：<code>https://tryallapi.com/v1</code>；Gemini 原生：<code>https://tryallapi.com/v1beta</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>3.8 Flash 的官方限时价 $0.75 / $3.75 和 3.7 Flash、3.6 Flash 一样，2027-01-01 起变成 $1.50 / $7.50。价目表<strong>不按 prompt 长度分档</strong>，音频输入也没有单独定价。</li>
+<li>默认 <code>medium</code>，最低只能设到 <code>low</code>，不能用 <code>minimal</code>，思考也关不掉。官方说明它在复杂任务上会主动多想几步、多调几次工具，按输出计费的账单可能比 3.7 Flash 高。</li>
+<li>tryallapi.com 标定的基价正好等于官方限时价（$0.75 / $3.75 / 缓存读 $0.075）。实际价格约为基价 × 分组倍率（0.147～1.91），<strong>以控制台为准</strong>。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、价格结构：限时价、2027 翻倍与四种推理档</h2>
+<p>官方价格页列出 3.8 Flash 的四种计费方式（单位：美元 / 百万 tokens，输出均含思考 tokens）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>档位</th>
+<th>输入</th>
+<th>输出</th>
+<th>缓存读取</th>
+<th>2027-01-01 起（输入 / 输出 / 缓存）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard</td>
+<td>$0.75</td>
+<td>$3.75</td>
+<td>$0.075</td>
+<td>$1.50 / $7.50 / $0.15</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>$0.375</td>
+<td>$1.875</td>
+<td>$0.0375</td>
+<td>$0.75 / $3.75 / $0.075</td>
+</tr>
+<tr>
+<td>Flex</td>
+<td>$0.375</td>
+<td>$1.875</td>
+<td>$0.0375</td>
+<td>$0.75 / $3.75 / $0.075</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>$1.35</td>
+<td>$6.75</td>
+<td>$0.135</td>
+<td>$2.70 / $13.50 / $0.27</td>
+</tr>
+</tbody>
+</table></div>
+<p>缓存存储另计：2026 年内 $0.50 / 百万 tokens / 小时，2027 年起 $1.00。Google Search 和 Google Maps grounding 每月有 5,000 次免费额度（Gemini 3.x 模型共享），超出后 $14 / 1,000 次。免费层（Free Tier）的标准档和 Priority 档也能用 3.8 Flash，但内容会被用于改进 Google 产品。</p>
+<p>和老版本对比：</p>
+<ul>
+<li><strong>同价换代</strong>：3.8、3.7、3.6 Flash 的限时价完全相同。上一代 3.5 Flash 标准价是 $1.50 / $9.00，换到 3.8 Flash 在年底前更便宜。</li>
+<li><strong>没有长度分档</strong>：3.1 Pro Preview 等模型在 prompt 超过 200K 后价格上调，3.8 Flash 的价目表只有一档，1M 上下文全程同价。</li>
+<li><strong>2027 年的预算</strong>：做年度预算时直接按 $1.50 / $7.50 计算更稳妥；Batch / Flex 届时为 $0.75 / $3.75。</li>
+</ul>
+<hr />
+<h2>二、thinking_level：默认 medium，没有 minimal</h2>
+<p>官方 Thinking 文档列出各模型的思考配置，3.8 Flash 与几款常见模型对比如下：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>默认</th>
+<th>可选档位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gemini-3.8-flash</code></td>
+<td>medium</td>
+<td>low、medium、high</td>
+</tr>
+<tr>
+<td><code>gemini-3.7-flash</code></td>
+<td>medium</td>
+<td>low、medium、high</td>
+</tr>
+<tr>
+<td><code>gemini-3.6-flash</code></td>
+<td>medium</td>
+<td>minimal、low、medium、high</td>
+</tr>
+<tr>
+<td><code>gemini-3-flash-preview</code></td>
+<td>high</td>
+<td>minimal、low、medium、high</td>
+</tr>
+</tbody>
+</table></div>
+<p>接入时注意三点：</p>
+<ol>
+<li><strong><code>minimal</code> 会报错</strong>：从 3.6 Flash 或 3 Flash Preview 迁移过来时，如果代码里写死了 <code>minimal</code>，必须改成 <code>low</code>。官方 OpenAI 兼容文档也说明 Gemini 3 系列的思考无法关闭。</li>
+<li><strong>“更卖力”是设计取向</strong>：官方博客和 What's new 指南都提到，3.8 Flash 在复杂任务上会拆成更小的推理步骤、反复调用工具并自我校验，因此可能消耗更多 token，effort 越高越明显。日常任务建议设为 <code>low</code>；以效率为先的负载，官方建议继续使用 3.7 Flash。</li>
+<li><strong><code>max_output_tokens</code> 包含思考 tokens</strong>：上限设得太小，模型可能在思考阶段就被截断，返回空的或不完整的输出，但已生成的思考 tokens 仍会计费。官方建议通过降低 <code>thinking_level</code> 来省钱，而不是压低 <code>max_output_tokens</code>。</li>
+</ol>
+<p>使用 OpenAI 兼容格式时，官方示例用 <code>reasoning_effort=&quot;low&quot;</code> 控制 3.8 Flash 的思考档位。也可以在 <code>extra_body</code> 里传 <code>google.thinking_config</code>，但两者不能同时使用。</p>
+<hr />
+<h2>三、从旧模型迁移到 3.8 Flash 的清单</h2>
+<p>官方 What's new 指南给出的迁移要点：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td>改为 <code>gemini-3.8-flash</code></td>
+</tr>
+<tr>
+<td>采样参数</td>
+<td>去掉 <code>temperature</code>、<code>top_p</code>、<code>top_k</code>（2026-07-21 起已标记弃用）</td>
+</tr>
+<tr>
+<td>思考参数</td>
+<td>用字符串枚举 <code>thinking_level</code> 替换 <code>thinking_budget</code>，且不能用 <code>minimal</code></td>
+</tr>
+<tr>
+<td><code>candidate_count</code></td>
+<td>删除（Gemini 3 及以后不支持）</td>
+</tr>
+<tr>
+<td>多轮对话</td>
+<td>推荐用服务端的 <code>previous_interaction_id</code>；去掉预填（prefill）的 model 回合</td>
+</tr>
+<tr>
+<td>函数调用</td>
+<td>多模态素材放进 response payload；使用 generateContent 时，每个 <code>FunctionResponse</code> 都要带 <code>call_id</code> 和 <code>name</code></td>
+</tr>
+<tr>
+<td>思考签名</td>
+<td>无状态模式下必须原样回传所有 thought 块和签名，不要删改</td>
+</tr>
+</tbody>
+</table></div>
+<p>能力方面，DeepMind 模型卡公布的官方成绩里，3.8 Flash 在 DeepSWE v1.1（长周期软件工程）上得分 73.7%（3.7 Flash 为 65.3%），Terminal-bench 2.1 为 89.4%，HLE-Verified 为 54.9%。另外，Gemini Managed Agents 里的 Antigravity agent 现在默认使用 3.8 Flash。</p>
+<hr />
+<h2>四、Gemini 3.8 Flash API 价格：官方 vs tryallapi.com</h2>
+<p><code>gemini-3.8-flash</code>：<code>model_ratio=0.375</code>、<code>completion_ratio=5</code>、<code>cache_ratio=0.1</code>，换算后基价为输入 $0.75、输出 $3.75、缓存读 $0.075，与官方 2026 年限时标准价一致。按单价计费（<code>quota_type=0</code>），没有长度阶梯，也不区分 Batch / Flex / Priority。2026-10-06 可见的分组如下：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anti-Gemini-1</td>
+<td>0.14706</td>
+<td>$0.110</td>
+<td>$0.551</td>
+<td>$0.011</td>
+</tr>
+<tr>
+<td>Cli-Gemini-1</td>
+<td>0.14706</td>
+<td>$0.110</td>
+<td>$0.551</td>
+<td>$0.011</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-1</td>
+<td>0.35294</td>
+<td>$0.265</td>
+<td>$1.324</td>
+<td>$0.026</td>
+</tr>
+<tr>
+<td>Vertex-Gemini-1</td>
+<td>0.4</td>
+<td>$0.30</td>
+<td>$1.50</td>
+<td>$0.030</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-2</td>
+<td>0.52942</td>
+<td>$0.397</td>
+<td>$1.985</td>
+<td>$0.040</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-3</td>
+<td>0.88236</td>
+<td>$0.662</td>
+<td>$3.309</td>
+<td>$0.066</td>
+</tr>
+<tr>
+<td>Vertex-Gemini-2</td>
+<td>0.9</td>
+<td>$0.675</td>
+<td>$3.375</td>
+<td>$0.068</td>
+</tr>
+<tr>
+<td>Vertex-Gemini-3</td>
+<td>1.8</td>
+<td>$1.35</td>
+<td>$6.75</td>
+<td>$0.135</td>
+</tr>
+<tr>
+<td>Aistudio-Gemini-4</td>
+<td>1.91178</td>
+<td>$1.434</td>
+<td>$7.169</td>
+<td>$0.143</td>
+</tr>
+</tbody>
+</table></div>
+<p>（单位：美元额度 / 百万 tokens。）表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），实际以充值页为准。<strong>以控制台为准。</strong></p>
+<p>怎么选：需要 Batch / Flex 半价、Priority 通道、Interactions API 或 Managed Agents，选 Google 官方；需要在国内网络下稳定调用，并在同一个项目里混用 Claude、GPT、DeepSeek 等模型、统一 Key 和账单，选 tryallapi.com。注意 2027 年官方涨价后，tryallapi 的基价是否跟随调整，以届时控制台为准。</p>
+<hr />
+<h2>五、Gemini 3.8 Flash 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（OpenAI 兼容，经 tryallapi）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ[&quot;TRYALLAPI_KEY&quot;], base_url=&quot;https://tryallapi.com/v1&quot;)
+r = client.chat.completions.create(
+    model=&quot;gemini-3.8-flash&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;分析这段支付重试逻辑里的竞态条件，并给出加锁方案&quot;}],
+    reasoning_effort=&quot;low&quot;,          # 3.8 Flash 只支持 low / medium / high，默认 medium
+    max_completion_tokens=16384,     # 思考 tokens 也计入，留足余量
+)
+print(r.choices[0].message.content)
+print(r.usage)
+</code></pre>
+<p><code>reasoning_effort</code> 的映射关系来自 Google 官方的 OpenAI 兼容文档。经聚合调用时，请先发一条短请求，看 <code>usage</code> 确认参数确实生效，再放到生产环境。</p>
+<h3>3. 多模态：PDF / 图片 / 音频</h3>
+<pre><code class="language-python">import base64
+
+with open(&quot;meeting.wav&quot;, &quot;rb&quot;) as f:
+    audio_b64 = base64.b64encode(f.read()).decode()
+
+r = client.chat.completions.create(
+    model=&quot;gemini-3.8-flash&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: [
+        {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;整理这段会议录音的结论和行动项&quot;},
+        {&quot;type&quot;: &quot;input_audio&quot;, &quot;input_audio&quot;: {&quot;data&quot;: audio_b64, &quot;format&quot;: &quot;wav&quot;}},
+    ]}],
+)
+print(r.choices[0].message.content)
+</code></pre>
+<p>图片使用 <code>{&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: &quot;data:image/jpeg;base64,...&quot;}}</code>，格式与官方 OpenAI 兼容文档一致。3.8 Flash 只输出文本。</p>
+<h3>4. Gemini 原生 REST（经 tryallapi）</h3>
+<p>tryallapi 支持 <code>gemini</code> 端点类型（依据 <code>/api/pricing</code>），可以按 Gemini 原生 <code>generateContent</code> 格式调用。取数当天用无效 Key 探测该路径，返回 <code>401 Invalid token</code>，说明路由存在、能识别 <code>x-goog-api-key</code> 请求头：</p>
+<pre><code class="language-bash">curl &quot;https://tryallapi.com/v1beta/models/gemini-3.8-flash:generateContent&quot; \
+  -H &quot;x-goog-api-key: $TRYALLAPI_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -X POST \
+  -d '{
+    &quot;contents&quot;: [{&quot;parts&quot;: [{&quot;text&quot;: &quot;用三句话解释 thought signature 的作用&quot;}]}],
+    &quot;generationConfig&quot;: {
+      &quot;maxOutputTokens&quot;: 8192,
+      &quot;thinkingConfig&quot;: {&quot;thinkingLevel&quot;: &quot;LOW&quot;}
+    }
+  }'
+</code></pre>
+<p><code>thinkingLevel</code> 的枚举值（<code>LOW</code> / <code>MEDIUM</code> / <code>HIGH</code>）以官方 API 参考的 <code>ThinkingConfig</code> 为准。不要传 <code>MINIMAL</code>，也不要再用 <code>thinkingBudget</code>。</p>
+<h3>5. 对照：官方直连</h3>
+<pre><code class="language-python"># OpenAI 兼容（官方）
+client = OpenAI(
+    api_key=os.environ[&quot;GEMINI_API_KEY&quot;],
+    base_url=&quot;https://generativelanguage.googleapis.com/v1beta/openai/&quot;,
+)
+
+# 原生 google-genai SDK（官方 Interactions API 示例）
+# pip install -U google-genai
+from google import genai
+
+g = genai.Client()  # 读取环境变量 GEMINI_API_KEY
+interaction = g.interactions.create(
+    model=&quot;gemini-3.8-flash&quot;,
+    input=&quot;Analyze this payment processing pipeline for race conditions during retry attempts.&quot;,
+    generation_config={&quot;thinking_level&quot;: &quot;medium&quot;},
+)
+print(interaction.output_text)
+</code></pre>
+<p>官方 OpenAI 兼容层还支持 <code>service_tier=&quot;flex&quot;</code> / <code>&quot;priority&quot;</code>，对应价格页中的 Flex / Priority 档。</p>
+<hr />
+<h2>六、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传 <code>minimal</code> 报错</td>
+<td>3.8 Flash 不支持 <code>minimal</code></td>
+<td>改用 <code>low</code></td>
+</tr>
+<tr>
+<td>输出为空或被截断</td>
+<td><code>max_output_tokens</code> 被思考 tokens 用完</td>
+<td>调大上限，或把 <code>thinking_level</code> 降到 <code>low</code></td>
+</tr>
+<tr>
+<td>账单比 3.7 Flash 高</td>
+<td>3.8 Flash 在复杂任务上会多想几步、多调工具</td>
+<td>日常任务用 <code>low</code>；以效率为先的负载可继续用 3.7 Flash</td>
+</tr>
+<tr>
+<td><code>temperature</code> 等参数无效或告警</td>
+<td>采样参数已被弃用</td>
+<td>按迁移清单删除 <code>temperature</code> / <code>top_p</code> / <code>top_k</code></td>
+</tr>
+<tr>
+<td><code>reasoning_effort</code> 与 <code>thinking_config</code> 冲突</td>
+<td>两者功能重叠，不能同时使用</td>
+<td>二选一</td>
+</tr>
+<tr>
+<td><code>Malformed_Function_Call</code></td>
+<td>工具调用前的文本格式不符合要求</td>
+<td>内联指令用 <code>\n\n</code> 分隔，参照官方 workaround</td>
+</tr>
+<tr>
+<td>多轮后推理质量下降</td>
+<td>无状态模式下丢了 thought 块和签名</td>
+<td>原样回传，或改用 <code>previous_interaction_id</code></td>
+</tr>
+<tr>
+<td>401 Invalid token</td>
+<td>Key 错误，或原生请求头用错</td>
+<td>OpenAI 格式用 <code>Authorization: Bearer</code>，原生格式用 <code>x-goog-api-key</code></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、Gemini 3.8 Flash FAQ</h2>
+<p><strong>Q1：Gemini 3.8 Flash 的模型 ID 是什么？有 preview 后缀吗？</strong><br />
+<code>gemini-3.8-flash</code>，是 Stable 版，没有 <code>-preview</code> 后缀。2026-09-02 以 GA 形式发布，tryallapi.com 上同名。</p>
+<p><strong>Q2：Gemini 3.8 Flash 官方价格多少？</strong><br />
+2026-12-31 前的标准价为每百万 tokens 输入 $0.75、输出 $3.75（含思考 tokens）、缓存读取 $0.075；2027-01-01 起为 $1.50 / $7.50 / $0.15。Batch 和 Flex 按标准价五折，Priority 为 $1.35 / $6.75。</p>
+<p><strong>Q3：价格会按 prompt 长度或音频输入分档吗？</strong><br />
+不会。官方价格页对 3.8 Flash 只列了一档，没有 200K 之类的长度阶梯，也没有单独的音频输入价，这一点和 3 Flash Preview、3.1 Pro Preview 不同。</p>
+<p><strong>Q4：上下文和最大输出有多长？</strong><br />
+输入上限 1,048,576 tokens，输出上限 65,536 tokens。输入支持文本、图片、视频、音频和 PDF，输出只有文本。</p>
+<p><strong>Q5：thinking 能关掉吗？支持哪些档位？</strong><br />
+不能关闭。可选 <code>low</code>、<code>medium</code>、<code>high</code>，默认 <code>medium</code>；<code>minimal</code> 不支持，传入会报错。旧代码里的 <code>thinking_budget</code> 要换成 <code>thinking_level</code>。</p>
+<p><strong>Q6：为什么 3.8 Flash 有时比 3.7 Flash 更费 token？</strong><br />
+这是官方的设计取向：复杂任务中它会拆分推理步骤、反复调用工具并自我验证，effort 越高越明显。日常任务用 <code>low</code> 可以减少消耗，官方也说明 3.7 Flash 会继续完整支持。</p>
+<p><strong>Q7：国内怎么经 tryallapi 调用？</strong><br />
+OpenAI 兼容格式：<code>base_url=https://tryallapi.com/v1</code>，Key 用 <code>TRYALLAPI_KEY</code>，模型填 <code>gemini-3.8-flash</code>。Gemini 原生格式：POST <code>https://tryallapi.com/v1beta/models/gemini-3.8-flash:generateContent</code>，请求头 <code>x-goog-api-key</code>。</p>
+<p><strong>Q8：tryallapi 怎么计费？</strong><br />
+基价 $0.75 / $3.75 / 缓存读 $0.075（等于官方限时价）× 分组倍率，2026-10-06 共有 9 个分组，倍率 0.14706～1.91178，以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gemini-3-flash-api/">Gemini 3 Flash API 国内中转调用指南与价格</a>：gemini-3-flash-preview：官方文本 $0.50/$3，thinking 计入输出。</li>
+<li><a href="/gemini-3.1-pro-api/">Gemini 3.1 Pro API 国内中转调用指南与价格</a>：gemini-3.1-pro-preview：官方 ≤200K $2/$12，&gt;200K $4/$18。</li>
+<li><a href="/gemini-2.5-pro-api/">Gemini 2.5 Pro API 国内中转调用指南与价格</a>：官方 $1.25/$10（≤200K），100 万上下文；OpenAI 兼容 + Gemini 原生双协议。</li>
+<li><a href="/gpt-6-sol-api/">GPT-6 Sol API 国内中转调用指南与价格</a>：gpt-6-sol 官方价 $2/$10、105万上下文，支持 none 推理，附国内中转调用代码</li>
+<li><a href="/claude-fable-5-1-api/">Claude Fable 5.1 API 国内中转调用指南与价格</a>：Fable 5.1 缓存读降75%：价格、3项破坏性变更与国内调用代码</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash" target="_blank" rel="noopener noreferrer">Gemini 3.8 Flash 模型页</a> · <a href="https://ai.google.dev/gemini-api/docs/latest-model" target="_blank" rel="noopener noreferrer">What's new in Gemini 3.8 Flash</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Gemini API 价格</a> · <a href="https://ai.google.dev/gemini-api/docs/thinking" target="_blank" rel="noopener noreferrer">Thinking 文档</a> · <a href="https://ai.google.dev/gemini-api/docs/openai" target="_blank" rel="noopener noreferrer">OpenAI 兼容</a> · <a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener noreferrer">Release notes</a> · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" target="_blank" rel="noopener noreferrer">官方发布博客</a> · <a href="https://deepmind.google/models/model-cards/gemini-3-8-flash/" target="_blank" rel="noopener noreferrer">DeepMind 模型卡</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-06｜最后更新：2026-10-06｜更新日志：2026-10-06 首版（价格与参数取自 Google 官方 Gemini API 文档、发布博客与 DeepMind 模型卡，tryallapi 倍率取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-06，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>Gemini 3.8 Flash API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">查看 Gemini 3.8 Flash API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=gemini-3.8-flash-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

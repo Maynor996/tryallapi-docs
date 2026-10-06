@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>豆包 Seed 2.1 Pro API 国内中转调用指南：价格、教程与代码（2026）</title>
+<meta name="description" content="豆包 Seed 2.1 Pro API 国内调用指南：官方价格¥6/¥30、1M上下文不分档、思考参数与tryallapi代码示例">
+<link rel="canonical" href="https://docs.tryallapi.com/doubao-seed-2-1-pro-api/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0b1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="tryallapi.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="豆包 Seed 2.1 Pro API 国内中转调用指南：价格、教程与代码（2026）">
+<meta property="og:description" content="豆包 Seed 2.1 Pro API 国内调用指南：官方价格¥6/¥30、1M上下文不分档、思考参数与tryallapi代码示例">
+<meta property="og:url" content="https://docs.tryallapi.com/doubao-seed-2-1-pro-api/">
+<meta property="og:image" content="https://docs.tryallapi.com/og/doubao-seed-2-1-pro-api.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="豆包 Seed 2.1 Pro API 国内中转调用指南：价格、教程与代码（2026）">
+<meta name="twitter:description" content="豆包 Seed 2.1 Pro API 国内调用指南：官方价格¥6/¥30、1M上下文不分档、思考参数与tryallapi代码示例">
+<meta name="twitter:image" content="https://docs.tryallapi.com/og/doubao-seed-2-1-pro-api.png">
+<meta property="article:published_time" content="2026-10-06">
+<meta property="article:modified_time" content="2026-10-06">
+<meta property="article:section" content="ByteDance">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "豆包 Seed 2.1 Pro API 国内中转调用指南：价格、教程与代码（2026）",
+   "description": "豆包 Seed 2.1 Pro API 国内调用指南：官方价格¥6/¥30、1M上下文不分档、思考参数与tryallapi代码示例",
+   "image": [
+    "https://docs.tryallapi.com/og/doubao-seed-2-1-pro-api.png"
+   ],
+   "datePublished": "2026-10-06",
+   "dateModified": "2026-10-06",
+   "inLanguage": "zh-CN",
+   "mainEntityOfPage": "https://docs.tryallapi.com/doubao-seed-2-1-pro-api/",
+   "url": "https://docs.tryallapi.com/doubao-seed-2-1-pro-api/",
+   "author": {
+    "@type": "Person",
+    "name": "MaynorAI",
+    "url": "https://tryallapi.com/"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "tryallapi.com",
+    "url": "https://tryallapi.com/",
+    "logo": {
+     "@type": "ImageObject",
+     "url": "https://docs.tryallapi.com/assets/logo.png",
+     "width": 512,
+     "height": 512
+    }
+   },
+   "about": {
+    "@type": "Thing",
+    "name": "豆包 Seed 2.1 Pro API（doubao-seed-2-1-pro-260915）"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "首页",
+     "item": "https://docs.tryallapi.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "豆包 Seed 2.1 Pro API 国内中转调用指南：价格、教程与代码（2026）",
+     "item": "https://docs.tryallapi.com/doubao-seed-2-1-pro-api/"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "豆包 Seed 2.1 Pro 的 API 模型 ID 是什么？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "最新快照是 doubao-seed-2-1-pro-260915，往期快照是 doubao-seed-2-1-pro-260628；火山方舟与 tryallapi.com 均使用这两个 ID。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Doubao-Seed-2.1-Pro 官方价格多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "火山方舟在线推理（常规）每百万 tokens：输入 ¥6.00、输出 ¥30.00、缓存命中 ¥1.20，缓存存储 ¥0.017 / 百万 tokens / 小时；输入长度在 [0, 1024K] 内统一价，不分档。低优与批量推理为输入 ¥3.00、输出 ¥15.00。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "上下文和最大输出是多少？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "260915 版上下文窗口 1024K、最大输入 1024K，最大回答 256K、最大思维链 256K；260628 版上下文与最大输入为 256K。max_tokens 默认只有 4096，需要长输出时请显式设置。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "260915 和 260628 价格一样吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "一样。官方价格表按 doubao-seed-2.1-pro 统一标价，tryallapi.com 两个快照的倍率也相同（model_ratio=0.45、completion_ratio=5）。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "怎么关闭深度思考？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Chat API 传 {\"thinking\": {\"type\": \"disabled\"}}，或传 reasoning_effort=\"minimal\"；Responses API 传 reasoning.effort=minimal。2.1 Pro 的 thinking.type 只支持 enabled（默认）和 disabled。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "reasoning_effort 有哪些档位？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "默认 high，可选 minimal（关闭思考）、low、medium、high；none 会映射为 minimal，xhigh 与 max 会映射为 high。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "支持图片和视频输入吗？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "支持。260915 在官方「视觉理解能力」推荐模型列表中，可用 image_url、video_url 传入；视频 fps 默认 1.0、范围 [0.2, 5]，URL 传入的视频不超过 50 MB。"
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "国内怎么经 tryallapi 调用？",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "base_url=https://tryallapi.com/v1，Key 用 TRYALLAPI_KEY，模型 doubao-seed-2-1-pro-260915，OpenAI Chat Completions 格式；基价 $0.90 / $4.50 × 分组倍率（1.5 或 2.2），以控制台为准。"
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner">
+<a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✦</span>tryallapi<span class="brand-dot">.com</span> <span class="brand-sub">API 调用指南</span></a>
+<nav class="topbar-links" aria-label="站点导航"><a href="/">全部模型</a><a href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">价格</a><a class="btn" href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">注册 tryallapi.com</a></nav>
+</div></header>
+<main class="wrap">
+<nav class="breadcrumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">›</span><span aria-current="page">豆包 Seed 2.1 Pro API 指南</span></nav>
+<article class="article">
+<header class="article-head">
+<p class="eyebrow">字节跳动（豆包 Seed） · <code>doubao-seed-2-1-pro-260915</code></p>
+<h1>豆包 Seed 2.1 Pro API 国内中转调用指南：价格、教程与代码（2026）</h1>
+<p class="meta">作者 MaynorAI · 首发 <time datetime="2026-10-06">2026-10-06</time> · 更新 <time datetime="2026-10-06">2026-10-06</time></p>
+</header>
+<blockquote>
+<p>利益声明：作者运营 tryallapi.com。Doubao-Seed-2.1-Pro 的模型 ID、上下文、价格与参数来自火山方舟官方文档（模型列表、模型价格、深度思考、Chat API、视频理解、模型发布公告）与字节跳动 Seed 官方博客；tryallapi.com 数据取自公开接口 <code>/api/pricing</code>，取数时间 2026-10-06（北京时间），最终以控制台为准。</p>
+</blockquote>
+<p><strong>入口速查：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<p>字节跳动在 2026-06-23 发布 Seed2.1 系列，旗舰版 <strong>Doubao-Seed-2.1-Pro</strong>（豆包大模型 2.1 Pro）主打 Coding、Agent 与多模态理解；2026 年 9 月火山方舟又上线了它的 0915 小版本 <code>doubao-seed-2-1-pro-260915</code>。和上一个快照 <code>doubao-seed-2-1-pro-260628</code> 相比，API 层面最大的变化是<strong>上下文从 256K 扩到 1024K</strong>，而两者官方单价相同。它和别家旗舰还有三点不一样：<strong>整个 1M 输入区间只有一档价格</strong>（不像 2.0 Pro 按输入长度分三档）；<strong>深度思考默认开启、<code>reasoning_effort</code> 默认就是 <code>high</code></strong>；<strong>默认返回思考摘要 + 加密思维链</strong>，Agent 多轮工具调用时要原样回传。本文逐一说明。</p>
+<hr />
+<h2>doubao-seed-2-1-pro-260915 信息卡</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 ID</td>
+<td><code>doubao-seed-2-1-pro-260915</code>（推荐模型）；往期快照 <code>doubao-seed-2-1-pro-260628</code></td>
+<td><a href="https://www.volcengine.com/docs/82379/1330310" target="_blank" rel="noopener noreferrer">火山方舟模型列表</a></td>
+</tr>
+<tr>
+<td>发布</td>
+<td>Seed2.1 系列 2026-06-23 正式发布；260915 版收录在模型发布公告 2026-09 批次（「新发布」）</td>
+<td><a href="https://research.doubao.com/zh/blog/seed2-1-officially-released-advancing-ai-productivity" target="_blank" rel="noopener noreferrer">Seed 官方博客</a> · <a href="https://www.volcengine.com/docs/82379/1159178" target="_blank" rel="noopener noreferrer">模型发布公告</a></td>
+</tr>
+<tr>
+<td>上下文</td>
+<td>上下文窗口 1024K；最大输入 1024K</td>
+<td>模型列表</td>
+</tr>
+<tr>
+<td>输出上限</td>
+<td>最大回答 256K（<code>max_tokens</code> 默认 4096）；最大思维链 256K</td>
+<td>模型列表 · <a href="https://www.volcengine.com/docs/82379/1494384" target="_blank" rel="noopener noreferrer">Chat API</a></td>
+</tr>
+<tr>
+<td>能力标签</td>
+<td>深度思考、文本生成、多模态理解（图片 / 视频）、GUI 任务处理、工具调用、结构化输出</td>
+<td>模型列表</td>
+</tr>
+<tr>
+<td>限流</td>
+<td>最大 RPM 500；最大 TPM 1,000,000</td>
+<td>模型列表</td>
+</tr>
+<tr>
+<td>官方价（在线推理·常规，每百万 tokens）</td>
+<td>输入长度 [0, 1024K] 统一价：输入 ¥6.00；输出 ¥30.00；缓存命中 ¥1.20；缓存存储 ¥0.017 / 百万 tokens / 小时</td>
+<td><a href="https://www.volcengine.com/docs/82379/1544106" target="_blank" rel="noopener noreferrer">火山方舟模型价格</a></td>
+</tr>
+<tr>
+<td>官方价（在线推理·低优 / 批量推理）</td>
+<td>输入 ¥3.00；输出 ¥15.00；缓存命中 ¥1.20</td>
+<td>模型价格</td>
+</tr>
+<tr>
+<td>深度思考参数</td>
+<td><code>thinking.type</code>：<code>enabled</code>（默认）/ <code>disabled</code>；<code>reasoning_effort</code> 默认 <code>high</code></td>
+<td><a href="https://www.volcengine.com/docs/82379/1449737" target="_blank" rel="noopener noreferrer">深度思考</a></td>
+</tr>
+<tr>
+<td>官方 Base URL</td>
+<td><code>https://ark.cn-beijing.volces.com/api/v3</code>（兼容 OpenAI SDK，支持 Chat API 与 Responses API）</td>
+<td><a href="https://www.volcengine.com/docs/82379/1399008" target="_blank" rel="noopener noreferrer">快速入门</a></td>
+</tr>
+<tr>
+<td>tryallapi.com</td>
+<td><strong>已上架</strong> <code>doubao-seed-2-1-pro-260915</code> 与 <code>doubao-seed-2-1-pro-260628</code>；端点 <code>openai</code>；分组 Doubao-2（×1.5）、Doubao-3（×2.2）</td>
+<td><code>/api/pricing</code> 2026-10-06</td>
+</tr>
+<tr>
+<td>Base URL（聚合）</td>
+<td><code>https://tryallapi.com/v1</code></td>
+<td>tryallapi.com</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>三行结论</strong></p>
+<ol>
+<li>新项目直接用 <code>doubao-seed-2-1-pro-260915</code>：上下文 1024K，是 260628 的 4 倍，官方单价相同（¥6 / ¥30），而且 1M 以内不分档。</li>
+<li>默认开深度思考且强度为 <code>high</code>，简单任务记得传 <code>thinking={&quot;type&quot;:&quot;disabled&quot;}</code> 或 <code>reasoning_effort=&quot;low&quot;</code>；<code>max_tokens</code> 默认只有 4096，长输出要显式调大。</li>
+<li>tryallapi.com 标定基价为 $0.90 / $4.50（输出倍率 5 倍，与官方比例一致），实际 ≈ 基价 × 分组倍率（1.5 或 2.2），以控制台为准。</li>
+</ol>
+<p>👉 <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">前往 tryallapi.com 注册并生成 API Key</a></p>
+<hr />
+<h2>一、260915 还是 260628：两个快照怎么选</h2>
+<p>火山方舟模型列表里，Doubao-Seed-2.1-Pro 现在有两个可调用的快照：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>doubao-seed-2-1-pro-260915</code></th>
+<th><code>doubao-seed-2-1-pro-260628</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列表位置</td>
+<td>推荐模型</td>
+<td>往期模型</td>
+</tr>
+<tr>
+<td>上下文窗口 / 最大输入</td>
+<td>1024K / 1024K</td>
+<td>256K / 256K</td>
+</tr>
+<tr>
+<td>最大回答 / 最大思维链</td>
+<td>256K / 256K</td>
+<td>256K / 256K</td>
+</tr>
+<tr>
+<td>结构化输出</td>
+<td>支持</td>
+<td>支持（官方注明推荐 <code>json_schema</code> 模式）</td>
+</tr>
+<tr>
+<td>限流</td>
+<td>RPM 500 / TPM 1,000,000</td>
+<td>RPM 500 / TPM 1,000,000</td>
+</tr>
+<tr>
+<td>隐式缓存</td>
+<td>Chat API、Responses API</td>
+<td>Chat API、Responses API</td>
+</tr>
+<tr>
+<td>显式缓存（前缀 / Session）</td>
+<td>Responses API</td>
+<td>Responses API</td>
+</tr>
+<tr>
+<td>tryallapi 倍率</td>
+<td><code>model_ratio=0.45</code>、<code>completion_ratio=5</code></td>
+<td>同左</td>
+</tr>
+</tbody>
+</table></div>
+<p>官方对 0915 版的定位是「迈向生产级智能的新一代大模型，全面升级 Coding、Agent 与多模态能力，以更强的自主规划、长链路执行和动态修复能力，胜任企业真实复杂任务」。</p>
+<p>实务建议：</p>
+<ul>
+<li><strong>新接入</strong>：直接用 260915，1M 上下文对仓库级 Coding、长文档、长会话 Agent 都更宽裕；</li>
+<li><strong>已在线上跑 260628</strong>：两个快照的参数结构一致，只换 <code>model</code> 字符串即可，但要重新回归 Prompt 效果；</li>
+<li><strong>固定版本</strong>：生产环境建议写死带日期的快照 ID，不要依赖「最新」。火山方舟另有 <code>doubao-seed-evolving</code>（每周至少迭代一个版本、统一 ID 自动升级），适合愿意跟随快速迭代的场景。</li>
+</ul>
+<hr />
+<h2>二、1M 上下文只有一档价：和 2.0 Pro 的分档计价对比</h2>
+<p>豆包以往的旗舰按<strong>单次请求输入长度</strong>分段计价，2.1 Pro 改成了整个 [0, 1024K] 区间统一单价。对照官方「在线推理（常规）」价格表（元 / 百万 tokens）：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>输入长度条件</th>
+<th>输入</th>
+<th>缓存命中</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doubao-seed-2.1-pro</td>
+<td>[0, 1024K]</td>
+<td>6.00</td>
+<td>1.20</td>
+<td>30.00</td>
+</tr>
+<tr>
+<td>doubao-seed-2.0-pro</td>
+<td>[0, 32K]</td>
+<td>3.2</td>
+<td>0.64</td>
+<td>16.0</td>
+</tr>
+<tr>
+<td>doubao-seed-2.0-pro</td>
+<td>(32K, 128K]</td>
+<td>4.8</td>
+<td>0.96</td>
+<td>24.0</td>
+</tr>
+<tr>
+<td>doubao-seed-2.0-pro</td>
+<td>(128K, 256K]</td>
+<td>9.6</td>
+<td>1.92</td>
+<td>48.0</td>
+</tr>
+</tbody>
+</table></div>
+<p>怎么理解：</p>
+<ul>
+<li><strong>短请求（≤32K）</strong>：2.1 Pro 单价高于 2.0 Pro 的最低档；</li>
+<li><strong>长请求（&gt;128K）</strong>：2.1 Pro 反而比 2.0 Pro 最高档便宜（输入 ¥6 vs ¥9.6，输出 ¥30 vs ¥48），并且可以一直用到 1024K 不涨价；</li>
+<li><strong>缓存</strong>：缓存命中 ¥1.20，是输入价的 1/5；另收缓存存储费 ¥0.017 / 百万 tokens / 小时。固定 system prompt 和工具定义、只往后追加消息，最容易命中隐式缓存；</li>
+<li><strong>不急的任务</strong>：官方「在线推理（低优）」与「批量推理」都是输入 ¥3、输出 ¥15（缓存命中仍为 ¥1.20），约为常规价的一半。低优只支持隐式缓存，不收缓存存储费；</li>
+<li>2.1 Pro 目前不在官方「在线推理（低延迟）」价格表内，TPM 保障包页面显示「暂无支持的模型」。</li>
+</ul>
+<hr />
+<h2>三、深度思考：thinking、reasoning_effort 与加密思维链</h2>
+<p>2.1 Pro 带「深度思考」标签，<strong>默认调用即开启思考</strong>。官方提供两套开关：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>2.1 Pro 的取值 / 行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>thinking.type</code>（Chat API）</td>
+<td>支持 <code>enabled</code>（默认）、<code>disabled</code>；不在 <code>auto</code> 的支持列表中</td>
+</tr>
+<tr>
+<td><code>reasoning_effort</code>（Chat API）/ <code>reasoning.effort</code>（Responses API）</td>
+<td>默认 <code>high</code>；<code>minimal</code> 关闭思考；<code>none</code> 映射为 <code>minimal</code>；<code>xhigh</code> / <code>max</code> 映射为 <code>high</code>；可用 <code>low</code>、<code>medium</code> 缩短思维链</td>
+</tr>
+<tr>
+<td><code>max_tokens</code></td>
+<td>默认 4096，只限制<strong>回答</strong>长度</td>
+</tr>
+<tr>
+<td><code>max_completion_tokens</code></td>
+<td>限制<strong>回答 + 思维链</strong>总长度，Chat API 取值范围 [1, 65536]；设置后 <code>max_tokens</code> 默认值失效，两者不可同时设置</td>
+</tr>
+</tbody>
+</table></div>
+<p>三条容易踩的规则：</p>
+<ol>
+<li><strong>默认强度就是 <code>high</code></strong>。分类、改写、抽取这类简单任务，传 <code>thinking={&quot;type&quot;:&quot;disabled&quot;}</code> 或 <code>reasoning_effort=&quot;minimal&quot;/&quot;low&quot;</code>，能明显省时延和输出 token。</li>
+<li><strong>思考摘要 + 加密原文</strong>。2.1 Pro 在官方「回传思考内容加密原文」的支持列表里：默认返回思考内容摘要 <code>reasoning_content</code> 和加密原文 <code>encrypted_content</code>。多轮工具调用（Agent）时必须<strong>原样回传</strong> <code>encrypted_content</code>；只回传摘要不会报错，但官方说明推理效果会下降；内容被篡改会返回 <code>Invalid signature</code>。</li>
+<li><strong>计费按原始思维链</strong>。<code>usage.completion_tokens_details.reasoning_tokens</code> 是原始思考内容的 token 数，计费按它算，而不是按你看到的摘要长度。<code>reasoning_effort</code> 也只作用于原始思考内容。</li>
+</ol>
+<p>另外，官方提示深度思考耗时较长，SDK 示例把超时设为 1800 秒以上；开启思考摘要后包间延迟可能较高，请调大 <code>timeout</code>。</p>
+<hr />
+<h2>四、豆包 Seed 2.1 Pro API 价格：官方 vs tryallapi.com</h2>
+<p><code>doubao-seed-2-1-pro-260915</code> 与 <code>doubao-seed-2-1-pro-260628</code> 在 tryallapi.com 的配置相同：<code>model_ratio=0.45</code>、<code>completion_ratio=5</code>，未配置 <code>cache_ratio</code>；换算基价为输入 $0.90、输出 $4.50 / 百万 tokens（输出 / 输入 = 5，与官方 ¥30 / ¥6 的比例一致）。2026-10-06 可见分组：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分组</th>
+<th>倍率</th>
+<th>输入估算</th>
+<th>输出估算</th>
+<th>缓存读估算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Doubao-2</td>
+<td>1.5</td>
+<td>$1.35</td>
+<td>$6.75</td>
+<td>未单独配置缓存倍率</td>
+</tr>
+<tr>
+<td>Doubao-3</td>
+<td>2.2</td>
+<td>$1.98</td>
+<td>$9.90</td>
+<td>未单独配置缓存倍率</td>
+</tr>
+</tbody>
+</table></div>
+<p>（单位：每百万 tokens。）表中金额是 tryallapi 的美元额度；<code>/api/status</code> 显示充值价 <code>price=1</code>（元 / 美元额度），按此换算，Doubao-3 分组约为官方常规价（¥6 / ¥30）的 1/3，实际以充值页为准。<strong>以控制台为准。</strong></p>
+<p>怎么选：需要 Responses API、显式缓存、低优 / 批量推理、Files API 大视频上传或火山方舟内置工具（知识库、MCP、联网搜索等）→ 火山方舟官方；需要在同一项目里同时调用 Claude、GPT、DeepSeek、豆包等模型，统一 Key 与账单 → tryallapi.com（OpenAI Chat Completions 格式）。</p>
+<hr />
+<h2>五、豆包 Seed 2.1 Pro 国内调用方法：快速接入</h2>
+<h3>1. 环境变量</h3>
+<pre><code class="language-bash">export TRYALLAPI_KEY=&quot;sk-xxxxxxxx&quot;
+</code></pre>
+<h3>2. Python（经 tryallapi，默认深度思考）</h3>
+<pre><code class="language-python"># pip install -U openai
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;TRYALLAPI_KEY&quot;],
+    base_url=&quot;https://tryallapi.com/v1&quot;,
+    timeout=1800,                       # 深度思考耗时较长，官方建议调大超时
+)
+r = client.chat.completions.create(
+    model=&quot;doubao-seed-2-1-pro-260915&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;这个仓库的循环依赖该怎么拆？给出分步方案&quot;}],
+    max_completion_tokens=32768,        # 回答 + 思维链总长度；不要和 max_tokens 同时传
+)
+msg = r.choices[0].message
+print(getattr(msg, &quot;reasoning_content&quot;, None))   # 思考摘要
+print(msg.content)
+print(r.usage)
+</code></pre>
+<h3>3. 关闭思考 / 调低思考强度</h3>
+<pre><code class="language-python"># 关闭思考：简单任务、低延迟场景
+r = client.chat.completions.create(
+    model=&quot;doubao-seed-2-1-pro-260915&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;把这段需求改写成 3 条用户故事&quot;}],
+    extra_body={&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}},
+)
+
+# 保留思考但缩短思维链
+r = client.chat.completions.create(
+    model=&quot;doubao-seed-2-1-pro-260915&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;这段 SQL 为什么走不了索引？&quot;}],
+    reasoning_effort=&quot;low&quot;,
+)
+</code></pre>
+<p><code>thinking</code> 是火山方舟的扩展参数，经聚合透传时，先用一条短请求确认生效（看 <code>reasoning_content</code> 是否为空、<code>usage</code> 中 reasoning tokens 是否为 0），再上线。</p>
+<h3>4. 图片 / 视频理解</h3>
+<pre><code class="language-python">r = client.chat.completions.create(
+    model=&quot;doubao-seed-2-1-pro-260915&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: [
+        {&quot;type&quot;: &quot;image_url&quot;, &quot;image_url&quot;: {&quot;url&quot;: &quot;https://example.com/design.png&quot;}},
+        {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;按这张设计稿写出 React + Tailwind 页面&quot;},
+    ]}],
+)
+
+r = client.chat.completions.create(
+    model=&quot;doubao-seed-2-1-pro-260915&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: [
+        {&quot;type&quot;: &quot;video_url&quot;, &quot;video_url&quot;: {&quot;url&quot;: &quot;https://example.com/demo.mp4&quot;, &quot;fps&quot;: 1}},
+        {&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;按时间顺序列出录屏里用户的操作步骤&quot;},
+    ]}],
+)
+</code></pre>
+<p>官方限制：<code>fps</code> 默认 1.0，取值范围 [0.2, 5]，越低越省 token；视频 URL 传入时文件不超过 50 MB；Base64 传入时文件小于 50 MB、请求体不超过 64 MB；更大的视频需走官方 Files API（默认存储最大 512 MB，TOS Bucket 最大 2 GB）。</p>
+<h3>5. 对照：官方直连（火山方舟）</h3>
+<pre><code class="language-python">client = OpenAI(
+    api_key=os.environ[&quot;ARK_API_KEY&quot;],
+    base_url=&quot;https://ark.cn-beijing.volces.com/api/v3&quot;,
+)
+r = client.chat.completions.create(model=&quot;doubao-seed-2-1-pro-260915&quot;, messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;你好&quot;}])
+</code></pre>
+<hr />
+<h2>六、常见报错与排查</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>报错 / 现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回答在 4K 左右被截断</td>
+<td><code>max_tokens</code> 默认 4096</td>
+<td>调大 <code>max_tokens</code>，或改用 <code>max_completion_tokens</code></td>
+</tr>
+<tr>
+<td>同时传了 <code>max_tokens</code> 和 <code>max_completion_tokens</code></td>
+<td>官方规定两者不可同时设置</td>
+<td>只保留一个</td>
+</tr>
+<tr>
+<td>简单问题也很慢、输出 token 很多</td>
+<td>默认开启思考且强度 <code>high</code></td>
+<td><code>thinking.type=disabled</code> 或 <code>reasoning_effort=low/minimal</code></td>
+</tr>
+<tr>
+<td>想用 <code>thinking.type=auto</code> 让模型自己判断</td>
+<td>官方列出 2.1 Pro 只支持 <code>enabled</code> / <code>disabled</code></td>
+<td>改用 <code>reasoning_effort</code> 调强度</td>
+</tr>
+<tr>
+<td><code>xhigh</code> / <code>max</code> 与 <code>high</code> 效果一样</td>
+<td>官方映射规则：<code>xhigh</code> / <code>max</code> → <code>high</code></td>
+<td>正常现象，<code>high</code> 即上限</td>
+</tr>
+<tr>
+<td><code>Invalid signature</code></td>
+<td>回传的 <code>encrypted_content</code> 被修改或无效</td>
+<td>原样回传，不要拼接或截断</td>
+</tr>
+<tr>
+<td>Agent 多轮后效果下降</td>
+<td>只回传了 <code>reasoning_content</code> 摘要</td>
+<td>回传 <code>encrypted_content</code></td>
+</tr>
+<tr>
+<td>视频请求失败</td>
+<td>URL / Base64 视频超过 50 MB 或请求体超过 64 MB</td>
+<td>压缩、降 <code>fps</code>，或改走官方 Files API</td>
+</tr>
+<tr>
+<td>请求超时</td>
+<td>深度思考耗时长</td>
+<td>调大客户端 <code>timeout</code>（官方示例 1800 秒以上）</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>七、豆包 Seed 2.1 Pro FAQ</h2>
+<p><strong>Q1：豆包 Seed 2.1 Pro 的 API 模型 ID 是什么？</strong><br />
+最新快照是 <code>doubao-seed-2-1-pro-260915</code>，往期快照是 <code>doubao-seed-2-1-pro-260628</code>；火山方舟与 tryallapi.com 均使用这两个 ID。</p>
+<p><strong>Q2：Doubao-Seed-2.1-Pro 官方价格多少？</strong><br />
+火山方舟在线推理（常规）每百万 tokens：输入 ¥6.00、输出 ¥30.00、缓存命中 ¥1.20，缓存存储 ¥0.017 / 百万 tokens / 小时；输入长度在 [0, 1024K] 内统一价，不分档。低优与批量推理为输入 ¥3.00、输出 ¥15.00。</p>
+<p><strong>Q3：上下文和最大输出是多少？</strong><br />
+260915 版上下文窗口 1024K、最大输入 1024K，最大回答 256K、最大思维链 256K；260628 版上下文与最大输入为 256K。<code>max_tokens</code> 默认只有 4096，需要长输出时请显式设置。</p>
+<p><strong>Q4：260915 和 260628 价格一样吗？</strong><br />
+一样。官方价格表按 doubao-seed-2.1-pro 统一标价，tryallapi.com 两个快照的倍率也相同（<code>model_ratio=0.45</code>、<code>completion_ratio=5</code>）。</p>
+<p><strong>Q5：怎么关闭深度思考？</strong><br />
+Chat API 传 <code>{&quot;thinking&quot;: {&quot;type&quot;: &quot;disabled&quot;}}</code>，或传 <code>reasoning_effort=&quot;minimal&quot;</code>；Responses API 传 <code>reasoning.effort=minimal</code>。2.1 Pro 的 <code>thinking.type</code> 只支持 <code>enabled</code>（默认）和 <code>disabled</code>。</p>
+<p><strong>Q6：reasoning_effort 有哪些档位？</strong><br />
+默认 <code>high</code>，可选 <code>minimal</code>（关闭思考）、<code>low</code>、<code>medium</code>、<code>high</code>；<code>none</code> 会映射为 <code>minimal</code>，<code>xhigh</code> 与 <code>max</code> 会映射为 <code>high</code>。</p>
+<p><strong>Q7：支持图片和视频输入吗？</strong><br />
+支持。260915 在官方「视觉理解能力」推荐模型列表中，可用 <code>image_url</code>、<code>video_url</code> 传入；视频 <code>fps</code> 默认 1.0、范围 [0.2, 5]，URL 传入的视频不超过 50 MB。</p>
+<p><strong>Q8：国内怎么经 tryallapi 调用？</strong><br />
+<code>base_url=https://tryallapi.com/v1</code>，Key 用 <code>TRYALLAPI_KEY</code>，模型 <code>doubao-seed-2-1-pro-260915</code>，OpenAI Chat Completions 格式；基价 $0.90 / $4.50 × 分组倍率（1.5 或 2.2），以控制台为准。</p>
+<hr />
+<h2>相关阅读</h2>
+<ul>
+<li><a href="/gpt-6-sol-api/">GPT-6 Sol API 国内中转调用指南与价格</a>：gpt-6-sol 官方价 $2/$10、105万上下文，支持 none 推理，附国内中转调用代码</li>
+<li><a href="/claude-fable-5-1-api/">Claude Fable 5.1 API 国内中转调用指南与价格</a>：Fable 5.1 缓存读降75%：价格、3项破坏性变更与国内调用代码</li>
+<li><a href="/gemini-3.8-flash-api/">Gemini 3.8 Flash API 国内中转调用指南与价格</a>：gemini-3.8-flash限时价$0.75/$3.75，2027年翻倍；默认medium不支持minimal</li>
+<li><a href="/deepseek-v4.1-flash-api/">DeepSeek V4.1 API 国内中转调用指南与价格</a>：高峰 ¥2/¥8、空闲半价；官方新模型名 deepseek-flash，1M 上下文、384K 输出。</li>
+<li><a href="/grok-4.7-api/">Grok 4.7 API 国内中转调用指南与价格</a>：官方 &lt;200K $2/$6、缓存 $0.50；xAI Responses / OpenAI 兼容接入。</li>
+<li><a href="/qwen3.8-max-api/">Qwen3.8 Max API 国内中转调用指南与价格</a>：阿里云百炼华北2 ¥12/¥36；DashScope OpenAI 兼容与聚合接入对比。</li>
+<li><a href="/">全部 AI 大模型 API 国内调用指南与价格汇总</a></li>
+<li>官方参考：<a href="https://www.volcengine.com/docs/82379/1330310" target="_blank" rel="noopener noreferrer">火山方舟模型列表</a> · <a href="https://www.volcengine.com/docs/82379/1544106" target="_blank" rel="noopener noreferrer">模型价格</a> · <a href="https://www.volcengine.com/docs/82379/1449737" target="_blank" rel="noopener noreferrer">深度思考</a> · <a href="https://www.volcengine.com/docs/82379/1494384" target="_blank" rel="noopener noreferrer">对话（Chat）API</a> · <a href="https://www.volcengine.com/docs/82379/1895586" target="_blank" rel="noopener noreferrer">视频理解</a> · <a href="https://www.volcengine.com/docs/82379/1159178" target="_blank" rel="noopener noreferrer">模型发布公告</a> · <a href="https://research.doubao.com/zh/blog/seed2-1-officially-released-advancing-ai-productivity" target="_blank" rel="noopener noreferrer">Seed2.1 正式发布（Seed 官方博客）</a></li>
+</ul>
+<hr />
+<p><strong>其他使用方式，按需选择：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道类型</th>
+<th>访问网址</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全模型 API 聚合站</td>
+<td><a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">https://tryallapi.com/</a></td>
+<td>适合开发者调用、低延迟直连、多模型一站式接入</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><em>作者：MaynorAI，tryallapi.com 运营者，关注国内开发者接入大模型 API 的实践问题。</em>
+<em>首发：2026-10-06｜最后更新：2026-10-06｜更新日志：2026-10-06 首版（价格与参数取自火山方舟官方文档与 tryallapi.com 公开接口，取数时间 2026-10-06，最终以控制台为准）。</em>
+<em>免责声明：文中价格、倍率与政策可能随厂商及平台调整而变化，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</em></p>
+
+<aside class="cta"><p><strong>豆包 Seed 2.1 Pro API 中转调用</strong>：一个 Key 调用 GPT / Claude / Gemini 等多家模型，按官方价 × 分组倍率计费。</p><a class="btn" href="https://tryallapi.com/pricing?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">查看 豆包 Seed 2.1 Pro API 中转价格（tryallapi.com）</a></aside>
+</article>
+</main>
+<footer class="site-footer"><div class="wrap">
+<p><a href="/">AI 大模型 API 国内中转调用指南</a> · <a href="https://tryallapi.com/?utm_source=docs&amp;utm_medium=article&amp;utm_campaign=doubao-seed-2-1-pro-api" target="_blank" rel="noopener">tryallapi.com</a></p>
+<p class="muted">文中价格与倍率均标注取数日期，可能随厂商及平台调整，请以官方页面和 tryallapi.com 控制台为准。第三方中转服务不是模型厂商官方服务。</p>
+</div></footer>
+</body>
+</html>

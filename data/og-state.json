@@ -1,5 +1,5 @@
 {
- "index": "6b43d657bde3",
+ "index": "41bb45d68fb6",
  "gemini-2.5-pro-api": "4fb676038d11",
  "gpt-6.1-sol-api": "abd2916ce97c",
  "gpt-6-astra-api": "53dd997a6ead",
@@ -16,5 +16,10 @@
  "deepseek-v4.1-flash-api": "715391fe029a",
  "mimo-v2.6-pro-api": "5147d34d88cb",
  "hy4-preview-api": "646a9c9a7633",
- "minimax-m3-api": "2e37a4f2d638"
+ "minimax-m3-api": "2e37a4f2d638",
+ "gpt-6-sol-api": "ef89122d9ff7",
+ "claude-fable-5-1-api": "a6d4a74d9d06",
+ "gemini-3.8-flash-api": "114e2929b663",
+ "glm-5.3-api": "26ff081339c3",
+ "doubao-seed-2-1-pro-api": "b5d31ea8164b"
 }
